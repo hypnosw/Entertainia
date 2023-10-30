@@ -1,6 +1,30 @@
-.et-profile-icon{
+.form-control.et-profile-icon{
     width:60px;
-    display:flex;
     height:60px;
     border-radius: 30px;
+    margin:0px;
+    padding:0px;
+}
+p.et-profile-label{
+    margin:0px;
+    padding:0px;
+    font-weight: bold;
+}
+.form-control.et-upload-btn{
+    width:70px;
+    margin:0px;
+    padding:0px;
+    height:40px;
+}
+.et-profile-row{
+    width:70%;
+    margin-bottom: 10px;
+    margin-top:10px;
+}
+
+#et-personal-bio{
+    height:150px;
+}
+#et-username-input{
+    max-width:60%;
 }
