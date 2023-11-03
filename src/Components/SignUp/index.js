@@ -62,9 +62,14 @@ function SignUp() {
                 that you understand the Privacy Policy.
               </p>
 
-              <MDBBtn className="mb-4 px-5" color="dark" size="lg">
+              <button
+                type="button"
+                className="btn btn-dark btn-lg mb-4 px-5"
+                color="dark"
+                size="lg"
+              >
                 Create account
-              </MDBBtn>
+              </button>
               <p
                 className="mb-5 pb-lg-2 text-center"
                 style={{ color: "#393f81" }}
