@@ -1,0 +1,67 @@
+
+.sidebar {
+    width: 150px;
+    background-color: black; 
+    color: white; 
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* 顶部部分的样式 */
+  .top-section {
+    color: black;
+    background-color: #76ce79; /* 顶部部分的背景颜色 */
+    padding: 10px;
+    text-align: center;
+    border:  5px solid #b2b0b0;
+    border-radius: 10px;
+    margin-top: 25px;
+  }
+  
+  /* 顶部部分按钮的样式 */
+  .post-button {
+    background-color: #76ce79;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    
+  }
+  
+  /* 中间部分的样式 */
+  .middle-section {
+    flex-grow: 1;
+  }
+  
+  /* 底部部分的样式 */
+  .bottom-section {
+    margin-top: 20px;
+  }
+  
+  /* 通用的按钮样式 */
+  .sidebar-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* 鼠标悬停时的背景颜色 */
+  .sidebar-item:hover {
+    background-color: #555; 
+  }
+  
