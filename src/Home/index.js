@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import HeadBar from "../Components/HeadBar";
 
 export default function Home() {
   return (
@@ -11,6 +10,9 @@ export default function Home() {
       </Link>
       <Link to="/SignUp">
         <h2>Sign Up Page</h2>
+      </Link>
+      <Link to="/LogIN">
+        <h2>LogIN Form</h2>
       </Link>
       <Link to="/HeadBar">
         <h2>HeadBar Page</h2>

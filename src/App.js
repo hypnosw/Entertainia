@@ -7,6 +7,7 @@ import ProfileSetting from "./Components/Profile-Setting";
 import Home from "./Home";
 import HeadBar from "./Components/HeadBar";
 import SideBar from "./Components/SideBar";
+import LogIn from "./Components/LogIn";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/LogIn" element={<LogIn />} />
           <Route path="/profile-setting" element={<ProfileSetting />} />
           <Route path="/HeadBar" element={<HeadBar />} />
           <Route path="/SideBar" element={<SideBar />} />

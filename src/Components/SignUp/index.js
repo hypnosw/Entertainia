@@ -8,12 +8,13 @@ import {
   MDBCol,
   MDBInput,
 } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 import "./index.css";
 
 function SignUp() {
   return (
     <MDBContainer className="my-5">
-      <MDBCard className="w-50 mx-auto ">
+      <MDBCard className="mx-auto ">
         <MDBRow className="g-0">
           <MDBCol md="12">
             <MDBCardBody className="d-flex flex-column">
@@ -31,16 +32,18 @@ function SignUp() {
               <MDBInput
                 wrapperClass="mb-4"
                 label="Email address"
-                id="formControlLg"
+                id="email"
                 type="email"
-                size="lg"
+                size="md"
+                placeholder="12345678@xxxxx.com"
               />
               <MDBInput
                 wrapperClass="mb-4"
                 label="Password"
-                id="formControlLg"
+                id="password"
                 type="password"
-                size="lg"
+                size="md"
+                placeholder="Must have 6 characters"
               />
               <div className="row">
                 <div className="col-12">
@@ -74,10 +77,14 @@ function SignUp() {
                 className="mb-5 pb-lg-2 text-center"
                 style={{ color: "#393f81" }}
               >
-                Already have an account?{" "}
-                <a href="#!" style={{ color: "#393f81" }}>
-                  Login here
-                </a>
+                Already have an account?
+                <Link
+                  to={`/LogIn`}
+                  activeClassName="active"
+                  style={{ color: "#393f81" }}
+                >
+                  Log in here
+                </Link>
               </p>
 
               {/* <div className="d-flex flex-row justify-content-start mx-auto">
