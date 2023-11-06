@@ -8,6 +8,9 @@ export default function Home() {
       <Link to="/profile-setting">
         <h2>Profile Setting Page</h2>
       </Link>
+        <Link to="/profile">
+            <h2>Profile Page</h2>
+        </Link>
       <Link to="/SignUp">
         <h2>Sign Up Page</h2>
       </Link>

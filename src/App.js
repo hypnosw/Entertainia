@@ -10,6 +10,7 @@ import SideBar from "./Components/SideBar";
 import LogIn from "./Components/LogIn";
 import { Provider } from "react-redux";
 import store from "./store";
+import UserProfile from "./Components/UserProfile";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile-setting" element={<ProfileSetting />} />
           <Route path="/HeadBar" element={<HeadBar />} />
           <Route path="/SideBar" element={<SideBar />} />
+          <Route path="/profile" element={<UserProfile/>}/>
         </Routes>
       </HashRouter>
     </Provider>
