@@ -1,8 +1,8 @@
 import React from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
-
-import { MDBCheckbox } from "mdb-react-ui-kit";
+import "mdb-ui-kit/css/mdb.min.css";
+import { MDBCheckbox, MDBInput } from "mdb-react-ui-kit";
 
 function LogIn() {
   return (
@@ -34,14 +34,13 @@ function LogIn() {
 
                       <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
-                          <input
+                          <MDBInput
+                            wrapperClass="mb-4"
+                            label="Password"
+                            id="password"
                             type="password"
-                            id="form3Example3c"
-                            class="form-control"
+                            size="md"
                           />
-                          <label class="form-label" for="form3Example3c">
-                            Password
-                          </label>
                         </div>
                       </div>
                       <div className="d-flex justify-content-between  mb-4">

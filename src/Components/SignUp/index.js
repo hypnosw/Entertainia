@@ -9,6 +9,7 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
+import "mdb-ui-kit/css/mdb.min.css";
 import "./index.css";
 
 function SignUp() {
