@@ -1,4 +1,3 @@
-import React from "react";
 import {
   MDBBtn,
   MDBContainer,
@@ -8,11 +7,30 @@ import {
   MDBCol,
   MDBInput,
 } from "mdb-react-ui-kit";
+import React, { useState } from "react";
+import validator from "validator";
 import { Link } from "react-router-dom";
 import "mdb-ui-kit/css/mdb.min.css";
 import "./index.css";
 
 function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPassword, setIsValidPassword] = useState(true);
+
+  const handleEmailChange = (event) => {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+    setIsValidEmail(validator.isEmail(newEmail));
+  };
+
+  const handlePasswordChange = (event) => {
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+    setIsValidPassword(newPassword.length >= 8);
+  };
+
   return (
     <MDBContainer className="my-5">
       <MDBCard className="mx-auto ">
@@ -30,6 +48,7 @@ function SignUp() {
               </div>
               <br />
 
+              {/* create a new user */}
               <MDBInput
                 wrapperClass="mb-4"
                 label="Email address"
@@ -37,7 +56,17 @@ function SignUp() {
                 type="email"
                 size="md"
                 placeholder="12345678@xxxxx.com"
+                onChange={(e) => {
+                  {
+                    handleEmailChange(e);
+                  }
+                }}
               />
+              {!isValidEmail && (
+                <p style={{ color: "red" }}>
+                  Invalid email address. Please enter a valid email.
+                </p>
+              )}
               <MDBInput
                 wrapperClass="mb-4"
                 label="Password"
@@ -45,7 +74,15 @@ function SignUp() {
                 type="password"
                 size="md"
                 placeholder="Must have 6 characters"
+                onChange={(e) => {
+                  {
+                    handlePasswordChange(e);
+                  }
+                }}
               />
+              {!isValidPassword && (
+                <p style={{ color: "red" }}>Less than 6 characters.</p>
+              )}
               <div className="row">
                 <div className="col-12">
                   <select className="select form-control">
@@ -66,6 +103,7 @@ function SignUp() {
                 that you understand the Privacy Policy.
               </p>
 
+              {/* By clicking it, add the new user to the db. */}
               <button
                 type="button"
                 className="btn btn-dark btn-lg mb-4 px-5"
@@ -78,7 +116,7 @@ function SignUp() {
                 className="mb-5 pb-lg-2 text-center"
                 style={{ color: "#393f81" }}
               >
-                Already have an account?
+                Already have an account?&nbsp;
                 <Link
                   to={`/LogIn`}
                   activeClassName="active"
