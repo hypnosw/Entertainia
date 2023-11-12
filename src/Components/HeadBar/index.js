@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import "mdb-ui-kit/css/mdb.min.css"
 
 const HeadBar = () => {
     return (
