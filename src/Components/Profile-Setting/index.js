@@ -6,6 +6,7 @@ import store from "../../store";
 
 function ProfileSetting(){
     const user = useSelector(state=>state.userReducer);
+    // Also parse userID here as query param
     console.log(user.name);
     return (
         <div>
@@ -48,11 +49,15 @@ function ProfileSetting(){
                             <label htmlFor="et-cur-password-input">
                                 <strong>Current Password</strong>
                             </label>
-                            <input id="et-cur-password-input" type="text" className="form-control"/>
+                            <input id="et-cur-password-input" type="text" className="form-control mb-3"/>
                         </div>
                         <div>
-                            <label htmlFor="et-password-input"><strong>Password</strong></label>
-                            <input id="et-password-input" type="text" className="form-control"/>
+                            <label htmlFor="et-password-input"><strong>New Password</strong></label>
+                            <input id="et-password-input" type="text" className="form-control mb-2"/>
+                        </div>
+                        <div>
+                            <label htmlFor="et-password-input"><strong>Confirm New Password</strong></label>
+                            <input id="et-newPassword-input" type="text" className="form-control"/>
                         </div>
 
                         <div className="d-block float-end mt-5">

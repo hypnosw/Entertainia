@@ -1,8 +1,24 @@
 
+@keyframes coolEffect {
+  0% {
+    transform: scale(1);
+    background-color: #76ce79;
+  }
+  50% {
+    transform: scale(1.2);
+    background-color: #4CAF50;
+  }
+  100% {
+    transform: scale(1);
+    background-color: #76ce79;
+  }
+}
+
 .sidebar {
-    width: 150px;
-    background-color: black; 
-    color: white; 
+    width: 210px;
+    /* background-color: black;  */
+    /* color: white;  */
+    color:black;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -11,6 +27,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-right: 1px solid grey;
+
   }
   
   /* 顶部部分的样式 */
@@ -19,27 +37,31 @@
     background-color: #76ce79; /* 顶部部分的背景颜色 */
     padding: 10px;
     text-align: center;
-    border:  5px solid #b2b0b0;
-    border-radius: 10px;
+    /* border:  5px solid #b2b0b0; */
+    border-radius: 20px;
     margin-top: 25px;
+    transition: background-color 0.3s;
+    animation: coolEffect 0.5s ease-in-out;
   }
   
   /* 顶部部分按钮的样式 */
   .post-button {
     background-color: #76ce79;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: bold;
     color: black;
     border: none;
     padding: 10px 20px;
-    margin: 10px 0;
-    border-radius: 5px;
+    /* margin: 10px 0; */
+    border-radius: 10px;
     cursor: pointer;
-    
+    transition: background-color 0.3s;
+    animation: coolEffect 0.5s ease-in-out;
   }
   
   /* 中间部分的样式 */
   .middle-section {
+    margin-top: 30px;
     flex-grow: 1;
   }
   
@@ -52,16 +74,36 @@
   .sidebar-list {
     list-style: none;
     padding: 0;
+    margin-bottom: 10px;
   }
   
   .sidebar-item {
+    font-size: 15px;
     padding: 10px;
     cursor: pointer;
+    margin-bottom: 20px;
     transition: background-color 0.3s;
+    /* display: flex; */
+    align-items: center;
   }
   
+  .sidebar-item svg {
+    margin-right: 8px; /* 调整图标和文字之间的间距 */
+  }
+
   /* 鼠标悬停时的背景颜色 */
   .sidebar-item:hover {
-    background-color: #555; 
+    background-color: #b3b1b1; 
   }
   
+
+  .shared-parent-container {
+    justify-content: center;
+  }
+  
+  .shared-parent-container:hover .top-section,
+.shared-parent-container:hover .post-button {
+  background-color: #b3b1b1/* 悬停时的背景颜色 */;
+  animation: none; /* 停止按钮上的动画 */
+  transform: scale(1.1); 
+}
