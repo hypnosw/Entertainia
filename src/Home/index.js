@@ -23,6 +23,9 @@ export default function Home() {
       <Link to="/Sidebar">
         <h2>Sidebar Page</h2>
       </Link>
+      <Link to="/Createpost">
+        <h2>Create Post</h2>
+      </Link>
     </div>
   );
 }
