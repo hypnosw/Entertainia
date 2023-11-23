@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import UserProfile from "./Components/UserProfile";
 import CreatePost from "./Components/CreatePost";
+import Homepage from "./Components/HomePage";
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
           <Route path="/profile-setting" element={<ProfileSetting />} />
           <Route path="/HeadBar" element={<HeadBar />} />
           <Route path="/SideBar" element={<SideBar />} />
-          <Route path="/profile" element={<UserProfile/>}/>
-          <Route path="/CreatePost" element={<CreatePost/>}/>
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/CreatePost" element={<CreatePost />} />
+          <Route path="/Homepage" element={<Homepage />} />
         </Routes>
       </HashRouter>
     </Provider>

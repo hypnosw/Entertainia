@@ -8,9 +8,9 @@ export default function Home() {
       <Link to="/profile-setting">
         <h2>Profile Setting Page</h2>
       </Link>
-        <Link to="/profile">
-            <h2>Profile Page</h2>
-        </Link>
+      <Link to="/profile">
+        <h2>Profile Page</h2>
+      </Link>
       <Link to="/SignUp">
         <h2>Sign Up Page</h2>
       </Link>
@@ -25,6 +25,9 @@ export default function Home() {
       </Link>
       <Link to="/Createpost">
         <h2>Create Post</h2>
+      </Link>
+      <Link to="/Homepage">
+        <h2>Homepage</h2>
       </Link>
     </div>
   );
