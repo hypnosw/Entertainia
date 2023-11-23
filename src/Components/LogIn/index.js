@@ -1,7 +1,18 @@
 import { React, useState } from "react";
 import validator from "validator";
 import { Link } from "react-router-dom";
-import { MDBCheckbox, MDBInput } from "mdb-react-ui-kit";
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBInput,
+  MDBIcon,
+  MDBCheckbox,
+} from "mdb-react-ui-kit";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../Reducers/userReducer";
 import "./index.css";
