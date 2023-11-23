@@ -6,28 +6,77 @@
     top: 0;
     bottom: 0;
     left: 0;
+    border-bottom: 1px solid grey;
+
 }
 
-.form-control.headbar-icon{
-    width:50px;
-    height:50px;
+.form-control.headbar-icon {
+    width: 50px;
+    height: 50px;
     border-radius: 30px;
-    margin:15px;
+    margin: 15px;
     margin-right: 430px;
-    padding:0px;
+    padding: 0px;
 }
-.form-control.search-btn{
+
+.form-control.search-btn {
     background-color: #F5F5F5;
-    width:80px;
-    margin:15px;
+    width: 80px;
+    margin: 15px;
     margin-right: 450px;
-    padding:0px;
-    height:30px;
+    padding: 0px;
+    height: 30px;
 }
-.form-control.login-btn{
+
+.form-control.login-btn {
     background-color: #F5F5F5;
-    width:80px;
-    margin:15px;
-    padding:0px;
-    height:30px;
+    width: 80px;
+    margin: 15px;
+    padding: 0px;
+    height: 30px;
+}
+
+/* .input-group {
+
+} */
+
+
+
+.form-outline .form-control:focus~.form-notch .form-notch-leading {
+    border-top: 0.125rem solid #00b74a;
+    border-bottom: 0.125rem solid #00b74a;
+    border-left: 0.125rem solid #00b74a;
+}
+
+.form-outline .form-control:focus~.form-notch .form-notch-middle {
+    border-color: #00b74a;
+}
+
+.form-outline .form-control:focus~.form-notch .form-notch-trailing {
+    border-top: 0.125rem solid #00b74a;
+    border-bottom: 0.125rem solid #00b74a;
+    border-right: 0.125rem solid #00b74a;
+}
+
+.form-outline .form-control:focus~.form-label {
+    color: #00b74a;
+}
+
+.autocomplete-input.focused~.form-notch .form-notch-leading {
+    border-top: 2px solid #00b74a;
+    border-bottom: 2px solid #00b74a;
+    border-left: 2px solid #00b74a;
+    transition: all 0.2s linear;
+}
+
+.autocomplete-input.focused~.form-notch .form-notch-middle {
+    border-color: #00b74a;
+}
+
+.autocomplete-input.focused~.form-notch .form-notch-trailing {
+    border-color: #00b74a;
+}
+
+.autocomplete-input.focused~.autocomplete-label {
+    color: #00b74a;
 }
