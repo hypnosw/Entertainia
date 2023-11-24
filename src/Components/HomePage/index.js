@@ -26,7 +26,6 @@ export default function HomePage() {
           <HeadBar />
         </div>
       </div>
-
       <div class="row">
         <div class="col-sm-2">
           <Sidebar />

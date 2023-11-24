@@ -29,6 +29,9 @@ export default function Home() {
       <Link to="/Homepage">
         <h2>Homepage</h2>
       </Link>
+      <Link to="/PostDetail">
+        <h2>Post Detail</h2>
+      </Link>
     </div>
   );
 }

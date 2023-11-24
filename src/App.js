@@ -13,6 +13,7 @@ import store from "./store";
 import UserProfile from "./Components/UserProfile";
 import CreatePost from "./Components/CreatePost";
 import Homepage from "./Components/HomePage";
+import PostDetail from "./Components/PostDetail";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/CreatePost" element={<CreatePost />} />
           <Route path="/Homepage" element={<Homepage />} />
+          <Route path="/PostDetail" element={<PostDetail />} />
         </Routes>
       </HashRouter>
     </Provider>

@@ -7,7 +7,16 @@
     bottom: 0;
     left: 0;
     border-bottom: 1px solid grey;
+    /* position: fixed; */
 
+}
+
+.form-control.rounded {
+    width : 80%;
+}
+
+.input-group.rounded {
+    width : 80%;
 }
 
 .form-control.headbar-icon {
@@ -36,9 +45,7 @@
     height: 30px;
 }
 
-/* .input-group {
 
-} */
 
 
 

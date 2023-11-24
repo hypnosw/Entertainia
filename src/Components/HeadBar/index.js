@@ -30,9 +30,9 @@ const Headbar = () => {
                         />
                     </a>
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Home</a>
-                        </li>
+                        {/* <li className="nav-item">
+                            <a className="nav-link" href="#">Sign In</a>
+                        </li> */}
                         <li className="nav-item">
                             <a className="nav-link" href="#">Settings</a>
                         </li>
@@ -48,14 +48,22 @@ const Headbar = () => {
                         aria-describedby="search-addon"
                     />
                     <div className="input-group-text border-0" id="search-addon">
-                        <FaSearch/>
+                        <FaSearch />
                     </div>
                     {/* <span className="input-group-text border-0" id="search-addon">
                         <i className="fas fa-search"></i>
                     </span> */}
                     {/* <li className="sidebar-item"><FaSearch /> </li> */}
-
                 </div>
+                
+               {/* // 还需要做登录后的sign out */}
+               {/* // 还是说点进profile 在最下方signout比较好 */}
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Sign In</a>
+                    </li>
+                </ul>
+                
 
 
 
@@ -76,14 +84,14 @@ const Headbar = () => {
                             <i className="fas fa-bell"></i>
                             <span className="badge rounded-pill badge-notification bg-danger">1</span>
                         </a>
-                        <ul
+                        {/* <ul
                             className="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdownMenuLink"
                         >
                             <li><a className="dropdown-item" href="#">Some news</a></li>
                             <li><a className="dropdown-item" href="#">Another news</a></li>
                             <li><a className="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                        </ul> */}
                     </div>
 
 
@@ -105,14 +113,14 @@ const Headbar = () => {
                                 loading="lazy"
                             />
                         </a>
-                        <ul
+                        {/* <ul
                             className="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdownMenuAvatar"
                         >
                             <li><a className="dropdown-item" href="#">My profile</a></li>
                             <li><a className="dropdown-item" href="#">Settings</a></li>
                             <li><a className="dropdown-item" href="#">Logout</a></li>
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
             </div>

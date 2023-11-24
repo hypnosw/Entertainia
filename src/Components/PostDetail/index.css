@@ -1,0 +1,343 @@
+.h5 {
+    margin: 0;
+    /* Remove default margin */
+    /* Additional styling as needed */
+}
+
+.text-column-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    /* Ensure it takes full height */
+
+}
+
+/* Header with buttons */
+.text-column-header {
+    align-items: center; /* Align items vertically in the center */
+    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+/* Button in the top right */
+.top-right-button {
+    margin-left: auto;
+    /* Pushes the button to the right */
+}
+
+/* Button in the bottom right */
+.bottom-right-button {
+    align-self: end;
+    /* Aligns the button to the right at the bottom */
+}
+
+
+
+
+.col-lg-6.mb-4.mb-lg-0 {
+    flex: 0 0 50%;
+    /* Adjust this percentage to increase the width */
+    max-width: 50%;
+    /* Adjust this percentage to increase the width */
+}
+
+/* Text Column - Adjust accordingly */
+.col-lg-6 {
+    flex: 0 0 50%;
+    /* Adjust this percentage to decrease the width */
+    max-width: 50%;
+    /* Adjust this percentage to decrease the width */
+}
+
+
+
+
+
+
+.row.d-flex.align-items-center {
+    display: flex;
+    align-items: center;
+    /* This centers the children vertically */
+}
+
+/* Ensure the image takes full width of its container */
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+
+
+
+/* Adjust the sidebar to be below the head bar */
+.sidebar {
+    margin-top: 60px;
+    /* Adjust this based on the height of your HeadBar */
+    /* ... other styles ... */
+}
+
+/* Ensure main content takes more space and is centered */
+.main-content {
+    padding: 15px;
+    margin: auto;
+    max-width: 800px;
+    /* Adjust this to control the width of the post content */
+}
+
+/* Larger image and text columns */
+/* .img-fluid {
+    max-width: 100%;
+    height: auto;
+} */
+
+/* .main-content {
+    padding-top: 100px;
+
+} */
+
+
+
+
+
+/* General Styles */
+body {
+    margin-top: 60px;
+    /* Adjust based on the height of your fixed head bar */
+    background-color: #f8f9fa;
+    /* Example background color */
+    font-family: Arial, sans-serif;
+    /* Example font */
+}
+
+.container-fluid {
+    padding: 15px;
+}
+
+/* HeadBar Styles */
+.fixed-top {
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1030;
+    /* Higher than other elements to keep on top */
+    background-color: #fff;
+    /* Example background color for the head bar */
+    border-bottom: 1px solid #e3e3e3;
+    /* Example border */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    /* padding: 15px;
+    min-height: 100vh; */
+    /* Full height */
+    /* background-color: #343a40; */
+    /* Example background color */
+    /* color: #fff; */
+    /* Example text color */
+    width: 210px;
+    /* background-color: black;  */
+    /* color: white;  */
+    color: black;
+    /* position: fixed; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid grey;
+}
+
+/* Main Content Styles */
+.main-content {
+    /* padding: 15px; */
+    padding-top: 100px
+}
+
+/* Post Detail Styles */
+.my-5 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.pb-4,
+.py-4 {
+    padding-bottom: 1.5rem;
+}
+
+.mb-5,
+.my-5 {
+    margin-bottom: 3rem;
+}
+
+/* .img-fluid {
+    max-width: 100%;
+    height: auto;
+} */
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
+
+    .main-content {
+        padding: 15px 0;
+    }
+}
+
+
+
+
+
+
+
+
+/* .col-lg-4,
+.col-md-12 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.mb-4,
+.mb-lg-0 {
+    margin-bottom: 1.5rem !important;
+} */
+
+/* .bg-image { */
+/* Increase the size of the image container */
+/* width: 100%; */
+/* Adjust the width as needed */
+/* height: auto; */
+/* Adjust the height as needed */
+/* display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+/* .shadow-1-strong {
+    box-shadow: 0 10px 20px -12px rgba(0, 0, 0, .42), 0 3px 20px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+} */
+
+/* Remove rounded corners */
+/* .rounded-5 {
+    border-radius: 10%; */
+/* Set to 0 for sharp corners */
+/* } */
+
+/* .img-fluid {
+    width: 100%; */
+/* Make the image larger */
+/* height: auto;
+    display: block;
+    transition: transform .2s; */
+/* Smooth transition for hover effects */
+/* } */
+
+/* Hover effect to zoom the image */
+/* .bg-image:hover .img-fluid {
+    transform: scale(1.1);
+    Scale the image up on hover
+} */
+
+
+
+
+
+
+
+
+/* .my-5 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.pb-4,
+.py-4 {
+    padding-bottom: 1.5rem !important;
+} */
+
+/* .mb-5,
+.my-5 {
+    margin-bottom: 3rem !important;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-6 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.mb-4,
+.my-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.bg-image {
+    background-image: url('https://mdbootstrap.com/img/new/slides/080.jpg');
+    background-size: cover;
+} */
+
+/* .hover-overlay {
+    position: relative;
+} */
+
+/* .ripple {
+    position: relative;
+    overflow: hidden;
+} */
+
+/* .shadow-2-strong {
+    box-shadow: 0 10px 20px -12px rgba(0, 0, 0, .42), 0 3px 20px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+} */
+
+/* .rounded-5 {
+    border-radius: .5rem !important;
+} */
+
+/* .img-fluid {
+    max-width: 100%;
+    height: auto;
+} */
