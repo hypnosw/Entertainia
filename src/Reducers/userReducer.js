@@ -6,6 +6,8 @@ const initialState = {
   profilePicture: "FaUser",
   personalBio: "Tell us more about you!",
   password: "",
+  // posts should contain an array of the IDs of the posts that belong to this user
+  posts:[1, 2, 3, 4, 5 ],
   // user ID in the following array
   following: [1, 2, 3],
   // user ID in the followers array

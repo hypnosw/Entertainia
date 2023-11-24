@@ -1,8 +1,7 @@
-.et-main-wrapper{
-    max-width:60%;
-    margin-left:20%;
-    margin-right:20%;
-    margin-top: 30px;
+.et-main-wrapper.row{
+    /*max-width:60%;*/
+    margin-right:3%;
+    margin-top: 2%;
 }
 
 /* for the profile page profile icon */
@@ -20,4 +19,14 @@
 .et-user-follow{
     color:black;
     text-decoration: none;
+}
+
+/* for each post card component */
+.card.et-post-cards{
+    min-width:300px;
+    max-width:300px;
+    min-height:300px;
+    max-height:300px;
+    text-decoration: none;
+    margin:10px;
 }
