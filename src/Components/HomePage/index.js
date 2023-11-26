@@ -17,8 +17,11 @@ import city from "../../images/city.jpeg";
 import spider from "../../images/spiderman.jpg";
 import game from "../../images/game.jpg";
 import "./index.css";
+import { useSelector } from "react-redux";
+import { FaBaby, FaThumbsUp } from "react-icons/fa";
 
 export default function HomePage() {
+  const user = useSelector((state) => state.userReducer);
   return (
     <div>
       <div class="row">
@@ -89,6 +92,13 @@ export default function HomePage() {
                         natural lead-in to additional content. This content is a
                         little bit longer.
                       </MDBCardText>
+                      <div className="d-flex justify-content-between et-post-author-likes">
+                        <p className="card-text mb-0">{user.name}</p>
+                        <p className="mb-0">
+                          <FaThumbsUp />
+                          15
+                        </p>
+                      </div>
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
@@ -106,6 +116,13 @@ export default function HomePage() {
                         natural lead-in to additional content. This content is a
                         little bit longer.
                       </MDBCardText>
+                      <div className="d-flex justify-content-between et-post-author-likes">
+                        <p className="card-text mb-0">{user.name}</p>
+                        <p className="mb-0">
+                          <FaThumbsUp />
+                          15
+                        </p>
+                      </div>
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
@@ -123,6 +140,13 @@ export default function HomePage() {
                         natural lead-in to additional content. This content is a
                         little bit longer.
                       </MDBCardText>
+                      <div className="d-flex justify-content-between et-post-author-likes">
+                        <p className="card-text mb-0">{user.name}</p>
+                        <p className="mb-0">
+                          <FaThumbsUp />
+                          15
+                        </p>
+                      </div>
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
@@ -140,6 +164,13 @@ export default function HomePage() {
                         natural lead-in to additional content. This content is a
                         little bit longer.
                       </MDBCardText>
+                      <div className="d-flex justify-content-between et-post-author-likes">
+                        <p className="card-text mb-0">{user.name}</p>
+                        <p className="mb-0">
+                          <FaThumbsUp />
+                          15
+                        </p>
+                      </div>
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
