@@ -35,7 +35,7 @@ export default function HomePage() {
         </div>
         <div class="col-sm-10">
           {" "}
-          <div style={{ maxWidth: "1220px" }}>
+          <div style={{ maxWidth: "1222px" }}>
             <MDBCarousel showControls showIndicators dark fade>
               <MDBCarouselItem
                 className="w-100 d-block"
@@ -76,107 +76,107 @@ export default function HomePage() {
                 </p>
               </MDBCarouselItem>
             </MDBCarousel>
-            <MDBRow>
-              <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-                <MDBCol>
-                  <MDBCard>
-                    <MDBCardImage
-                      src="https://mdbootstrap.com/img/new/standard/city/041.webp"
-                      alt="..."
-                      position="top"
-                    />
-                    <MDBCardBody>
-                      <MDBCardTitle>Card title</MDBCardTitle>
-                      <MDBCardText>
-                        This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
-                      </MDBCardText>
-                      <div className="d-flex justify-content-between et-post-author-likes">
-                        <p className="card-text mb-0">{user.name}</p>
-                        <p className="mb-0">
-                          <FaThumbsUp />
-                          15
-                        </p>
-                      </div>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-                <MDBCol>
-                  <MDBCard>
-                    <MDBCardImage
-                      src="https://mdbootstrap.com/img/new/standard/city/042.webp"
-                      alt="..."
-                      position="top"
-                    />
-                    <MDBCardBody>
-                      <MDBCardTitle>Card title</MDBCardTitle>
-                      <MDBCardText>
-                        This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
-                      </MDBCardText>
-                      <div className="d-flex justify-content-between et-post-author-likes">
-                        <p className="card-text mb-0">{user.name}</p>
-                        <p className="mb-0">
-                          <FaThumbsUp />
-                          15
-                        </p>
-                      </div>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-                <MDBCol>
-                  <MDBCard>
-                    <MDBCardImage
-                      src="https://mdbootstrap.com/img/new/standard/city/043.webp"
-                      alt="..."
-                      position="top"
-                    />
-                    <MDBCardBody>
-                      <MDBCardTitle>Card title</MDBCardTitle>
-                      <MDBCardText>
-                        This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
-                      </MDBCardText>
-                      <div className="d-flex justify-content-between et-post-author-likes">
-                        <p className="card-text mb-0">{user.name}</p>
-                        <p className="mb-0">
-                          <FaThumbsUp />
-                          15
-                        </p>
-                      </div>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-                <MDBCol>
-                  <MDBCard>
-                    <MDBCardImage
-                      src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-                      alt="..."
-                      position="top"
-                    />
-                    <MDBCardBody>
-                      <MDBCardTitle>Card title</MDBCardTitle>
-                      <MDBCardText>
-                        This is a longer card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
-                      </MDBCardText>
-                      <div className="d-flex justify-content-between et-post-author-likes">
-                        <p className="card-text mb-0">{user.name}</p>
-                        <p className="mb-0">
-                          <FaThumbsUp />
-                          15
-                        </p>
-                      </div>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-              </MDBRow>
-            </MDBRow>
           </div>
+          <MDBRow>
+            <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+              <MDBCol>
+                <MDBCard>
+                  <MDBCardImage
+                    src="https://mdbootstrap.com/img/new/standard/city/041.webp"
+                    alt="..."
+                    position="top"
+                  />
+                  <MDBCardBody>
+                    <MDBCardTitle>Card title</MDBCardTitle>
+                    <MDBCardText>
+                      This is a longer card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </MDBCardText>
+                    <div className="d-flex justify-content-between et-post-author-likes">
+                      <p className="card-text mb-0">{user.name}</p>
+                      <p className="mb-0">
+                        <FaThumbsUp />
+                        15
+                      </p>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+              <MDBCol>
+                <MDBCard>
+                  <MDBCardImage
+                    src="https://mdbootstrap.com/img/new/standard/city/042.webp"
+                    alt="..."
+                    position="top"
+                  />
+                  <MDBCardBody>
+                    <MDBCardTitle>Card title</MDBCardTitle>
+                    <MDBCardText>
+                      This is a longer card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </MDBCardText>
+                    <div className="d-flex justify-content-between et-post-author-likes">
+                      <p className="card-text mb-0">{user.name}</p>
+                      <p className="mb-0">
+                        <FaThumbsUp />
+                        15
+                      </p>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+              <MDBCol>
+                <MDBCard>
+                  <MDBCardImage
+                    src="https://mdbootstrap.com/img/new/standard/city/043.webp"
+                    alt="..."
+                    position="top"
+                  />
+                  <MDBCardBody>
+                    <MDBCardTitle>Card title</MDBCardTitle>
+                    <MDBCardText>
+                      This is a longer card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </MDBCardText>
+                    <div className="d-flex justify-content-between et-post-author-likes">
+                      <p className="card-text mb-0">{user.name}</p>
+                      <p className="mb-0">
+                        <FaThumbsUp />
+                        15
+                      </p>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+              <MDBCol>
+                <MDBCard>
+                  <MDBCardImage
+                    src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                    alt="..."
+                    position="top"
+                  />
+                  <MDBCardBody>
+                    <MDBCardTitle>Card title</MDBCardTitle>
+                    <MDBCardText>
+                      This is a longer card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </MDBCardText>
+                    <div className="d-flex justify-content-between et-post-author-likes">
+                      <p className="card-text mb-0">{user.name}</p>
+                      <p className="mb-0">
+                        <FaThumbsUp />
+                        15
+                      </p>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            </MDBRow>
+          </MDBRow>
         </div>
       </div>
     </div>
