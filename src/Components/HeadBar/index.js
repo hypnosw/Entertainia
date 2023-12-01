@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 import "mdb-ui-kit/css/mdb.min.css"
 import { FaSearch } from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 
 const Headbar = () => {
@@ -21,14 +22,14 @@ const Headbar = () => {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <a className="navbar-brand mt-2 mt-lg-0" href="#">
+                    <Link className="navbar-brand mt-2 mt-lg-0" to="/home">
                         <img
                             src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
                             height="15"
                             alt="MDB Logo"
                             loading="lazy"
                         />
-                    </a>
+                    </Link>
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         {/* <li className="nav-item">
                             <a className="nav-link" href="#">Sign In</a>
@@ -97,9 +98,9 @@ const Headbar = () => {
 
 
                     <div className="dropdown">
-                        <a
+                        <Link
                             className="dropdown-toggle d-flex align-items-center hidden-arrow"
-                            href="#"
+                            to="/profile"
                             id="navbarDropdownMenuAvatar"
                             role="button"
                             data-mdb-toggle="dropdown"
@@ -112,7 +113,7 @@ const Headbar = () => {
                                 alt="Black and White Portrait of a Man"
                                 loading="lazy"
                             />
-                        </a>
+                        </Link>
                         {/* <ul
                             className="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdownMenuAvatar"

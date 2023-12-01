@@ -73,11 +73,11 @@
 
 
 /* Adjust the sidebar to be below the head bar */
-.sidebar {
-    margin-top: 60px;
-    /* Adjust this based on the height of your HeadBar */
-    /* ... other styles ... */
-}
+/*.sidebar {*/
+/*    margin-top: 60px;*/
+/*    !* Adjust this based on the height of your HeadBar *!*/
+/*    !* ... other styles ... *!*/
+/*}*/
 
 /* Ensure main content takes more space and is centered */
 .main-content {

@@ -17,7 +17,8 @@ import PostDetail from "./Components/PostDetail";
 
 function App() {
   return (
-      <div>
+      <HashRouter>
+        <Provider store={store}>
         <div className="row">
           <HeadBar/>
         </div>
@@ -26,8 +27,6 @@ function App() {
             <SideBar/>
           </div>
           <div className="col">
-            <Provider store={store}>
-              <HashRouter>
                 <Routes>
                   <Route path="/SignUp" element={<SignUp />} />
                   <Route path="/LogIn" element={<LogIn />} />
@@ -37,42 +36,38 @@ function App() {
                   <Route path="/home" element={<Homepage />} />
                   <Route path="/PostDetail" element={<PostDetail />} />
                 </Routes>
-              </HashRouter>
-            </Provider>
-            <>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-              <h1>Testing</h1>
-            </>
-
-
-
+            {/*<>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*  <h1>Testing</h1>*/}
+            {/*</>*/}
 
 
           </div>
         </div>
 
+        </Provider>
 
-      </div>
+      </HashRouter>
   );
 }
 
