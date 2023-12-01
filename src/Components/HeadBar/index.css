@@ -8,9 +8,15 @@
     left: 0;
     border-bottom: 1px solid grey;
     /* position: fixed; */
-
 }
 
+/* Hypnos Edits: shortened the height of the headbar */
+.navbar{
+    --bs-navbar-padding-y:unset !important;
+}
+.navbar .container-fluid{
+
+}
 .form-control.rounded {
     width : 80%;
 }
@@ -44,8 +50,6 @@
     padding: 0px;
     height: 30px;
 }
-
-
 
 
 

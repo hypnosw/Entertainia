@@ -6,9 +6,10 @@ const Sidebar = () => {
     return (
       <div className="sidebar">
         <div className="shared-parent-container">
-        <div className="top-section">
-          <button className="post-button">POST</button>
-        </div></div>
+            <div className="top-section">
+              <button className="post-button">POST</button>
+            </div>
+        </div>
         <div className="middle-section">
           <ul className="sidebar-list">
           <li className="sidebar-item"><FaHome /> HOME</li>
