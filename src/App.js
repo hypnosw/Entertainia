@@ -4,7 +4,6 @@ import { HashRouter, useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import SignUp from "./Components/SignUp";
 import ProfileSetting from "./Components/Profile-Setting";
-import Home from "./Home";
 import HeadBar from "./Components/HeadBar";
 import SideBar from "./Components/SideBar";
 import LogIn from "./Components/LogIn";
@@ -28,6 +27,7 @@ function App() {
           </div>
           <div className="col">
                 <Routes>
+                  <Route path={"/"} element={<Homepage />}/>
                   <Route path="/SignUp" element={<SignUp />} />
                   <Route path="/LogIn" element={<LogIn />} />
                   <Route path="/profile-setting" element={<ProfileSetting />} />

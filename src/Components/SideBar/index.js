@@ -16,7 +16,7 @@ const Sidebar = () => {
         <div className="middle-section">
           <ul className="sidebar-list">
           <li className="sidebar-item">
-              <Link to={"/home"}><FaHome /> HOME</Link>
+              <Link to={"/"}><FaHome /> HOME</Link>
           </li>
           <li className="sidebar-item"><FaUserFriends /> FOLLOWING</li>
           <li className="sidebar-item"><FaEnvelope /> MESSAGES</li>

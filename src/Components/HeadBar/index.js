@@ -22,7 +22,7 @@ const Headbar = () => {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <Link className="navbar-brand mt-2 mt-lg-0" to="/home">
+                    <Link className="navbar-brand mt-2 mt-lg-0" to="/">
                         <img
                             src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
                             height="15"
@@ -49,7 +49,9 @@ const Headbar = () => {
                         aria-describedby="search-addon"
                     />
                     <div className="input-group-text border-0" id="search-addon">
-                        <FaSearch />
+                        <Link to={`/search?terms=hi`}>
+                            <FaSearch />
+                        </Link>
                     </div>
                     {/* <span className="input-group-text border-0" id="search-addon">
                         <i className="fas fa-search"></i>

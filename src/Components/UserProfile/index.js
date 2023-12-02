@@ -9,9 +9,9 @@ export default function UserProfile(){
     const user = useSelector(state => state.userReducer);
     console.log(user);
     return (
-            <div className="et-main-wrapper row">
-                <div className="col-lg-3 d-flex justify-content-center">
-                    <div className="d-block ">
+            <div className="et-main-wrapper row ">
+                <div className="col-sm-auto  d-flex justify-content-center w-100">
+                    <div className="d-block">
                         {/* Profile Picture */}
                         <img src={process.env.PUBLIC_URL + "/cat-pic.jpg"} alt="" className="form-control et-profile-picture mb-4"/>
 
@@ -53,8 +53,8 @@ export default function UserProfile(){
 
                     </div>
                 </div>
-                <div className="col-lg-9 mt-1 d-flex justify-content-center">
-                    <div className="d-flex flex-row flex-wrap">
+                <div className="col-lg-9 mt-3 d-flex justify-content-center w-100">
+                    <div className="d-flex flex-row flex-wrap justify-content-center">
                         {/* Should be a map function here to map out every post
                         that belongs to the user*/}
                         <Link to="" className="card et-post-cards">
