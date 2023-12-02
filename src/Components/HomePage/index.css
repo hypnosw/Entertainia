@@ -5,3 +5,7 @@
 .carousel-control-next-icon:after {
   content: "";
 }
+
+.hp-content {
+  transform: scale(0.95);
+}
