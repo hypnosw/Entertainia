@@ -4,10 +4,18 @@ import React from "react";
 import LogIn from "../LogIn";
 import {Link} from "react-router-dom";
 import {FaBaby, FaThumbsUp} from "react-icons/fa";
+import {PostCards} from "../Post-cards";
 
 export default function UserProfile(){
     const user = useSelector(state => state.userReducer);
     console.log(user);
+
+    // placeholder
+    const post = {
+                        title:"Title so so very long",
+                        author:"No Author",
+                        likes:["12131", "dwadadasd", "dadsads"]
+                        };
     return (
             <div className="et-main-wrapper row ">
                 <div className="col-sm-auto  d-flex justify-content-center w-100">
@@ -57,76 +65,23 @@ export default function UserProfile(){
                     <div className="d-flex flex-row flex-wrap justify-content-center">
                         {/* Should be a map function here to map out every post
                         that belongs to the user*/}
-                        <Link to="" className="card et-post-cards">
-                            <div className="bg-image hover-overlay" data-mdb-ripple-init
-                                 data-mdb-ripple-color="light">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp"
-                                     className="img-fluid"/>
-                            </div>
-                            <div className="card-body">
-                                <h5 className="card-title mb-3">Post Title Very Long Yep <FaBaby/></h5>
-                                <div className="d-flex justify-content-between et-post-author-likes">
-                                    <p className="card-text mb-0">{user.name}</p>
-                                    <p className="mb-0"><FaThumbsUp/>15</p>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="" className="card et-post-cards">
-                            <div className="bg-image hover-overlay" data-mdb-ripple-init
-                                 data-mdb-ripple-color="light">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp"
-                                     className="img-fluid"/>
-                            </div>
-                            <div className="card-body">
-                                <h5 className="card-title mb-3">Post Title Very Long Yep <FaBaby/></h5>
-                                <div className="d-flex justify-content-between et-post-author-likes">
-                                    <p className="card-text mb-0">{user.name}</p>
-                                    <p className="mb-0"><FaThumbsUp/>15</p>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="" className="card et-post-cards">
-                            <div className="bg-image hover-overlay" data-mdb-ripple-init
-                                 data-mdb-ripple-color="light">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp"
-                                     className="img-fluid"/>
-                            </div>
-                            <div className="card-body">
-                                <h5 className="card-title mb-3">Post Title Very Long Yep <FaBaby/></h5>
-                                <div className="d-flex justify-content-between et-post-author-likes">
-                                    <p className="card-text mb-0">{user.name}</p>
-                                    <p className="mb-0"><FaThumbsUp/>15</p>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="" className="card et-post-cards">
-                            <div className="bg-image hover-overlay" data-mdb-ripple-init
-                                 data-mdb-ripple-color="light">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp"
-                                     className="img-fluid"/>
-                            </div>
-                            <div className="card-body">
-                                <h5 className="card-title mb-3">Post Title Very Long Yep <FaBaby/></h5>
-                                <div className="d-flex justify-content-between et-post-author-likes">
-                                    <p className="card-text mb-0">{user.name}</p>
-                                    <p className="mb-0"><FaThumbsUp/>15</p>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="" className="card et-post-cards">
-                            <div className="bg-image hover-overlay" data-mdb-ripple-init
-                                 data-mdb-ripple-color="light">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp"
-                                     className="img-fluid"/>
-                            </div>
-                            <div className="card-body">
-                                <h5 className="card-title mb-3">Post Title Very Long Yep <FaBaby/></h5>
-                                <div className="d-flex justify-content-between et-post-author-likes">
-                                    <p className="card-text mb-0">{user.name}</p>
-                                    <p className="mb-0"><FaThumbsUp/>15</p>
-                                </div>
-                            </div>
-                        </Link>
+
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+                        {PostCards(post)}
+
+
+
                     </div>
 
                 </div>

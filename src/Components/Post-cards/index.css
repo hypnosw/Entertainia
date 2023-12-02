@@ -1,0 +1,9 @@
+/* for each post card component */
+.card.et-post-cards{
+    min-width:300px;
+    max-width:300px;
+    min-height:300px;
+    max-height:300px;
+    text-decoration: none;
+    margin:10px;
+}

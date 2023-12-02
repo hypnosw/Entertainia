@@ -15,13 +15,15 @@ const Sidebar = () => {
         </div>
         <div className="middle-section">
           <ul className="sidebar-list">
-          <li className="sidebar-item">
-              <Link to={"/"}><FaHome /> HOME</Link>
-          </li>
-          <li className="sidebar-item"><FaUserFriends /> FOLLOWING</li>
-          <li className="sidebar-item"><FaEnvelope /> MESSAGES</li>
-          <li className="sidebar-item"><FaBell /> NOTIFICATIONS</li>
-          <li className="sidebar-item"><FaList /> LISTS</li>
+              <Link to={"/"} className={"text-decoration-none text-black"}>
+                  <li className="sidebar-item">
+                      <FaHome /> HOME
+                  </li>
+              </Link>
+              <li className="sidebar-item"><FaUserFriends /> FOLLOWING</li>
+              <li className="sidebar-item"><FaEnvelope /> MESSAGES</li>
+              <li className="sidebar-item"><FaBell /> NOTIFICATIONS</li>
+              <li className="sidebar-item"><FaList /> LISTS</li>
           </ul>
         </div>
         <div className="bottom-section">
