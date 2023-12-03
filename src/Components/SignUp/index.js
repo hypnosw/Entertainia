@@ -14,15 +14,13 @@ import "mdb-ui-kit/css/mdb.min.css";
 import "./index.css";
 
 function SignUp() {
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
 
-  const handleEmailChange = (event) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    setIsValidEmail(validator.isEmail(newEmail));
+  const handleUsernameChange = (event) => {
+    const newUsername = event.target.value;
+    setUserName(newUsername);
   };
 
   const handlePasswordChange = (event) => {
@@ -51,22 +49,18 @@ function SignUp() {
               {/* create a new user */}
               <MDBInput
                 wrapperClass="mb-4"
-                label="Email address"
-                id="email"
-                type="email"
+                label="Username"
+                id="Username"
+                type="text"
                 size="md"
-                placeholder="12345678@xxxxx.com"
+                placeholder="User123456"
                 onChange={(e) => {
                   {
-                    handleEmailChange(e);
+                    handleUsernameChange(e);
                   }
                 }}
               />
-              {!isValidEmail && (
-                <p style={{ color: "red" }}>
-                  Invalid email address. Please enter a valid email.
-                </p>
-              )}
+
               <MDBInput
                 wrapperClass="mb-4"
                 label="Password"
