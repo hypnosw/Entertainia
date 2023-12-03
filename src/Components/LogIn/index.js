@@ -19,16 +19,14 @@ import "./index.css";
 import "mdb-ui-kit/css/mdb.min.css";
 
 function LogIn() {
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const handleEmailChange = (event) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    setIsValidEmail(validator.isEmail(newEmail));
+  const handleUsernameChange = (event) => {
+    const newUsername = event.target.value;
+    setUserName(newUsername);
   };
 
   const handlePasswordChange = (event) => {
@@ -40,22 +38,22 @@ function LogIn() {
   const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
-    if (isValidEmail && isValidPassword && email && password) {
-      dispatch(
-        setUser({
-          ...user,
-          email: email,
-          password: password,
-          loggedIn: true,
-          isAdmin: isAdmin,
-        })
-      );
-      console.log(email);
-      console.log(password);
-      console.log(user);
-    }
-  };
+  // const handleSubmit = () => {
+  //   if (isValidEmail && isValidPassword && email && password) {
+  //     dispatch(
+  //       setUser({
+  //         ...user,
+  //         email: email,
+  //         password: password,
+  //         loggedIn: true,
+  //         isAdmin: isAdmin,
+  //       })
+  //     );
+  //     console.log(email);
+  //     console.log(password);
+  //     console.log(user);
+  //   }
+  // };
 
   return (
     <div className="vh-100" style={{ backgroundColor: "#eee" }}>
@@ -77,21 +75,16 @@ function LogIn() {
                         <div className="form-outline flex-fill mb-0">
                           <MDBInput
                             wrapperClass="mb-4"
-                            label="Email Adress"
-                            id="email"
-                            type="email"
+                            label="Username"
+                            id="username"
+                            type="text"
                             size="lg"
                             onChange={(e) => {
                               {
-                                handleEmailChange(e);
+                                handleUsernameChange(e);
                               }
                             }}
                           />
-                          {!isValidEmail && (
-                            <p style={{ color: "red" }}>
-                              Invalid email address. Please enter a valid email.
-                            </p>
-                          )}
                         </div>
                       </div>
 
@@ -146,7 +139,7 @@ function LogIn() {
                         <button
                           type="button"
                           className="btn btn-dark btn-lg"
-                          onClick={() => handleSubmit()}
+                          // onClick={() => handleSubmit()}
                         >
                           LOGIN
                         </button>

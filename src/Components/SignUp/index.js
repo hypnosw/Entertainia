@@ -79,12 +79,13 @@ function SignUp() {
               )}
               <div className="row">
                 <div className="col-12">
-                  <select className="select form-control">
+                  <select className="select form-select">
                     <option value="1" disabled>
                       Role
                     </option>
                     <option value="2">Admin</option>
                     <option value="3">User</option>
+                    <option value="4">Enterprise</option>
                   </select>
                   <div className="small text-muted mt-2">
                     Choose the role, admin or normal user.
