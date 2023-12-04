@@ -20,7 +20,7 @@ export const PostCards = (post)=>{
                     {/* Assuming that the likes field is an array of the ID of
                      the users who liked the post, or if we have a field that keeps count of likes,
                      then we can use that instead of array.length */}
-                    <p className="mb-0"><FaThumbsUp/>15</p>
+                    <p className="mb-0"><FaThumbsUp/>{post.numberOfLikes}</p>
                 </div>
             </div>
         </Link>

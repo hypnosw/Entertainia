@@ -14,7 +14,7 @@ export default function UserProfile(){
     const post = {
                         title:"Title so so very long",
                         author:"No Author",
-                        likes:["12131", "dwadadasd", "dadsads"],
+                        images:["https://i.kym-cdn.com/entries/icons/original/000/046/895/huh_cat.jpg"],
                         numberOfLikes:32,
                         };
     return (
