@@ -12,21 +12,49 @@ import validator from "validator";
 import { Link } from "react-router-dom";
 import "mdb-ui-kit/css/mdb.min.css";
 import "./index.css";
+import * as client from "../../Clients/userclient.js";
 
 function SignUp() {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+    role: "ADMIN",
+  });
+
+  const handleRoleChange = (event) => {
+    const selectedRole = event.target.value;
+    switch (selectedRole) {
+      case "2":
+        setCredentials({
+          ...credentials,
+          role: "ADMIN",
+        });
+        break;
+      case "3":
+        setCredentials({
+          ...credentials,
+          role: "USER",
+        });
+        break;
+      case "4":
+        setCredentials({
+          ...credentials,
+          role: "ENTERPRISE",
+        });
+        break;
+      default:
+    }
+  };
   const [isValidPassword, setIsValidPassword] = useState(true);
 
-  const handleUsernameChange = (event) => {
-    const newUsername = event.target.value;
-    setUserName(newUsername);
-  };
-
-  const handlePasswordChange = (event) => {
-    const newPassword = event.target.value;
-    setPassword(newPassword);
-    setIsValidPassword(newPassword.length >= 8);
+  const signup = async () => {
+    try {
+      await client.signup(credentials);
+      window.alert("Signup successful!");
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
 
   return (
@@ -54,11 +82,12 @@ function SignUp() {
                 type="text"
                 size="md"
                 placeholder="User123456"
-                onChange={(e) => {
-                  {
-                    handleUsernameChange(e);
-                  }
-                }}
+                onChange={(e) =>
+                  setCredentials({
+                    ...credentials,
+                    username: e.target.value,
+                  })
+                }
               />
 
               <MDBInput
@@ -69,9 +98,12 @@ function SignUp() {
                 size="md"
                 placeholder="Must have 6 characters"
                 onChange={(e) => {
-                  {
-                    handlePasswordChange(e);
-                  }
+                  setCredentials((prevCredentials) => ({
+                    ...prevCredentials,
+                    password: e.target.value,
+                  }));
+
+                  setIsValidPassword(e.target.value.length >= 6);
                 }}
               />
               {!isValidPassword && (
@@ -79,7 +111,10 @@ function SignUp() {
               )}
               <div className="row">
                 <div className="col-12">
-                  <select className="select form-select">
+                  <select
+                    className="select form-select"
+                    onChange={handleRoleChange}
+                  >
                     <option value="1" disabled>
                       Role
                     </option>
@@ -104,6 +139,7 @@ function SignUp() {
                 className="btn btn-dark btn-lg mb-4 px-5"
                 color="dark"
                 size="lg"
+                onClick={signup}
               >
                 Create account
               </button>

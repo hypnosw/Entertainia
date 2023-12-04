@@ -71,11 +71,11 @@ export default function HomePage() {
       </div>
       <MDBRow>
         <MDBRow className="row-cols-1 row-cols-md-4 g-4">
+          {/* <MDBCol>{PostCards(post)}</MDBCol>
           <MDBCol>{PostCards(post)}</MDBCol>
           <MDBCol>{PostCards(post)}</MDBCol>
           <MDBCol>{PostCards(post)}</MDBCol>
-          <MDBCol>{PostCards(post)}</MDBCol>
-          <MDBCol>{PostCards(post)}</MDBCol>
+          <MDBCol>{PostCards(post)}</MDBCol> */}
         </MDBRow>
       </MDBRow>
     </div>
