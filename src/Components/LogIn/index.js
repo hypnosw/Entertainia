@@ -22,13 +22,25 @@ function LogIn() {
 
   const signin = async () => {
     try {
-      await client.signin(credentials);
+      const response = await client.signin(credentials);
+      console.log(response);
       dispatch(
         setUser({
           ...user,
-          username: credentials.username,
-          password: credentials.password,
-          role: credentials.role,
+          username: response.username,
+          nickname:response.nickname,
+          profilePicture: response.profilePicture,
+          personalBio: response.personalBio,
+          password: response.password,
+          // posts should contain an array of the IDs of the posts that belong to this user
+          posts: response.posts,
+          // user ID in the following array
+          following: response.following,
+          followingCount:response.followingCount,
+          // user ID in the followers array
+          followers: response.followers,
+          followersCount:response.followersCount,
+          role: response.role,
         })
       );
       navigate("/home");

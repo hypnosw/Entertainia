@@ -18,8 +18,7 @@ const SearchResults = ()=>{
 
     useEffect(()=>{handleSearch();}, [location]);
     return(
-        <div>
-            <h1>Search Results Screen</h1>
+        <div className={"mt-2"}>
             {results.length === 0 ?
              (<p>No one shared anything on this topic, be the first!</p>) :
              (<p>We found {results.length} results</p>)}
