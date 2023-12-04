@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   name: "Unknown User",
-  email: "",
   profilePicture: "FaUser",
   personalBio: "Tell us more about you!",
   password: "",
@@ -12,8 +11,7 @@ const initialState = {
   following: [1, 2, 3],
   // user ID in the followers array
   followers: [1, 2, 3, 4],
-  loggedIn: false,
-  isAdmin: false,
+  role:"ADMIN"
 };
 
 const userSlice = createSlice({

@@ -14,7 +14,8 @@ export default function UserProfile(){
     const post = {
                         title:"Title so so very long",
                         author:"No Author",
-                        likes:["12131", "dwadadasd", "dadsads"]
+                        likes:["12131", "dwadadasd", "dadsads"],
+                        numberOfLikes:32,
                         };
     return (
             <div className="et-main-wrapper row ">
