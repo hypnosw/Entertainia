@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  name: "Unknown User",
+  username: "Unknown User",
   profilePicture: "FaUser",
   personalBio: "Tell us more about you!",
   password: "",
   // posts should contain an array of the IDs of the posts that belong to this user
-  posts:[1, 2, 3, 4, 5 ],
+  posts: [1, 2, 3, 4, 5],
   // user ID in the following array
   following: [1, 2, 3],
   // user ID in the followers array
   followers: [1, 2, 3, 4],
-  role:"ADMIN"
+  role: "ADMIN",
 };
 
 const userSlice = createSlice({
