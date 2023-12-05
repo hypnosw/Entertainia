@@ -20,13 +20,13 @@ export const PostCards = (post)=>{
 
             </div>
             <div className="card-body d-flex flex-column justify-content-between">
-                <h5 className="card-title mb-3 overflow-hidden">{post.title} <FaBaby/></h5>
+                <h5 className="card-title mb-3 overflow-hidden">{post.title}</h5>
                 <div className="d-flex justify-content-between et-post-author-likes">
                     <p className="card-text mb-0">{post.author}</p>
                     {/* Assuming that the likes field is an array of the ID of
                      the users who liked the post, or if we have a field that keeps count of likes,
                      then we can use that instead of array.length */}
-                    <p className="mb-0"><FaThumbsUp/>{post.numberOfLikes}</p>
+                    <p className="mb-0 d-flex align-items-center"><FaThumbsUp/>{post.numberOfLikes}</p>
                 </div>
             </div>
         </Link>
