@@ -11,9 +11,9 @@ import {
   MDBCardText,
 } from "mdb-react-ui-kit";
 import "mdb-ui-kit/css/mdb.min.css";
-import city from "../../images/city.jpeg";
-import spider from "../../images/spiderman.jpg";
-import game from "../../images/game.jpg";
+import man from "../../images/man.jpg";
+import tode from "../../images/toad.jpg";
+import raccoon from "../../images/raccoons.jpg";
 import "./index.css";
 import { useSelector } from "react-redux";
 import { PostCards } from "../Post-cards";
@@ -35,47 +35,50 @@ export default function HomePage() {
   }, []);
   return (
     <div className="hp-content">
-      <div style={{ maxWidth: "1255px" }}>
-        <MDBCarousel showControls showIndicators dark fade>
-          <MDBCarouselItem
-            className="w-100 d-block"
-            itemId={1}
-            src={city}
-            alt="..."
-            style={{ maxHeight: "450px" }}
-          >
-            <h5 className="text-white">First slide label</h5>
-            <p className="text-white">
-              Nulla vitae elit libero, a pharetra augue mollis interdum.
-            </p>
-          </MDBCarouselItem>
-          <MDBCarouselItem
-            className="w-100 d-block"
-            itemId={2}
-            src={spider}
-            alt="..."
-            style={{ maxHeight: "450px" }}
-          >
-            <h5 className="text-white">Second slide label</h5>
-            <p className="text-white">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
-          </MDBCarouselItem>
+      <MDBRow>
+        <MDBCol>
+          <MDBCarousel showControls showIndicators dark fade>
+            <MDBCarouselItem
+              className="w-100 d-block"
+              itemId={1}
+              src={raccoon}
+              alt="..."
+            >
+              <h5 className="text-white">First slide label</h5>
+              <p className="text-white">
+                Nulla vitae elit libero, a pharetra augue mollis interdum.
+              </p>
+            </MDBCarouselItem>
+            <MDBCarouselItem
+              className="w-100 d-block"
+              itemId={2}
+              src={man}
+              alt="..."
+              style={{ maxHeight: "600px", borderRadius: "10px" }}
+            >
+              <h5 className="text-white">Second slide label</h5>
+              <p className="text-white">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </MDBCarouselItem>
 
-          <MDBCarouselItem
-            className="w-100 d-block"
-            itemId={3}
-            src={game}
-            alt="..."
-            style={{ maxHeight: "450px" }}
-          >
-            <h5 className="text-white">Third slide label</h5>
-            <p className="text-white">
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </MDBCarouselItem>
-        </MDBCarousel>
-      </div>
+            <MDBCarouselItem
+              className="w-100 d-block"
+              itemId={3}
+              src={tode}
+              alt="..."
+              style={{ maxHeight: "450px" }}
+            >
+              <h5 className="text-white">Third slide label</h5>
+              <p className="text-white">
+                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              </p>
+            </MDBCarouselItem>
+          </MDBCarousel>
+        </MDBCol>
+        <MDBCol></MDBCol>
+      </MDBRow>
+
       <MDBRow>
         <MDBRow className="row-cols-1 row-cols-md-3 g-3">
           {posts.map((post) => {
