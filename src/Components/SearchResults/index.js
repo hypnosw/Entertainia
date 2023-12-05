@@ -1,15 +1,18 @@
 import {useContext, useEffect, useState} from "react";
 import {useLocation} from "react-router";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import * as client from "./client.js";
 import {PostCards} from "../Post-cards";
 import {getAPIResults} from "./client.js";
+import "./index.css";
 
 const SearchResults = ()=>{
     const location = useLocation();
+    const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
     // Get the value of the 'terms' parameter
     const searchTerms = queryParams.get('terms');
+    if(searchTerms === '') navigate('/home');
 
     const [results, setResults] = useState([]);
     const [APIResults, setAPIResults] = useState([]);
@@ -56,20 +59,31 @@ const SearchResults = ()=>{
             <div>
                 <hr/>
                 <h3>Other Resources You May Like</h3>
-                {APIResults.length !== 0 &&
-                 <div className={"d-flex flex-wrap"}>
-                     {APIResults.map(
-                         (post)=>{
-                             const index = { ...post,
-                                 title:post.title,
-                                 author:post.domain,
-                                 images:[post.favicon],
-                                 numberOfLikes:0,
-                             }
-                             return PostCards(index);
-                         }
-                     )}
-                 </div>
+
+                {APIResults.length === 0 ? (<div className="spinner-border" role="status">
+                                             <span className="sr-only"></span>
+                                         </div>):
+                 (<div className={""}>
+
+                     {APIResults.map((post)=>{
+                         return(
+                             <div className="search-result d-flex">
+                                 <div>
+                                     <img src={`${post.favicon}`}/>
+                                 </div>
+                                 <div className={"ms-2"}>
+                                     <h3><a href={`${post.link}`} target={`_blank`}>{post.title}</a></h3>
+                                     <a href={`${post.domain}`} className="search-link">{post.source}</a>
+                                     <p>
+                                         {post.snippet}
+                                     </p>
+                                 </div>
+
+                             </div>
+                         )
+                     })
+                     }
+                 </div>)
                 }
             </div>
 
