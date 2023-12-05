@@ -7,7 +7,8 @@ export const PostCards = (post)=>{
     // post should be  an object of the post, fields depend on the schemas
     return(
         <Link to="" className="card et-post-cards">
-            <div className="bg-image hover-overlay" data-mdb-ripple-init
+            <div className="bg-image hover-overlay"
+                 data-mdb-ripple-init
                  data-mdb-ripple-color="light">
 
                 {post.images[0] !== undefined ? (<img src={post.images[0]}
