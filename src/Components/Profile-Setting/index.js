@@ -7,7 +7,24 @@ import store from "../../store";
 function ProfileSetting(){
     const user = useSelector(state=>state.userReducer);
     const [newUser, SetNewUser] = useState(user);
+    const [currentPassword, SetCurrentPassword] = useState('');
+    const [newPassword, SetNewPassword] = useState('');
+    const [confirmPassword, SetConfirmPassword] = useState('');
     // console.log("newUser: " + newUser.nickname);
+    const handleUpdate = ()=>{
+        let replacement;
+        // do nothing about password if nothing is put in New Password
+        if(newPassword === ''){
+            replacement = {...newUser};
+        } else{
+            checkPassword() && (replacement.password = newPassword);
+        }
+
+    };
+    const checkPassword = ()=>{
+        return (newPassword === confirmPassword) &&
+                                             currentPassword === user.password;
+    }
     return (
         <div>
             <div className="container mt-2">
@@ -25,7 +42,8 @@ function ProfileSetting(){
                         <div className="d-inline-flex justify-content-between
                         align-items-center et-profile-row">
                             <p className="et-profile-label">Profile Picture</p>
-                            <img src={user.profilePicture} alt="" className="form-control et-profile-icon"/>
+                            <img src={user.profilePicture} alt=""
+                                 className="form-control et-profile-icon"/>
                             <button className="form-control et-upload-btn">Upload</button>
                         </div>
 
@@ -58,16 +76,34 @@ function ProfileSetting(){
                             <input id="et-cur-password-input"
                                    type="password"
                                    className="form-control mb-3"
+                                   onChange={(e)=>
+                                   {SetCurrentPassword(e.target.value)}}
                                     />
+                            {currentPassword !== '' &&
+                             currentPassword !== user.password &&
+                             <p className={"alert alert-danger"}>
+                                Current password incorrect
+                            </p> }
                         </div>
                         <div>
-                            <label htmlFor="et-password-input"><strong>New Password</strong></label>
-                            <input id="et-password-input" type="text" className="form-control mb-2"/>
+                            <label htmlFor="et-password-input">
+                                <strong>New Password</strong>
+                            </label>
+                            <input id="et-password-input" type="text" className="form-control mb-2"
+                                   onChange={(e)=>
+                                   {SetNewPassword(e.target.value)}}/>
                         </div>
                         <div>
-                            <label htmlFor="et-password-input"><strong>Confirm New Password</strong></label>
-                            <input id="et-newPassword-input" type="text" className="form-control"/>
+                            <label htmlFor="et-password-input">
+                                <strong>Confirm New Password</strong>
+                            </label>
+                            <input id="et-newPassword-input" type="password" className="form-control"
+                                   onChange={(e)=>
+                                   {SetConfirmPassword(e.target.value)}}/>
                         </div>
+                        { newPassword !== '' && (newPassword !== confirmPassword) &&
+                            <p className={"alert alert-danger mt-1"}>New Password Does Not Match</p>
+                        }
 
                         <div className="d-block float-end mt-5">
                             <button className="btn btn-outline-dark">Save</button>
