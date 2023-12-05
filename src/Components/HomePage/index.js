@@ -18,14 +18,21 @@ import "./index.css";
 import { useSelector } from "react-redux";
 import { PostCards } from "../Post-cards";
 import { FaBaby, FaThumbsUp } from "react-icons/fa";
+import { useState, useEffect } from "react";
+
+import * as client from "../../Clients/postclient.js";
 
 export default function HomePage() {
   const user = useSelector((state) => state.userReducer);
-  const post = {
-    title: "Title so so very long",
-    author: "No Author",
-    likes: ["12131", "dwadadasd", "dadsads"],
+  const [posts, setPosts] = useState([]);
+  const handlePosts = async () => {
+    const posts = await client.getAllPosts();
+    setPosts(posts);
   };
+
+  useEffect(() => {
+    handlePosts();
+  }, []);
   return (
     <div className="hp-content">
       <div style={{ maxWidth: "1255px" }}>
@@ -71,11 +78,9 @@ export default function HomePage() {
       </div>
       <MDBRow>
         <MDBRow className="row-cols-1 row-cols-md-4 g-4">
-          {/* <MDBCol>{PostCards(post)}</MDBCol>
-          <MDBCol>{PostCards(post)}</MDBCol>
-          <MDBCol>{PostCards(post)}</MDBCol>
-          <MDBCol>{PostCards(post)}</MDBCol>
-          <MDBCol>{PostCards(post)}</MDBCol> */}
+          {posts.map((post) => {
+            return PostCards(post);
+          })}
         </MDBRow>
       </MDBRow>
     </div>
