@@ -43,3 +43,18 @@ h4 {
     border-radius: 5px; 
     padding: 5px; 
 }
+
+/* .post-button {
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    margin-right: 5px;
+    background-color: #76ce79;
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation: coolEffect 0.5s ease-in-out;
+  } */

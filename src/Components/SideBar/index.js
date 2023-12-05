@@ -23,7 +23,7 @@ const Sidebar = () => {
               <li className="sidebar-item"><FaUserFriends /> FOLLOWING</li>
               <li className="sidebar-item"><FaEnvelope /> MESSAGES</li>
               <li className="sidebar-item"><FaBell /> NOTIFICATIONS</li>
-              <li className="sidebar-item"><FaList /> LISTS</li>
+              <li className="sidebar-item"><FaList /> LIKES</li>
           </ul>
         </div>
         <div className="bottom-section">
