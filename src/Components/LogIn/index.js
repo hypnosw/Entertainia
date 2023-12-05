@@ -23,7 +23,7 @@ function LogIn() {
   const signin = async () => {
     try {
       const response = await client.signin(credentials);
-      console.log(response);
+      // console.log(response);
       dispatch(
         setUser({
           ...user,

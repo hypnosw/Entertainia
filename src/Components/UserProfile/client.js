@@ -14,7 +14,7 @@ export const profile = async ()=>{
     //     return null;
     // }
     const user = await request.get(`${USER_URL}/profile`);
-    console.log(`profile:`, user.data);
+    // console.log(`profile:`, user.data);
     return user.data;
 
 }

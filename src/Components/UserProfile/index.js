@@ -1,12 +1,8 @@
 import "./index.css";
-import {useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import LogIn from "../LogIn";
 import {Link, useNavigate} from "react-router-dom";
-import {FaBaby, FaThumbsUp} from "react-icons/fa";
 import {PostCards} from "../Post-cards";
 import {profile, signOut} from "./client";
-import {setUser} from "../../Reducers/userReducer";
 
 export default function UserProfile(){
     const [user, SetUser] = useState(null);
@@ -28,7 +24,7 @@ export default function UserProfile(){
 
     useEffect(()=>{
         fetchProfile();
-    }, [user]);
+    }, []);
 
 
     return (
@@ -42,7 +38,10 @@ export default function UserProfile(){
 
                             {/* Username */}
                             <div className="justify-content-center d-flex mb-2">
-                                <strong className="h5">{user.nickname}</strong>
+                                <div>
+                                    <strong className=" h4">{user.nickname}</strong>
+                                        <p>@{user.username}</p>
+                                </div>
                             </div>
 
                             <div className="d-flex justify-content-around">
@@ -71,7 +70,7 @@ export default function UserProfile(){
                                         onClick={logOut}>
                                             Log Out
                                         </button>
-                                        <Link to="/profile-setting"
+                                        <Link to="/profile/profile-setting"
                                               className="btn btn-outline-dark et-edit-profile-btn">
                                             Edit Profile
                                         </Link>

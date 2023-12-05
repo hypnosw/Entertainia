@@ -36,6 +36,10 @@ const userSlice = createSlice({
       state.role = action.payload.role;
 
     },
+    emptyUser:(state)=>{
+
+      state.user = { ...initialState.user };
+    }
   },
 });
 
