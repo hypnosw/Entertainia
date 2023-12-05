@@ -11,8 +11,9 @@ export default function UserProfile(){
     const fetchProfile = async ()=>{
         try{
             const current = await profile();
-            if(current){SetUser(current)}
+            current ? SetUser(current) : navigate("/login");
         } catch(error){
+            // console.log("navigate");
             SetError(error.message + " :Failed to fetch account information");
         }
 
