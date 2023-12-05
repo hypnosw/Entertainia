@@ -54,6 +54,7 @@ function SignUp() {
       window.alert("Signup successful!");
     } catch (err) {
       setError(err.response.data.message);
+      window.alert("The username has been registered, please use another one.");
     }
   };
 

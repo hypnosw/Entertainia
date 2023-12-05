@@ -28,7 +28,7 @@ function LogIn() {
         setUser({
           ...user,
           username: response.username,
-          nickname:response.nickname,
+          nickname: response.nickname,
           profilePicture: response.profilePicture,
           personalBio: response.personalBio,
           password: response.password,
@@ -36,10 +36,10 @@ function LogIn() {
           posts: response.posts,
           // user ID in the following array
           following: response.following,
-          followingCount:response.followingCount,
+          followingCount: response.followingCount,
           // user ID in the followers array
           followers: response.followers,
-          followersCount:response.followersCount,
+          followersCount: response.followersCount,
           role: response.role,
         })
       );
