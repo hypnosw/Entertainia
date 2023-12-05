@@ -77,7 +77,7 @@ export default function HomePage() {
         </MDBCarousel>
       </div>
       <MDBRow>
-        <MDBRow className="row-cols-1 row-cols-md-4 g-4">
+        <MDBRow className="row-cols-1 row-cols-md-3 g-3">
           {posts.map((post) => {
             return PostCards(post);
           })}
