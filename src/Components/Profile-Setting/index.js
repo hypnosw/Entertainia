@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./index.css";
 import {useSelector} from "react-redux";
 import userReducer from "../../Reducers/userReducer";
@@ -6,8 +6,8 @@ import store from "../../store";
 
 function ProfileSetting(){
     const user = useSelector(state=>state.userReducer);
-    // Also parse userID here as query param
-    console.log(user.name);
+    const [newUser, SetNewUser] = useState(user);
+    // console.log("newUser: " + newUser.nickname);
     return (
         <div>
             <div className="container mt-2">
@@ -25,7 +25,7 @@ function ProfileSetting(){
                         <div className="d-inline-flex justify-content-between
                         align-items-center et-profile-row">
                             <p className="et-profile-label">Profile Picture</p>
-                            <img src="#" alt="" className="form-control et-profile-icon"/>
+                            <img src={user.profilePicture} alt="" className="form-control et-profile-icon"/>
                             <button className="form-control et-upload-btn">Upload</button>
                         </div>
 
@@ -33,14 +33,20 @@ function ProfileSetting(){
                         <div>
                             <label for="et-username-input"><strong>Username</strong></label>
                             <input id="et-username-input" type="text" className="form-control"
-                            defaultValue={user.name}/>
+                            defaultValue={user.nickname}
+                            onChange={(e)=>
+                                SetNewUser({...newUser, nickname:e.target.value})}/>
                         </div>
 
                         {/* Personal Bio Input */}
                         <div className="mt-3">
                             <label for="et-personal-bio"><strong>Personal Bio</strong></label>
                             <textarea id="et-personal-bio" className="form-control"
-                            placeholder={user.personalBio}></textarea>
+                            defaultValue={user.personalBio}
+                                      onChange={(e)=>
+                                          SetNewUser({...newUser, personalBio:e.target.value})}>
+
+                            </textarea>
                         </div>
 
                         {/* Password Section */}
@@ -49,7 +55,10 @@ function ProfileSetting(){
                             <label htmlFor="et-cur-password-input">
                                 <strong>Current Password</strong>
                             </label>
-                            <input id="et-cur-password-input" type="text" className="form-control mb-3"/>
+                            <input id="et-cur-password-input"
+                                   type="password"
+                                   className="form-control mb-3"
+                                    />
                         </div>
                         <div>
                             <label htmlFor="et-password-input"><strong>New Password</strong></label>
