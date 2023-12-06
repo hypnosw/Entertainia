@@ -37,7 +37,7 @@ const CreatePost = () => {
           formData.append('body', content);
           formData.append('images', image);
       
-          const response = await fetch('http://localhost:5001/api/posts', {
+          const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/posts`, {
             method: 'POST',
             body: formData,
           });

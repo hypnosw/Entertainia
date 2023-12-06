@@ -22,9 +22,9 @@ function App() {
         <div className="row">
           <HeadBar />
         </div>
-        <div className="row">
+        <div className="row et-homepage-main">
           <div className="col-auto">
-            <SideBar />
+            {/*<SideBar />*/}
           </div>
           <div className="col">
             <Routes>

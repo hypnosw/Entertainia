@@ -2,12 +2,13 @@ import "./index.css";
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {PostCards} from "../Post-cards";
-import {profile, signOut} from "./client";
+import {getPosts, profile, signOut} from "./client";
 
 export default function UserProfile(){
     const [user, SetUser] = useState(null);
     const [error, SetError] = useState('');
     const navigate = useNavigate();
+    const [posts, setPosts] = useState([]);
     const fetchProfile = async ()=>{
         try{
             const current = await profile();
@@ -16,21 +17,33 @@ export default function UserProfile(){
             // console.log("navigate");
             SetError(error.message + " :Failed to fetch account information");
         }
-
     }
     const logOut = async ()=>{
         await signOut();
         navigate("/home");
     }
+    const fetchPosts = async()=>{
+        try{
+            if(user){
+                const response = await getPosts(user._id);
+                setPosts(response.data);
+            }
+        }catch(error){
+            SetError(error.message);
+        }
+
+
+    }
 
     useEffect(()=>{
-        fetchProfile();
+        fetchProfile().then(()=>fetchPosts());
     }, []);
 
 
     return (
             <div>
-                {user?(<div className="et-main-wrapper row ">
+                {user?(
+                    <div className="et-main-wrapper row ">
                     <div className="col-sm-auto  d-flex justify-content-center w-100">
                         <div className="d-block">
                             {/* Profile Picture */}
@@ -88,7 +101,9 @@ export default function UserProfile(){
                             {/* Should be a map function here to map out every post
                         that belongs to the user*/}
 
-                            {user.posts.map((post)=>PostCards(post))};
+                            {posts.map(
+                                (post)=>PostCards(post)
+                            )}
 
 
 
