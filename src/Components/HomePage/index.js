@@ -108,12 +108,11 @@ export default function HomePage() {
           </div>
         </MDBCol>
       </MDBRow>
-      <MDBRow>
-        <MDBRow className="row-cols-1 row-cols-md-3 g-3">
-          {posts.map((post) => {
-            return PostCards(post);
-          })}
-        </MDBRow>
+      <br />
+      <MDBRow className="row-cols-1 row-cols-md-3 g-3">
+        {posts.map((post) => {
+          return PostCards(post);
+        })}
       </MDBRow>
     </div>
   );
