@@ -130,7 +130,7 @@ function LogIn() {
                           />
                           {!isValidPassword && (
                             <p style={{ color: "red" }}>
-                              Password incorrect or does not match the username.
+                              The password must be at least 6 characters long
                             </p>
                           )}
                         </div>
