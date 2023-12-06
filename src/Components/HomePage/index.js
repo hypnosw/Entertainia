@@ -40,47 +40,26 @@ export default function HomePage() {
     handlePosts();
     handlePopularPosts();
   }, []);
+
+  const topThreePosts = popularPosts.slice(0, 3);
   return (
     <div className="hp-content">
       <MDBRow>
         <MDBCol col-md-7>
           <MDBCarousel showControls showIndicators dark fade>
-            <MDBCarouselItem
-              className="w-100 d-block"
-              itemId={1}
-              src={raccoon}
-              alt="..."
-            >
-              <h5 className="text-white">First slide label</h5>
-              <p className="text-white">
-                Nulla vitae elit libero, a pharetra augue mollis interdum.
-              </p>
-            </MDBCarouselItem>
-            <MDBCarouselItem
-              className="w-100 d-block"
-              itemId={2}
-              src={man}
-              alt="..."
-              style={{ maxHeight: "600px", borderRadius: "10px" }}
-            >
-              <h5 className="text-white">Second slide label</h5>
-              <p className="text-white">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </MDBCarouselItem>
-
-            <MDBCarouselItem
-              className="w-100 d-block"
-              itemId={3}
-              src={tode}
-              alt="..."
-              style={{ maxHeight: "450px" }}
-            >
-              <h5 className="text-white">Third slide label</h5>
-              <p className="text-white">
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </MDBCarouselItem>
+            {topThreePosts.map((post, index) => (
+              <div key={post.id}>
+                <MDBCarouselItem
+                  className="w-100 d-block"
+                  itemId={index + 1}
+                  src={post.images[0]}
+                  alt="..."
+                >
+                  <h5 className="text-white">{post.title}</h5>
+                  <p className="text-white">{post.body}</p>
+                </MDBCarouselItem>
+              </div>
+            ))}
           </MDBCarousel>
         </MDBCol>
         <MDBCol col-md-5>
