@@ -130,8 +130,7 @@ function LogIn() {
                           />
                           {!isValidPassword && (
                             <p style={{ color: "red" }}>
-                              Password incorrect or does not match the email
-                              address.
+                              Password incorrect or does not match the username.
                             </p>
                           )}
                         </div>
