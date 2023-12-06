@@ -1,61 +1,81 @@
 import { React, useState } from "react";
-import validator from "validator";
 import { Link } from "react-router-dom";
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBInput,
-  MDBIcon,
-  MDBCheckbox,
-} from "mdb-react-ui-kit";
+import { MDBInput } from "mdb-react-ui-kit";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../Reducers/userReducer";
+import { useNavigate } from "react-router-dom";
+import * as client from "../../Clients/userclient.js";
 import "./index.css";
 import "mdb-ui-kit/css/mdb.min.css";
 
 function LogIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isValidPassword, setIsValidPassword] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  const handleEmailChange = (event) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    setIsValidEmail(validator.isEmail(newEmail));
-  };
-
-  const handlePasswordChange = (event) => {
-    const newPassword = event.target.value;
-    setPassword(newPassword);
-    setIsValidPassword(newPassword.length >= 8);
-  };
+  const navigate = useNavigate();
+  const [_, setError] = useState("");
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+    role: "ADMIN",
+  });
 
   const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {
-    if (isValidEmail && isValidPassword && email && password) {
+  const signin = async () => {
+    try {
+      const response = await client.signin(credentials);
+      // console.log(response);
       dispatch(
         setUser({
           ...user,
-          email: email,
-          password: password,
-          loggedIn: true,
-          isAdmin: isAdmin,
+          username: response.username,
+          nickname: response.nickname,
+          profilePicture: response.profilePicture,
+          personalBio: response.personalBio,
+          password: response.password,
+          // posts should contain an array of the IDs of the posts that belong to this user
+          posts: response.posts,
+          // user ID in the following array
+          following: response.following,
+          followingCount: response.followingCount,
+          // user ID in the followers array
+          followers: response.followers,
+          followersCount: response.followersCount,
+          role: response.role,
         })
       );
-      console.log(email);
-      console.log(password);
-      console.log(user);
+      navigate("/home");
+    } catch (err) {
+      setError("Incorrect username or password");
+      window.alert("Please recheck your information and try again");
     }
   };
+
+  const handleRoleChange = (event) => {
+    const selectedRole = event.target.value;
+    switch (selectedRole) {
+      case "2":
+        setCredentials({
+          ...credentials,
+          role: "ADMIN",
+        });
+        break;
+      case "3":
+        setCredentials({
+          ...credentials,
+          role: "USER",
+        });
+        break;
+      case "4":
+        setCredentials({
+          ...credentials,
+          role: "ENTERPRISE",
+        });
+        break;
+      default:
+    }
+  };
+
+  const [isValidPassword, setIsValidPassword] = useState(true);
 
   return (
     <div className="vh-100" style={{ backgroundColor: "#eee" }}>
@@ -77,21 +97,17 @@ function LogIn() {
                         <div className="form-outline flex-fill mb-0">
                           <MDBInput
                             wrapperClass="mb-4"
-                            label="Email Adress"
-                            id="email"
-                            type="email"
+                            label="Username"
+                            id="username"
+                            type="text"
                             size="lg"
-                            onChange={(e) => {
-                              {
-                                handleEmailChange(e);
-                              }
-                            }}
+                            onChange={(e) =>
+                              setCredentials({
+                                ...credentials,
+                                username: e.target.value,
+                              })
+                            }
                           />
-                          {!isValidEmail && (
-                            <p style={{ color: "red" }}>
-                              Invalid email address. Please enter a valid email.
-                            </p>
-                          )}
                         </div>
                       </div>
 
@@ -104,9 +120,12 @@ function LogIn() {
                             type="password"
                             size="lg"
                             onChange={(e) => {
-                              {
-                                handlePasswordChange(e);
-                              }
+                              setCredentials((prevCredentials) => ({
+                                ...prevCredentials,
+                                password: e.target.value,
+                              }));
+
+                              setIsValidPassword(e.target.value.length >= 6);
                             }}
                           />
                           {!isValidPassword && (
@@ -118,15 +137,19 @@ function LogIn() {
                         </div>
                       </div>
                       {/* Another checkbox to pick whether admin login */}
-                      <div className="d-flex justify-content-between  mb-4">
-                        <MDBCheckbox
-                          name="flexCheck"
-                          value="false"
-                          id="flexCheckDefault"
-                          label="Is it an admin account?"
-                          onClick={() => setIsAdmin(!isAdmin)}
-                        />
-                      </div>
+                      <select
+                        className="select form-select"
+                        onChange={handleRoleChange}
+                      >
+                        <option value="1" disabled>
+                          Role
+                        </option>
+                        <option value="2">Admin</option>
+                        <option value="3">User</option>
+                        <option value="4">Enterprise</option>
+                      </select>
+                      <br />
+
                       {/* If not a exiting account, the user can choose to create one */}
                       <p className="ms-5">
                         Don't have an account?&nbsp;
@@ -146,7 +169,7 @@ function LogIn() {
                         <button
                           type="button"
                           className="btn btn-dark btn-lg"
-                          onClick={() => handleSubmit()}
+                          onClick={signin}
                         >
                           LOGIN
                         </button>

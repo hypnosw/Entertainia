@@ -13,6 +13,7 @@ import UserProfile from "./Components/UserProfile";
 import CreatePost from "./Components/CreatePost";
 import Homepage from "./Components/HomePage";
 import PostDetail from "./Components/PostDetail";
+import SearchResults from "./Components/SearchResults";
 
 function App() {
   return (
@@ -30,36 +31,14 @@ function App() {
               <Route path={"/"} element={<Homepage />} />
               <Route path="/SignUp" element={<SignUp />} />
               <Route path="/LogIn" element={<LogIn />} />
-              <Route path="/profile-setting" element={<ProfileSetting />} />
-              <Route path="/profile" element={<UserProfile />} />
+              <Route path="/profile/profile-setting" element={<ProfileSetting />} />
+              <Route path="/profile/*" element={<UserProfile />} />
               <Route path="/CreatePost" element={<CreatePost />} />
               <Route path="/home" element={<Homepage />} />
               <Route path="/PostDetail" element={<PostDetail />} />
+              <Route path={"/search/*"} element={<SearchResults/>}/>
             </Routes>
-            {/*<>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*  <h1>Testing</h1>*/}
-            {/*</>*/}
+
           </div>
         </div>
       </Provider>

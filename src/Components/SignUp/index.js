@@ -12,23 +12,50 @@ import validator from "validator";
 import { Link } from "react-router-dom";
 import "mdb-ui-kit/css/mdb.min.css";
 import "./index.css";
+import * as client from "../../Clients/userclient.js";
 
 function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [error, setError] = useState("");
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+    role: "ADMIN",
+  });
+
+  const handleRoleChange = (event) => {
+    const selectedRole = event.target.value;
+    switch (selectedRole) {
+      case "2":
+        setCredentials({
+          ...credentials,
+          role: "ADMIN",
+        });
+        break;
+      case "3":
+        setCredentials({
+          ...credentials,
+          role: "USER",
+        });
+        break;
+      case "4":
+        setCredentials({
+          ...credentials,
+          role: "ENTERPRISE",
+        });
+        break;
+      default:
+    }
+  };
   const [isValidPassword, setIsValidPassword] = useState(true);
 
-  const handleEmailChange = (event) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    setIsValidEmail(validator.isEmail(newEmail));
-  };
-
-  const handlePasswordChange = (event) => {
-    const newPassword = event.target.value;
-    setPassword(newPassword);
-    setIsValidPassword(newPassword.length >= 8);
+  const signup = async () => {
+    try {
+      await client.signup(credentials);
+      window.alert("Signup successful!");
+    } catch (err) {
+      setError(err.response.data.message);
+      window.alert("The username has been registered, please use another one.");
+    }
   };
 
   return (
@@ -51,22 +78,19 @@ function SignUp() {
               {/* create a new user */}
               <MDBInput
                 wrapperClass="mb-4"
-                label="Email address"
-                id="email"
-                type="email"
+                label="Username"
+                id="Username"
+                type="text"
                 size="md"
-                placeholder="12345678@xxxxx.com"
-                onChange={(e) => {
-                  {
-                    handleEmailChange(e);
-                  }
-                }}
+                placeholder="User123456"
+                onChange={(e) =>
+                  setCredentials({
+                    ...credentials,
+                    username: e.target.value,
+                  })
+                }
               />
-              {!isValidEmail && (
-                <p style={{ color: "red" }}>
-                  Invalid email address. Please enter a valid email.
-                </p>
-              )}
+
               <MDBInput
                 wrapperClass="mb-4"
                 label="Password"
@@ -75,9 +99,12 @@ function SignUp() {
                 size="md"
                 placeholder="Must have 6 characters"
                 onChange={(e) => {
-                  {
-                    handlePasswordChange(e);
-                  }
+                  setCredentials((prevCredentials) => ({
+                    ...prevCredentials,
+                    password: e.target.value,
+                  }));
+
+                  setIsValidPassword(e.target.value.length >= 6);
                 }}
               />
               {!isValidPassword && (
@@ -85,12 +112,16 @@ function SignUp() {
               )}
               <div className="row">
                 <div className="col-12">
-                  <select className="select form-control">
+                  <select
+                    className="select form-select"
+                    onChange={handleRoleChange}
+                  >
                     <option value="1" disabled>
                       Role
                     </option>
                     <option value="2">Admin</option>
                     <option value="3">User</option>
+                    <option value="4">Enterprise</option>
                   </select>
                   <div className="small text-muted mt-2">
                     Choose the role, admin or normal user.
@@ -109,6 +140,7 @@ function SignUp() {
                 className="btn btn-dark btn-lg mb-4 px-5"
                 color="dark"
                 size="lg"
+                onClick={signup}
               >
                 Create account
               </button>

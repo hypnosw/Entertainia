@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import "./index.css";
 import "mdb-ui-kit/css/mdb.min.css";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Headbar = () => {
+  const [terms, setTerms] = useState("");
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -48,9 +49,10 @@ const Headbar = () => {
             placeholder="Come and catch up with friends!"
             aria-label="Search"
             aria-describedby="search-addon"
+            onChange={(e)=>{setTerms(e.target.value)}}
           />
           <div className="input-group-text border-0" id="search-addon">
-            <Link to={`/search?terms=hi`}>
+            <Link to={`/search?terms=${terms}`}>
               <FaSearch />
             </Link>
           </div>
