@@ -57,32 +57,6 @@ const CreatePost = () => {
         }
       };
       
-    // const handleShare = async () => {
-    //     try {
-    //       // 创建一个 FormData 对象，用于包装发送的数据
-    //       const formData = new FormData();
-    //       formData.append('title', title);
-    //       formData.append('content', content);
-    //       formData.append('image', image); // 将文件添加到 FormData 中
-    
-    //       // 发送 POST 请求
-    //       const response = await fetch('http://localhost:5001/api/posts', {
-    //         method: 'POST',
-    //         body: formData,
-    //       });
-    
-    //       // 处理响应
-    //       if (response.ok) {
-    //         const result = await response.json();
-    //         console.log('Post shared:', result);
-    //         navigate('/PostDetail'); // 可以跳转到新创建的帖子详情页面
-    //       } else {
-    //         console.error('Error sharing post:', response.statusText);
-    //       }
-    //     } catch (error) {
-    //       console.error('Error sharing post:', error);
-    //     }
-    //   };
 
     return (
         <div className="container mt-2">
@@ -138,7 +112,7 @@ const CreatePost = () => {
             </div>
         </div>
         </div>
-    );
+    ); 
 };
 
 export default CreatePost;
