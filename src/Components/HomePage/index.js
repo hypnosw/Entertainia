@@ -43,7 +43,7 @@ export default function HomePage() {
   return (
     <div className="hp-content">
       <MDBRow>
-        <MDBCol col-md-7>
+        <MDBCol>
           <MDBCarousel showControls showIndicators dark fade>
             <MDBCarouselItem
               className="w-100 d-block"
@@ -83,7 +83,7 @@ export default function HomePage() {
             </MDBCarouselItem>
           </MDBCarousel>
         </MDBCol>
-        <MDBCol col-md-5>
+        <MDBCol>
           <div class="container mt-5">
             <div class="row align-items-center">
               <div class="col-md-12 text-md-start text-center py-6">
@@ -109,7 +109,7 @@ export default function HomePage() {
         </MDBCol>
       </MDBRow>
       <br />
-      <MDBRow className="row-cols-1 row-cols-md-3 g-3">
+      <MDBRow className="row-cols-1 row-cols-md-3 g-4">
         {posts.map((post) => {
           return PostCards(post);
         })}
