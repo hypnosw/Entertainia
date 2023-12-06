@@ -37,6 +37,7 @@ function App() {
             <Route path="/PostDetail" element={<PostDetail />} />
             <Route path={"/search/*"} element={<SearchResults />} />
           </Routes>
+
         </div>
       </Provider>
     </HashRouter>
