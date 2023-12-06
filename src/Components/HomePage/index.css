@@ -6,10 +6,11 @@
   content: "";
 }
 
-.hp-content {
-  transform: scale(0.95);
-}
-
 .MDBCarousel {
   height: 1000px;
+}
+
+.container {
+  display: grid;
+  place-items: center;
 }
