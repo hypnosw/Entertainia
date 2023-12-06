@@ -36,8 +36,12 @@ export default function UserProfile(){
     }
 
     useEffect(()=>{
-        fetchProfile().then(()=>fetchPosts());
+        fetchProfile()
     }, []);
+
+    useEffect(()=>{
+        fetchPosts();
+    },[user]);
 
 
     return (
