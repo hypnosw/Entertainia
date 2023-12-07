@@ -32,7 +32,7 @@ function App() {
               path="/profile/profile-setting"
               element={<ProfileSetting />}
             />
-            <Route path="/profile/*" element={<UserProfile />} />
+            <Route path="/profile/:id/*" element={<UserProfile />} />
             <Route path="/CreatePost" element={<CreatePost />} />
             <Route path="/home" element={<Homepage />} />
             <Route path="/PostDetail" element={<PostDetail />} />

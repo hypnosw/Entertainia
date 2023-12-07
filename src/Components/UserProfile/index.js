@@ -1,28 +1,39 @@
 import "./index.css";
 import React, {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {PostCards} from "../Post-cards";
-import {getPosts, profile, signOut} from "./client";
+import {getPosts, currentLoggedInProfile, signOut} from "./client";
 import {useDispatch, useSelector} from "react-redux";
 import userReducer, {emptyUser} from "../../Reducers/userReducer";
 import {FaHamburger, FaUser} from "react-icons/fa";
+import {findUserById} from "../../Clients/userclient";
 
 
 export default function UserProfile() {
+  const {id} = useParams();
+  const [user, setUser] = useState(null);
+
+  // currentUser is the logged in user
+  const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
-  const [user, SetUser] = useState(null);
   const [error, SetError] = useState("");
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
-  const fetchProfile = async () => {
+  const fetchProfile = async()=>{
+
+    const response = await findUserById(id);
+    setUser(response);
+  }
+  const fetchCurrentProfile = async () => {
     try {
-      const current = await profile();
-      current ? SetUser(current) : navigate("/login");
+      const current = await currentLoggedInProfile();
+      current ? setCurrentUser(current) : navigate("/login");
     } catch (error) {
       // console.log("navigate");
-      SetError(error.message + " :Failed to fetch account information");
+      console.log("Not Logged In || Failed to fetch logged in user info");
     }
   };
+
   const logOut = async () => {
     await signOut();
     dispatch(emptyUser());
@@ -40,7 +51,8 @@ export default function UserProfile() {
 
   useEffect(() => {
     fetchProfile();
-  }, []);
+    fetchCurrentProfile();
+  }, [id]);
 
   useEffect(() => {
     fetchPosts();
@@ -53,11 +65,12 @@ export default function UserProfile() {
                     <div className="col-sm-auto  d-flex justify-content-center w-100">
                         <div className="d-block">
                             {/* All Users Button */}
-                            <div className={"et-dropdown-btn"}>
-                                <Link to="/profile/all-users"type={"button"} className={"btn"}>
-                                    <FaUser/>
-                                </Link>
-                            </div>
+                          {currentUser.username === user.username && currentUser.role === "ADMIN" &&
+                           <div className={"et-dropdown-btn"}>
+                            <Link to="/profile/all-users"type={"button"} className={"btn"}>
+                              <FaUser/>
+                            </Link>
+                          </div>}
 
                             {/* Profile Picture */}
                             <img src={"#"} alt="" className="form-control et-profile-picture mb-4"/>
@@ -84,23 +97,20 @@ export default function UserProfile() {
                             <p className="mt-3">
                                 {user.personalBio}
                             </p>
-                            <div className="d-block float-end mt-5 w-100">
-                                {/* Show Edit Profile button if logged in*/}
-                                {/* Currently shows if false for testing */}
-                                {
-                                    <div className={"d-flex justify-content-between"}>
-                                        <button className={"btn btn-danger"}
+                          {user.username === currentUser.username && <div className="d-block float-end mt-5 w-100">
+                            {
+                              <div className={"d-flex justify-content-between"}>
+                                <button className={"btn btn-danger"}
                                         onClick={logOut}>
-                                            Log Out
-                                        </button>
-                                        <Link to="/profile/profile-setting"
-                                              className="btn btn-outline-dark et-edit-profile-btn">
-                                            Edit Profile
-                                        </Link>
-                                    </div>
-
-                                }
-                            </div>
+                                  Log Out
+                                </button>
+                                <Link to="/profile/profile-setting"
+                                      className="btn btn-outline-dark et-edit-profile-btn">
+                                  Edit Profile
+                                </Link>
+                              </div>
+                            }
+                          </div>}
                         </div>
                     </div>
                     <div className="col-lg-9 mt-3 d-flex justify-content-center w-100">
@@ -109,7 +119,7 @@ export default function UserProfile() {
                         that belongs to the user*/}
 
                             {posts.map(
-                                (post)=>(PostCards(post))
+                                (post)=>(PostCards({...post, author_name:`${user.nickname}`}))
                             )}
                         </div>
 
