@@ -5,49 +5,48 @@ import {PostCards} from "../Post-cards";
 import {getPosts, profile, signOut} from "./client";
 import {useDispatch, useSelector} from "react-redux";
 import userReducer, {emptyUser} from "../../Reducers/userReducer";
-import {FaBurger} from "react-icons/fa6";
 import {FaHamburger, FaUser} from "react-icons/fa";
 
-export default function UserProfile(){
-    const dispatch = useDispatch();
-    const [user, SetUser] = useState(null);
-    const [error, SetError] = useState('');
-    const navigate = useNavigate();
-    const [posts, setPosts] = useState([]);
-    const fetchProfile = async ()=>{
-        try{
-            const current = await profile();
-            current ? SetUser(current) : navigate("/login");
-        } catch(error){
-            // console.log("navigate");
-            SetError(error.message + " :Failed to fetch account information");
-        }
-    }
-    const logOut = async ()=>{
-        await signOut();
-        dispatch(emptyUser());
-        navigate("/home");
-    }
-    const fetchPosts = async()=>{
-        try{
-            if(user){
-                const response = await getPosts(user._id);
-                setPosts(response.data);
-            }
-        }catch(error){
-            SetError(error.message);
-        }
-    }
 
-    useEffect(()=>{
-        fetchProfile()
-    }, []);
+export default function UserProfile() {
+  const dispatch = useDispatch();
+  const [user, SetUser] = useState(null);
+  const [error, SetError] = useState("");
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  const fetchProfile = async () => {
+    try {
+      const current = await profile();
+      current ? SetUser(current) : navigate("/login");
+    } catch (error) {
+      // console.log("navigate");
+      SetError(error.message + " :Failed to fetch account information");
+    }
+  };
+  const logOut = async () => {
+    await signOut();
+    dispatch(emptyUser());
+    navigate("/home");
+  };
+  const fetchPosts = async () => {
+    try {
+      if (user) {
+        const response = await getPosts(user._id);
+        setPosts(response.data);
+      }
+    } catch (error) {
+      SetError(error.message);
+    }};
 
-    useEffect(()=>{
-        fetchPosts();
-    },[user]);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
-    return (
+  useEffect(() => {
+    fetchPosts();
+  }, [user]);
+
+  return (
             <div>
                 {user?(
                     <div className="et-main-wrapper row ">
@@ -126,3 +125,4 @@ export default function UserProfile(){
             </div>
     )
 };
+

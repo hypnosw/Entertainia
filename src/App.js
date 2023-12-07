@@ -18,7 +18,7 @@ import AllUsers from "./Components/AllUsers";
 
 function App() {
   return (
-    <HashRouter className="app-page">
+    <HashRouter className="page-content">
       <Provider store={store}>
         <div className="row">
           <HeadBar />
