@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_BASE = process.env.REACT_APP_BASE_API_URL || "http://localhost:5001";
-export const POSTS_API = `${API_BASE}/api/posts`;
+const API_BASE = process.env.REACT_APP_SERVER_URL || "http://localhost:5001/api";
+export const POSTS_API = `${API_BASE}/posts`;
 const request = axios.create({
   withCredentials: true,
 });

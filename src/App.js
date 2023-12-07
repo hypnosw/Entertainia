@@ -34,7 +34,7 @@ function App() {
             <Route path="/profile/*" element={<UserProfile />} />
             <Route path="/CreatePost" element={<CreatePost />} />
             <Route path="/home" element={<Homepage />} />
-            <Route path="/PostDetail" element={<PostDetail />} />
+            <Route path="/PostDetail/:postId" element={<PostDetail />} />
             <Route path={"/search/*"} element={<SearchResults />} />
           </Routes>
           <Footer />

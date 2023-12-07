@@ -35,7 +35,7 @@ import "./index.css";
 
 export const PostCards = (post) => {
     return (
-      <Link to="" className="card et-post-cards">
+      <Link to="/PostDetail/:postId" className="card et-post-cards">
         <div
           className="bg-image hover-overlay"
           data-mdb-ripple-init

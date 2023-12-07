@@ -27,3 +27,8 @@ export const findPostById = async (postId) => {
   );
   return response.data.posts[0];
 };
+
+export const likePost = async (postId, userId) => {
+  const response = await axios.post(`${BASE_URL}/posts/like`, { postId, userId });
+  return response.data;
+};
