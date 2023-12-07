@@ -1,14 +1,32 @@
-import React from "react";
+
 import Sidebar from "../SideBar";
 import HeadBar from "../HeadBar";
 import "./index.css";
 import { useSelector } from "react-redux";
 import { FaRegHeart, FaRegStar, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FiMessageCircle } from "react-icons/fi";
-
+import React, { useState, useEffect } from 'react';
+import * as userClient from "../../Clients/userclient.js";
 const PostDetail = () => {
+    // to check if the user logged in
+    const [currentUser, setCurrentUser] = useState(null);
+    const fetchUser = async () => {
+        try {
+          const currentuser = await userClient.account();
+          setCurrentUser(currentuser );
+        } catch (error) {
+          setCurrentUser(null);
+        }
+      };
+
     const user = useSelector(state => state.userReducer);
     console.log(user);
+
+    useEffect(() => {
+        fetchUser();
+
+      }, []);
+
     return (
         <main className="my-5">
             {/* Fixed HeadBar */}
@@ -52,8 +70,16 @@ const PostDetail = () => {
                                                 <strong className="h5 mx-2">{user.name}</strong>
                                             </div>
                                             {/* <span className="badge bg-danger px-2 py-1 shadow-1-strong">News of the day</span> */}
+                                            {/* like button */}
+                                            {currentUser &&(
+                                            <button className="btn btn-warning float-end">Like</button>
+                                            )}
                                             <button type="button" className="btn btn-danger top-right-button ml-auto">Follow</button>
                                         </div>
+
+                
+
+                                        
                                         <h4><strong>Facilis consequatur eligendi</strong></h4>
                                         <p className="text-muted">
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur

@@ -14,3 +14,16 @@ export const getAllSortedPosts = async (keywords) => {
   return response.data;
 };
 
+export const findPosts = async (searchTerm) => {
+  const response = await axios.get(
+    `${BASE_URL}/search?query=${searchTerm}&type=posts&apikey=${POSTS_URL}`
+  );
+  return response.data.search.data.posts;
+};
+
+export const findPostById = async (postId) => {
+  const response = await axios.get(
+    `${BASE_URL}/posts/${postId}?apikey=${POSTS_URL}`
+  );
+  return response.data.posts[0];
+};
