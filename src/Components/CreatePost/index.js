@@ -31,7 +31,7 @@ const CreatePost = () => {
           try{
               const current = await profile();
               current ?  setUser(current) : navigate("/login");
-              console.log(user.username);
+              // console.log(user.username);
 
           } catch(error){
              setError(error.message);
@@ -42,7 +42,14 @@ const CreatePost = () => {
       useEffect(()=>{
           fetchProfile();
       }, []);
-  
+
+      useEffect(()=>{
+        if(user){
+        console.log("fetchProfile:" + user.username);
+        console.log("fetchprofile id:" + user._id);
+        }
+        }, [user]);
+
       const handleShare = async () => {
         try {
           if (!title || !content || !image) {
@@ -56,7 +63,8 @@ const CreatePost = () => {
           formData.append('title', title);
           formData.append('body', content);
           formData.append('images', image);
-      
+          formData.append('userId', user._id)
+
           const response = await fetch(
             POSTS_API,
             // 'http://localhost:5001/api/posts', 
@@ -69,15 +77,15 @@ const CreatePost = () => {
             const result = await response.json();
             console.log('Post shared:', result);
             // Update the route or handle redirection as needed
-            // navigate('/PostDetail');
+            navigate('/PostDetail');
           } else {
             setError('Error sharing post');
-            console.error('Error sharing post:', response.statusText);
+            console.error('Error1 sharing post:', response.statusText);
             // Provide user feedback if there's an error
           }
         } catch (error) {
           setError('Error sharing post');
-          console.error('Error sharing post:', error);
+          console.error('Erro2 sharing post:', error);
           // Provide user feedback if there's an error
         }
       };
