@@ -21,7 +21,7 @@ export default function HomePage() {
   const [posts, setPosts] = useState([]);
   const [popularPosts, setPopularPosts] = useState([]);
   const handlePosts = async () => {
-    const posts = await client.getAllPosts();
+    const posts = await client.getSortedPostsWithLimit(0, 8);
     for (let i = 0; i < posts.length; i++) {
       let author_name = "Unkown User";
       try {
@@ -38,8 +38,12 @@ export default function HomePage() {
       }
       posts[i] = { ...posts[i], author_name: author_name };
     }
-
     setPosts(posts);
+  };
+
+  const getMorePosts = async () => {
+    const nextPosts = await client.getSortedPostsWithLimit(posts.length, 4);
+    setPosts([...posts, ...nextPosts]);
   };
 
   // const handlePopularPosts = async () => {
@@ -88,7 +92,10 @@ export default function HomePage() {
         <div className="d-flex flex-row flex-wrap">{posts.map(PostCards)}</div>
       </div>
       <br />
-      <button className="btn btn-outline-secondary btn-rounde">
+      <button
+        className="btn btn-outline-secondary btn-rounde"
+        onClick={getMorePosts}
+      >
         Load More &gt;&gt;&gt;
       </button>
     </div>
