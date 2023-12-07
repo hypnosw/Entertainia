@@ -5,6 +5,8 @@ import {PostCards} from "../Post-cards";
 import {getPosts, profile, signOut} from "./client";
 import {useDispatch, useSelector} from "react-redux";
 import userReducer, {emptyUser} from "../../Reducers/userReducer";
+import {FaBurger} from "react-icons/fa6";
+import {FaHamburger, FaUser} from "react-icons/fa";
 
 export default function UserProfile(){
     const dispatch = useDispatch();
@@ -47,7 +49,6 @@ export default function UserProfile(){
         fetchPosts();
     },[user]);
 
-
     return (
             <div>
                 {user?(
@@ -55,8 +56,15 @@ export default function UserProfile(){
                     <div className="col-sm-auto  d-flex justify-content-center w-100">
                         <div className="d-block">
                             {/* Profile Picture */}
+                            <div className={"et-dropdown-btn"}>
+                                <Link to="/profile/all-users"type={"button"} className={"btn"}>
+                                    <FaUser/>
+                                </Link>
+                            </div>
+
 
                             <img src={"#"} alt="" className="form-control et-profile-picture mb-4"/>
+
 
                             {/* Username */}
                             <div className="justify-content-center d-flex mb-2">
@@ -110,7 +118,7 @@ export default function UserProfile(){
                         that belongs to the user*/}
 
                             {posts.map(
-                                (post)=>PostCards(post)
+                                (post)=>(PostCards(post))
                             )}
 
 
