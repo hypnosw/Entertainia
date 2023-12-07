@@ -5,6 +5,8 @@ import * as client from "./client.js";
 import {PostCards} from "../Post-cards";
 import {getAPIResults} from "./client.js";
 import "./index.css";
+import {useSelector} from "react-redux";
+import userReducer from "../../Reducers/userReducer";
 
 const SearchResults = ()=>{
     const location = useLocation();
@@ -17,6 +19,9 @@ const SearchResults = ()=>{
     const [results, setResults] = useState([]);
     const [APIResults, setAPIResults] = useState([]);
     const [error, setError] = useState('');
+    console.log("before redux");
+    const user = useSelector((state) => state.userReducer);
+    console.log(user);
 
     const handleSearch = async ()=>{
         try{
@@ -43,7 +48,7 @@ const SearchResults = ()=>{
         handleSearch().then(handleAPISearch);
         }, [location]);
     return(
-        <div className={"mt-2"}>
+        <div className={" ms-2 mt-2"}>
             {error !== '' && <p className={"alert alert-danger mt-2 w-25"}>{error}</p> }
             {results.length === 0 ?
              (<p>No one shared anything on this topic, be the first!</p>) :
@@ -55,8 +60,7 @@ const SearchResults = ()=>{
                     }
                 )}
             </div>
-
-            <div>
+            {user.role !== "USER" && <div>
                 <hr/>
                 <h3>Other Resources You May Like</h3>
 
@@ -85,7 +89,8 @@ const SearchResults = ()=>{
                      }
                  </div>)
                 }
-            </div>
+            </div>}
+
 
 
 

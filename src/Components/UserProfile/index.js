@@ -3,8 +3,11 @@ import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {PostCards} from "../Post-cards";
 import {getPosts, profile, signOut} from "./client";
+import {useDispatch, useSelector} from "react-redux";
+import userReducer, {emptyUser} from "../../Reducers/userReducer";
 
 export default function UserProfile(){
+    const dispatch = useDispatch();
     const [user, SetUser] = useState(null);
     const [error, SetError] = useState('');
     const navigate = useNavigate();
@@ -20,6 +23,7 @@ export default function UserProfile(){
     }
     const logOut = async ()=>{
         await signOut();
+        dispatch(emptyUser());
         navigate("/home");
     }
     const fetchPosts = async()=>{
