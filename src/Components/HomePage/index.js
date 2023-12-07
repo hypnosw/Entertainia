@@ -14,14 +14,36 @@ import {
   FcDislike,
 } from "react-icons/fc";
 import * as client from "../../Clients/postclient.js";
+import * as userClient from "../../Clients/userclient.js";
 
 export default function HomePage() {
   const user = useSelector((state) => state.userReducer);
   const [posts, setPosts] = useState([]);
   const [popularPosts, setPopularPosts] = useState([]);
   const handlePosts = async () => {
-    const posts = await client.getAllPosts();
+    const posts = await client.getSortedPostsWithLimit(0, 8);
+    for (let i = 0; i < posts.length; i++) {
+      let author_name = "Unkown User";
+      try {
+        if (posts[i].author) {
+          const author = await userClient.findUserById(posts[i].author);
+          if (author.nickname) {
+            author_name = author.nickname;
+          } else if (author.username) {
+            author_name = author.username;
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      posts[i] = { ...posts[i], author_name: author_name };
+    }
     setPosts(posts);
+  };
+
+  const getMorePosts = async () => {
+    const nextPosts = await client.getSortedPostsWithLimit(posts.length, 4);
+    setPosts([...posts, ...nextPosts]);
   };
 
   // const handlePopularPosts = async () => {
@@ -65,13 +87,17 @@ export default function HomePage() {
         </div>
       </div>
       <br />
-      <div className="col-lg-9 mt-3 d-flex justify-content-center w-100">
-        <div className="d-flex flex-row flex-wrap justify-content-center">
-          {posts.map((post) => {
-            return PostCards(post);
-          })}
-        </div>
+      <div className="col-lg-9 mt-3 d-flex  w-100">
+        <div class="col col-md-1"></div>
+        <div className="d-flex flex-row flex-wrap">{posts.map(PostCards)}</div>
       </div>
+      <br />
+      <button
+        className="btn btn-outline-secondary btn-rounde"
+        onClick={getMorePosts}
+      >
+        Load More &gt;&gt;&gt;
+      </button>
     </div>
   );
 }

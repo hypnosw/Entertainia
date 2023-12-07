@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createPost } from './client.js';
 import { POSTS_API } from './client.js';
-import { profile } from '../UserProfile/client.js';
+import { currentLoggedInProfile } from '../UserProfile/client.js';
 
 const CreatePost = () => {
   const [error, setError] = useState(null);
@@ -27,7 +27,7 @@ const CreatePost = () => {
 
   const fetchProfile = async () => {
     try {
-      const current = await profile();
+      const current = await currentLoggedInProfile();
       current ? setUser(current) : navigate('/login');
     } catch (error) {
       setError(error.message);

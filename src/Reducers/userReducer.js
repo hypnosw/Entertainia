@@ -6,6 +6,7 @@ const initialState = {
   profilePicture: "",
   personalBio: ``,
   password: "",
+  _id:"",
   // posts should contain an array of the IDs of the posts that belong to this user
   posts: [],
   // user ID in the following array
@@ -24,6 +25,7 @@ const userSlice = createSlice({
     setUser: (state, action) => {
       // console.log(action);
       state.username = action.payload.username;
+      state._id = action.payload._id;
       state.nickname = action.payload.nickname;
       state.profilePicture = action.payload.profilePicture;
       state.personalBio = action.payload.personalBio;

@@ -1,61 +1,94 @@
 import "./index.css";
 import React, {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {PostCards} from "../Post-cards";
-import {getPosts, profile, signOut} from "./client";
+import {getPosts, currentLoggedInProfile, signOut} from "./client";
 import {useDispatch, useSelector} from "react-redux";
 import userReducer, {emptyUser} from "../../Reducers/userReducer";
-
-export default function UserProfile(){
-    const dispatch = useDispatch();
-    const [user, SetUser] = useState(null);
-    const [error, SetError] = useState('');
-    const navigate = useNavigate();
-    const [posts, setPosts] = useState([]);
-    const fetchProfile = async ()=>{
-        try{
-            const current = await profile();
-            current ? SetUser(current) : navigate("/login");
-        } catch(error){
-            // console.log("navigate");
-            SetError(error.message + " :Failed to fetch account information");
-        }
-    }
-    const logOut = async ()=>{
-        await signOut();
-        dispatch(emptyUser());
-        navigate("/home");
-    }
-    const fetchPosts = async()=>{
-        try{
-            if(user){
-                const response = await getPosts(user._id);
-                setPosts(response.data);
-            }
-        }catch(error){
-            SetError(error.message);
-        }
+import {FaHamburger, FaUser} from "react-icons/fa";
+import {findUserById} from "../../Clients/userclient";
 
 
+export default function UserProfile() {
+  const {id} = useParams();
+  const [user, setUser] = useState(null);
+
+  // currentUser is the logged in user
+  const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  const fetchProfile = async()=>{
+    try{
+      const response = await findUserById(id);
+      setUser(response);
+    } catch(error){
+      setError(error.message);
     }
 
-    useEffect(()=>{
-        fetchProfile()
-    }, []);
+  }
+  const fetchCurrentProfile = async () => {
+    try {
+      const current = await currentLoggedInProfile();
+      current && setCurrentUser(current);
+    } catch (error) {
+      // console.log("navigate");
+      console.log("Not Logged In || Failed to fetch logged in user info");
+    }
+  };
 
-    useEffect(()=>{
-        fetchPosts();
-    },[user]);
+  const logOut = async () => {
+    await signOut();
+    dispatch(emptyUser());
+    navigate("/home");
+  };
+  const fetchPosts = async () => {
+    try {
+      if (user) {
+        const response = await getPosts(user._id);
+        setPosts(response.data);
+      }
+    } catch (error) {
+      setError(error.message);
+    }};
 
+  useEffect(() => {
+    fetchProfile();
+    fetchCurrentProfile();
+  }, [id]);
 
-    return (
+  useEffect(() => {
+    fetchPosts();
+  }, [user]);
+
+  let sameUser = false;
+  try{
+    sameUser = currentUser !== null ? user.username === currentUser.username : false;
+    {console.log(user)}
+    {console.log(currentUser)
+      console.log(sameUser)}
+  }catch(error){
+    console.log(error.message);
+  }
+
+  return (
             <div>
-                {user?(
+
+              {user !== null ?
+                 (
                     <div className="et-main-wrapper row ">
                     <div className="col-sm-auto  d-flex justify-content-center w-100">
                         <div className="d-block">
-                            {/* Profile Picture */}
+                            {/* All Users Button */}
+                          {sameUser && currentUser.role === "ADMIN" &&
+                           <div className={"et-dropdown-btn"}>
+                            <Link to="/profile/all-users"type={"button"} className={"btn"}>
+                              <FaUser/>
+                            </Link>
+                          </div>}
 
+                            {/* Profile Picture */}
                             <img src={"#"} alt="" className="form-control et-profile-picture mb-4"/>
 
                             {/* Username */}
@@ -77,31 +110,23 @@ export default function UserProfile(){
                                     Following <strong> {user.followingCount}</strong>
                                 </Link>
                             </div>
-
-
                             <p className="mt-3">
                                 {user.personalBio}
                             </p>
-
-                            <div className="d-block float-end mt-5 w-100">
-                                {/* Show Edit Profile button if logged in*/}
-                                {/* Currently shows if false for testing */}
-                                {
-                                    <div className={"d-flex justify-content-between"}>
-                                        <button className={"btn btn-danger"}
+                          {sameUser && <div className="d-block float-end mt-5 w-100">
+                            {
+                              <div className={"d-flex justify-content-between"}>
+                                <button className={"btn btn-danger"}
                                         onClick={logOut}>
-                                            Log Out
-                                        </button>
-                                        <Link to="/profile/profile-setting"
-                                              className="btn btn-outline-dark et-edit-profile-btn">
-                                            Edit Profile
-                                        </Link>
-                                    </div>
-
-                                }
-                            </div>
-
-
+                                  Log Out
+                                </button>
+                                <Link to="/profile/profile-setting"
+                                      className="btn btn-outline-dark et-edit-profile-btn">
+                                  Edit Profile
+                                </Link>
+                              </div>
+                            }
+                          </div>}
                         </div>
                     </div>
                     <div className="col-lg-9 mt-3 d-flex justify-content-center w-100">
@@ -110,26 +135,24 @@ export default function UserProfile(){
                         that belongs to the user*/}
 
                             {posts.map(
-                                (post)=>PostCards(post)
+                                (post)=>(PostCards({...post, author_name:`${user.nickname}`}))
                             )}
-
-
-
                         </div>
 
                     </div>
-
-
                 </div>)
                      :
                  (<div>
-                     {error !== '' && <div className={"alert alert-danger mt-2"} role={"alert"}>
+                     {error !== '' &&
+                      <div className={"alert alert-danger mt-2"} role={"alert"}>
                          {error}
                      </div>}
+                   (<div className="spinner-border" role="status">
+                   <span className="sr-only"></span>
+                 </div>)
                      <p className={"mt-2 h2"}>You are not logged in</p>
                  </div>)}
             </div>
-
-
     )
 };
+

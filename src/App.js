@@ -14,10 +14,11 @@ import Homepage from "./Components/HomePage";
 import PostDetail from "./Components/PostDetail";
 import SearchResults from "./Components/SearchResults";
 import Footer from "./Components/Footer";
+import AllUsers from "./Components/AllUsers";
 
 function App() {
   return (
-    <HashRouter className="app-page">
+    <HashRouter className="page-content">
       <Provider store={store}>
         <div className="row">
           <HeadBar />
@@ -31,11 +32,12 @@ function App() {
               path="/profile/profile-setting"
               element={<ProfileSetting />}
             />
-            <Route path="/profile/*" element={<UserProfile />} />
+            <Route path="/profile/:id/*" element={<UserProfile />} />
             <Route path="/CreatePost" element={<CreatePost />} />
             <Route path="/home" element={<Homepage />} />
             <Route path="/PostDetail/:postId" element={<PostDetail />} />
             <Route path={"/search/*"} element={<SearchResults />} />
+            <Route path="/profile/all-users" element={<AllUsers/>} />
           </Routes>
           <Footer />
         </div>

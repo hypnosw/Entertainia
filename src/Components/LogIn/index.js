@@ -28,6 +28,7 @@ function LogIn() {
         setUser({
           ...user,
           username: response.username,
+          _id:response._id,
           nickname: response.nickname,
           profilePicture: response.profilePicture,
           personalBio: response.personalBio,

@@ -6,15 +6,12 @@ const request = axios.create({
   withCredentials: true,
 });
 
-
 export const createPost = async (post) => {
   try {
     const response = await request.post(`${POSTS_API}`, post);
     return response.data;
   } catch (error) {
     console.error("Error creating post:", error);
-    throw error; 
+    throw error;
   }
 };
-
-

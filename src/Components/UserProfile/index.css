@@ -21,3 +21,8 @@
     text-decoration: none;
 }
 
+.et-dropdown-btn{
+    position:fixed;
+    margin-left:245px;
+}
+
