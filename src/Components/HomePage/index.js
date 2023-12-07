@@ -65,8 +65,9 @@ export default function HomePage() {
         </div>
       </div>
       <br />
-      <div className="col-lg-9 mt-3 d-flex justify-content-center w-100">
-        <div className="d-flex flex-row flex-wrap justify-content-center">
+      <div className="col-lg-9 mt-3 d-flex  w-100">
+        <div class="col col-md-1"></div>
+        <div className="d-flex flex-row flex-wrap">
           {posts.map((post) => {
             return PostCards(post);
           })}

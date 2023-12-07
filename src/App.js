@@ -17,7 +17,7 @@ import Footer from "./Components/Footer";
 
 function App() {
   return (
-    <HashRouter className="app-page">
+    <HashRouter className="page-content">
       <Provider store={store}>
         <div className="row">
           <HeadBar />
