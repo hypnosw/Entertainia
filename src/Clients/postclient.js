@@ -8,6 +8,14 @@ export const getAllPosts = async (keywords) => {
   return response.data;
 };
 
+export const getSortedPostsWithLimit = async (start, limit) => {
+  // console.log(POSTS_URL);
+  const response = await axios.get(
+    `${POSTS_URL}/sorted-posts-with-limit?start=${start}&limit=${limit}`
+  );
+  return response.data;
+};
+
 export const getAllSortedPosts = async (keywords) => {
   // console.log(POSTS_URL);
   const response = await axios.get(`${POSTS_URL}/sortedposts`);
