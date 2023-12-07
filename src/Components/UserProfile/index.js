@@ -16,18 +16,22 @@ export default function UserProfile() {
   // currentUser is the logged in user
   const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
-  const [error, SetError] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const fetchProfile = async()=>{
+    try{
+      const response = await findUserById(id);
+      setUser(response);
+    } catch(error){
+      setError(error.message);
+    }
 
-    const response = await findUserById(id);
-    setUser(response);
   }
   const fetchCurrentProfile = async () => {
     try {
       const current = await currentLoggedInProfile();
-      current ? setCurrentUser(current) : navigate("/login");
+      current && setCurrentUser(current);
     } catch (error) {
       // console.log("navigate");
       console.log("Not Logged In || Failed to fetch logged in user info");
@@ -46,7 +50,7 @@ export default function UserProfile() {
         setPosts(response.data);
       }
     } catch (error) {
-      SetError(error.message);
+      setError(error.message);
     }};
 
   useEffect(() => {
@@ -58,14 +62,26 @@ export default function UserProfile() {
     fetchPosts();
   }, [user]);
 
+  let sameUser = false;
+  try{
+    sameUser = currentUser !== null ? user.username === currentUser.username : false;
+    {console.log(user)}
+    {console.log(currentUser)
+      console.log(sameUser)}
+  }catch(error){
+    console.log(error.message);
+  }
+
   return (
             <div>
-                {user?(
+
+              {user !== null ?
+                 (
                     <div className="et-main-wrapper row ">
                     <div className="col-sm-auto  d-flex justify-content-center w-100">
                         <div className="d-block">
                             {/* All Users Button */}
-                          {currentUser.username === user.username && currentUser.role === "ADMIN" &&
+                          {sameUser && currentUser.role === "ADMIN" &&
                            <div className={"et-dropdown-btn"}>
                             <Link to="/profile/all-users"type={"button"} className={"btn"}>
                               <FaUser/>
@@ -97,7 +113,7 @@ export default function UserProfile() {
                             <p className="mt-3">
                                 {user.personalBio}
                             </p>
-                          {user.username === currentUser.username && <div className="d-block float-end mt-5 w-100">
+                          {sameUser && <div className="d-block float-end mt-5 w-100">
                             {
                               <div className={"d-flex justify-content-between"}>
                                 <button className={"btn btn-danger"}
@@ -127,9 +143,13 @@ export default function UserProfile() {
                 </div>)
                      :
                  (<div>
-                     {error !== '' && <div className={"alert alert-danger mt-2"} role={"alert"}>
+                     {error !== '' &&
+                      <div className={"alert alert-danger mt-2"} role={"alert"}>
                          {error}
                      </div>}
+                   (<div className="spinner-border" role="status">
+                   <span className="sr-only"></span>
+                 </div>)
                      <p className={"mt-2 h2"}>You are not logged in</p>
                  </div>)}
             </div>
