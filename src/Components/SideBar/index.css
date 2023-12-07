@@ -42,7 +42,7 @@
   /* 顶部部分的样式 */
   .top-section {
     color: black;
-    background-color: #76ce79; /* 顶部部分的背景颜色 */
+    /* background-color: #76ce79; 顶部部分的背景颜色 */
     padding: 10px;
     text-align: center;
     /* border:  5px solid #b2b0b0; */
