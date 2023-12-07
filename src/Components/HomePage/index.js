@@ -7,7 +7,12 @@ import { useSelector } from "react-redux";
 import { PostCards } from "../Post-cards";
 
 import { useState, useEffect } from "react";
-import { FcHeadset, FcLikePlaceholder, FcSearch } from "react-icons/fc";
+import {
+  FcHeadset,
+  FcLikePlaceholder,
+  FcSearch,
+  FcDislike,
+} from "react-icons/fc";
 import * as client from "../../Clients/postclient.js";
 
 export default function HomePage() {
@@ -19,14 +24,14 @@ export default function HomePage() {
     setPosts(posts);
   };
 
-  const handlePopularPosts = async () => {
-    const popularPosts = await client.getAllSortedPosts();
-    setPopularPosts(popularPosts);
-  };
+  // const handlePopularPosts = async () => {
+  //   const popularPosts = await client.getAllSortedPosts();
+  //   setPopularPosts(popularPosts);
+  // };
 
   useEffect(() => {
     handlePosts();
-    handlePopularPosts();
+    // handlePopularPosts();
   }, []);
 
   const topThreePosts = popularPosts.slice(0, 3);
@@ -35,7 +40,11 @@ export default function HomePage() {
       <div className="row text-center ">
         <div class="col col-md-1"></div>
         <div class="col col-md-5 d-none d-md-block">
-          <img className="w-100 d-block" src={man} alt="..." />
+          <img
+            className="img-fluid w-100 d-block img-rounded img-thumbnail "
+            src={man}
+            alt="..."
+          />
         </div>
         <div class="col col-md-6 col-sm-12">
           <div class="container mt-5">
@@ -63,18 +72,6 @@ export default function HomePage() {
           })}
         </div>
       </div>
-
-      <footer className="bg-neutral-200 text-center dark:bg-neutral-700 lg:text-left">
-        <div className="p-4 text-center text-neutral-700 dark:text-neutral-200">
-          © 2023 Copyright:
-          <a
-            className="text-neutral-800 dark:text-neutral-400"
-            href="https://tailwind-elements.com/"
-          >
-            Entertaina team
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }

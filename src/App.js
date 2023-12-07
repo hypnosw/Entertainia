@@ -5,7 +5,6 @@ import { Routes, Route } from "react-router";
 import SignUp from "./Components/SignUp";
 import ProfileSetting from "./Components/Profile-Setting";
 import HeadBar from "./Components/HeadBar";
-import SideBar from "./Components/SideBar";
 import LogIn from "./Components/LogIn";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -14,6 +13,7 @@ import CreatePost from "./Components/CreatePost";
 import Homepage from "./Components/HomePage";
 import PostDetail from "./Components/PostDetail";
 import SearchResults from "./Components/SearchResults";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -37,7 +37,10 @@ function App() {
             <Route path="/PostDetail" element={<PostDetail />} />
             <Route path={"/search/*"} element={<SearchResults />} />
           </Routes>
+          <Footer />
         </div>
+
+        <div></div>
       </Provider>
     </HashRouter>
   );
