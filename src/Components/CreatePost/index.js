@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import { createPost } from "./client.js";
+import {POSTS_API} from"./client.js";
+import {profile} from "../UserProfile/client.js";
 
 const CreatePost = () => {
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [image, setImage] = useState(null); 
+    const [user, setUser] = useState(null);
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -20,13 +24,29 @@ const CreatePost = () => {
         // 处理文件选择
         const selectedImage = e.target.files[0];
         setImage(selectedImage);
+
       };
 
-      
+      const fetchProfile = async ()=>{
+          try{
+              const current = await profile();
+              current ?  setUser(current) : navigate("/login");
+              console.log(user.username);
 
+          } catch(error){
+             setError(error.message);
+          }
+          
+      }
+   
+      useEffect(()=>{
+          fetchProfile();
+      }, []);
+  
       const handleShare = async () => {
         try {
           if (!title || !content || !image) {
+            setError('Please fill in all fields and select an image.');
             console.error('Please fill in all fields and select an image.');
             // Provide user feedback if the form is incomplete
             return;
@@ -37,7 +57,10 @@ const CreatePost = () => {
           formData.append('body', content);
           formData.append('images', image);
       
-          const response = await fetch('http://localhost:5001/api/posts', {
+          const response = await fetch(
+            POSTS_API,
+            // 'http://localhost:5001/api/posts', 
+            {
             method: 'POST',
             body: formData,
           });
@@ -46,12 +69,14 @@ const CreatePost = () => {
             const result = await response.json();
             console.log('Post shared:', result);
             // Update the route or handle redirection as needed
-            navigate('/PostDetail');
+            // navigate('/PostDetail');
           } else {
+            setError('Error sharing post');
             console.error('Error sharing post:', response.statusText);
             // Provide user feedback if there's an error
           }
         } catch (error) {
+          setError('Error sharing post');
           console.error('Error sharing post:', error);
           // Provide user feedback if there's an error
         }
@@ -106,6 +131,7 @@ const CreatePost = () => {
                     <Link to={"/"} className="btn btn-outline-dark">
         Back
       </Link>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
                         <button className="btn" style={{backgroundColor:"#76ce79"}} onClick={handleShare}>Share</button>
                     </div>
                 </div>
@@ -116,3 +142,4 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
+
