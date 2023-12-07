@@ -37,8 +37,6 @@ export default function UserProfile(){
         }catch(error){
             SetError(error.message);
         }
-
-
     }
 
     useEffect(()=>{
@@ -55,16 +53,15 @@ export default function UserProfile(){
                     <div className="et-main-wrapper row ">
                     <div className="col-sm-auto  d-flex justify-content-center w-100">
                         <div className="d-block">
-                            {/* Profile Picture */}
+                            {/* All Users Button */}
                             <div className={"et-dropdown-btn"}>
                                 <Link to="/profile/all-users"type={"button"} className={"btn"}>
                                     <FaUser/>
                                 </Link>
                             </div>
 
-
+                            {/* Profile Picture */}
                             <img src={"#"} alt="" className="form-control et-profile-picture mb-4"/>
-
 
                             {/* Username */}
                             <div className="justify-content-center d-flex mb-2">
@@ -85,12 +82,9 @@ export default function UserProfile(){
                                     Following <strong> {user.followingCount}</strong>
                                 </Link>
                             </div>
-
-
                             <p className="mt-3">
                                 {user.personalBio}
                             </p>
-
                             <div className="d-block float-end mt-5 w-100">
                                 {/* Show Edit Profile button if logged in*/}
                                 {/* Currently shows if false for testing */}
@@ -108,8 +102,6 @@ export default function UserProfile(){
 
                                 }
                             </div>
-
-
                         </div>
                     </div>
                     <div className="col-lg-9 mt-3 d-flex justify-content-center w-100">
@@ -120,14 +112,9 @@ export default function UserProfile(){
                             {posts.map(
                                 (post)=>(PostCards(post))
                             )}
-
-
-
                         </div>
 
                     </div>
-
-
                 </div>)
                      :
                  (<div>
@@ -137,7 +124,5 @@ export default function UserProfile(){
                      <p className={"mt-2 h2"}>You are not logged in</p>
                  </div>)}
             </div>
-
-
     )
 };
