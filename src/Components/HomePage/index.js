@@ -14,6 +14,7 @@ import {
   FcDislike,
 } from "react-icons/fc";
 import * as client from "../../Clients/postclient.js";
+import * as userClient from "../../Clients/userclient.js";
 
 export default function HomePage() {
   const user = useSelector((state) => state.userReducer);
@@ -21,6 +22,23 @@ export default function HomePage() {
   const [popularPosts, setPopularPosts] = useState([]);
   const handlePosts = async () => {
     const posts = await client.getAllPosts();
+    for (let i = 0; i < posts.length; i++) {
+      let author_name = "Unkown User";
+      try {
+        if (posts[i].author) {
+          const author = await userClient.findUserById(posts[i].author);
+          if (author.nickname) {
+            author_name = author.nickname;
+          } else if (author.username) {
+            author_name = author.username;
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      posts[i] = { ...posts[i], author_name: author_name };
+    }
+
     setPosts(posts);
   };
 
@@ -67,12 +85,12 @@ export default function HomePage() {
       <br />
       <div className="col-lg-9 mt-3 d-flex  w-100">
         <div class="col col-md-1"></div>
-        <div className="d-flex flex-row flex-wrap">
-          {posts.map((post) => {
-            return PostCards(post);
-          })}
-        </div>
+        <div className="d-flex flex-row flex-wrap">{posts.map(PostCards)}</div>
       </div>
+      <br />
+      <button className="btn btn-outline-secondary btn-rounde">
+        Load More &gt;&gt;&gt;
+      </button>
     </div>
   );
 }
