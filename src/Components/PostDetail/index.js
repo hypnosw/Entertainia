@@ -6,9 +6,18 @@ import { useSelector } from "react-redux";
 import { FaRegHeart, FaRegStar, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FiMessageCircle } from "react-icons/fi";
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import * as userClient from "../../Clients/userclient.js";
+import * as postClient from "../../Clients/postclient.js";
+import { profile } from '../UserProfile/client.js';
+
 const PostDetail = () => {
-    // to check if the user logged in
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+  
+    const user = useSelector(state => state.userReducer);
+    console.log(user);
+                                                                                                                               
     const [currentUser, setCurrentUser] = useState(null);
     const fetchUser = async () => {
         try {
@@ -19,8 +28,42 @@ const PostDetail = () => {
         }
       };
 
-    const user = useSelector(state => state.userReducer);
-    console.log(user);
+      
+    
+      const handleLike = async () => {
+        try {
+          if (!currentUser) {
+            console.log('User not logged in');
+            return;
+          }
+          const postId = postId;  // postid!!!
+          const userId = currentUser.id;  //userid!!!
+          console.log('Liking post with postId:', postId, 'and userId:', userId);
+
+
+        //   const response = await postClient.likePost(postId, userId);
+
+            const response = await fetch(`http://localhost:5001/api/posts/like`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ postId, userId }),
+          });
+    
+          if (response.ok) {
+            // 显示“已点赞”等逻辑，一会再写
+            // setLiked(true);
+          } else {
+            console.error('Failed to like the post');
+          }
+        } catch (error) {
+          console.error('Error during like:', error);
+        }
+      };
+      
+        
+
 
     useEffect(() => {
         fetchUser();
@@ -71,9 +114,9 @@ const PostDetail = () => {
                                             </div>
                                             {/* <span className="badge bg-danger px-2 py-1 shadow-1-strong">News of the day</span> */}
                                             {/* like button */}
-                                            {currentUser &&(
-                                            <button className="btn btn-warning float-end">Like</button>
-                                            )}
+                                            
+                                            <button className="btn btn-warning float-end" onClick={handleLike}>Like</button>
+                                            
                                             <button type="button" className="btn btn-danger top-right-button ml-auto">Follow</button>
                                         </div>
 
@@ -109,7 +152,6 @@ const PostDetail = () => {
         </main>
     );
 };
-
 export default PostDetail;
 
 

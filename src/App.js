@@ -37,7 +37,7 @@ function App() {
             <Route path="/profile/:id/*" element={<UserProfile />} />
             <Route path="/CreatePost" element={<CreatePost />} />
             <Route path="/home" element={<Homepage />} />
-            <Route path="/PostDetail" element={<PostDetail />} />
+            <Route path="/PostDetail/:postId" element={<PostDetail />} />
             <Route path={"/search/*"} element={<SearchResults />} />
             <Route path="/profile/all-users" element={<AllUsers/>} />
           </Routes>
