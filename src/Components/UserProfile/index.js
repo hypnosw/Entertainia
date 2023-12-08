@@ -107,6 +107,9 @@ export default function UserProfile() {
                   <p>@{user.username}</p>
                 </div>
               </div>
+              {user.role !== "USER" && <p><strong>{user.role === "ADMIN"? (
+                  "Employe ID: " + user.employeID
+              ) : ("Enterprise: " + user.enterpriseName)}</strong></p>}
 
               <div className="d-flex justify-content-around">
                 {/* Direct to show the list of the followers */}

@@ -85,7 +85,7 @@ function ProfileSetting(){
                                          <button className={"m-1 border border-0 bg-white"}
                                          onClick={()=>{setNewUser({...newUser, profilePicture:url})}}>
                                              <img src={url} alt=""
-                                                  className="form-control et-profile-icon"/>
+                                                  className="form-control et-profile-icon-options"/>
                                          </button>
                                      )
                                  })}

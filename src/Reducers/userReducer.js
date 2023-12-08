@@ -15,6 +15,8 @@ const initialState = {
   // user ID in the followers array
   followers: [],
   followersCount:0,
+  employeeID:0,
+  enterpriseName:"",
   role: "USER",
 };
 
@@ -36,6 +38,8 @@ const userSlice = createSlice({
       state.followersCount = action.payload.followersCount;
       state.followers = action.payload.followers;
       state.role = action.payload.role;
+      state.employeeID = action.payload.employeeID;
+      state.enterpriseName = action.payload.enterpriseName;
 
     },
     emptyUser: (state) => {
