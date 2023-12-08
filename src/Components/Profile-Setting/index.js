@@ -3,7 +3,6 @@ import "./index.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import userReducer, {setUser} from "../../Reducers/userReducer";
-import store from "../../store";
 import {updateUser} from "../../Clients/userclient";
 
 function ProfileSetting(){
@@ -12,7 +11,7 @@ function ProfileSetting(){
     const {id} = useParams();
     const user = useSelector(state=>state.userReducer);
     console.log(user);
-    if(id != user._id) navigate("/home");
+    if(id !== user._id) navigate("/home");
 
     const [newUser, setNewUser] = useState(user);
     const [currentPassword, SetCurrentPassword] = useState('');
@@ -29,32 +28,32 @@ function ProfileSetting(){
     // This function checks if the new passwords match, and if current password matches
     // if true, update newUser.password
     const checkPassword =   ()=>{
-        if(newPassword === '')return "emptypassword";
+        if(newPassword === '')return 0;
         else if(newPassword !== '' && (newPassword === confirmPassword) &&
            currentPassword === user.password && newPassword.length >= 6){
-            return "changed";
+            return 1;
         } else{
             alert("Passwords do not match or must be at least 6 characters long");
-            return "incorrect";
+            return -1;
         }
     };
 
     const handleUpdate = ()=>{
         const passwordState = checkPassword();
         switch (passwordState){
-            case "emptypassword":{
+            case 0:{
                 const response = updateUser({...newUser});
                 dispatch(setUser({...newUser}));
                 navigate("/home");
                 break;
             }
-            case "changed":{
+            case 1:{
                 const response = updateUser({...newUser, password:newPassword});
                 dispatch(setUser({...newUser, password:newPassword}));
                 navigate("/home");
                 break;
             }
-            case "incorrect":{
+            case -1:{
                 return;
             } default:return;
         }
