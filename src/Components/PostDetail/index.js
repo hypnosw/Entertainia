@@ -3,10 +3,10 @@ import HeadBar from "../HeadBar";
 import "./index.css";
 import { useSelector } from "react-redux";
 import {
-    FaHeart,
-    FaRegHeart,
-    FaRegStar,
-    FaArrowUpRightFromSquare,
+  FaHeart,
+  FaRegHeart,
+  FaRegStar,
+  FaArrowUpRightFromSquare,
 } from "react-icons/fa6";
 import { FiMessageCircle } from "react-icons/fi";
 import React, { useState, useEffect } from "react";
@@ -14,8 +14,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import * as userClient from "../../Clients/userclient.js";
 import * as postClient from "../../Clients/postclient.js";
 import { profile } from "../UserProfile/client.js";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 const PostDetail = () => {
@@ -28,7 +28,6 @@ const PostDetail = () => {
   const { postId } = useParams();
 
   const user = useSelector((state) => state.userReducer);
-  console.log(user);
 
   const fetchUser = async () => {
     try {
@@ -38,16 +37,20 @@ const PostDetail = () => {
       console.log("User fetched successfully:", currentuser);
     } catch (error) {
       setCurrentUser(null);
-    //   console.error("Error fetching user:", error);
+      //   console.error("Error fetching user:", error);
     }
   };
-  
+
+  const [comment, setComment] = useState({
+    content: "",
+    postId: postId,
+  });
 
   const fetchPostDetail = async () => {
     try {
       const postDetail = await postClient.findPostByPostID(postId);
       setPostDetail(postDetail);
-    //   console.log(postDetail);
+      //   console.log(postDetail);
     } catch (error) {
       window.alert(error);
     }
@@ -55,17 +58,17 @@ const PostDetail = () => {
 
   const handleLike = async () => {
     try {
-        if (!currentUser || !currentUser._id) {
-            // 用户未登录或者用户 ID 未定义
-            toast.warn('Please Log In', {
-              position: toast.POSITION.TOP_CENTER,
-            });
-            return;
-          }
+      if (!currentUser || !currentUser._id) {
+        // 用户未登录或者用户 ID 未定义
+        toast.warn("Please Log In", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        return;
+      }
       const postIdToLike = postId; // postid!!!
       const userId = currentUser._id; //userid!!!
-    //   console.log("Liking post with postId:", postIdToLike, "and userId:", userId);
-  
+      //   console.log("Liking post with postId:", postIdToLike, "and userId:", userId);
+
       const response = await fetch(`${API_URL}/posts/like`, {
         method: "POST",
         headers: {
@@ -78,17 +81,17 @@ const PostDetail = () => {
         const responseData = await response.json();
         setIsLiked(!isLiked);
         setLikesCount(responseData.numberOfLikes);
-        toast.info('Thanks for your like!', {
-            position: toast.POSITION.TOP_CENTER,
-          });
-    } else {
+        toast.info("Thanks for your like!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
         const responseData = await response.json();
-        if (response.status === 409){
-            console.log('look here');
+        if (response.status === 409) {
+          console.log("look here");
           toast.info(responseData.message, {
             position: toast.POSITION.TOP_CENTER,
           });
-        }  
+        }
         // const errorData = await response.json();
         // console.error("Failed to like the post:", errorData);
       }
@@ -96,25 +99,52 @@ const PostDetail = () => {
       console.error("Error during like:", error);
     }
   };
-  
 
-//   useEffect(() => {
-//     fetchUser();
-//     fetchPostDetail();
-//   }, []);
+  const handleComment = async () => {
+    try {
+      //check login
+      if (!currentUser || !currentUser._id) {
+        toast.warn("Please Log In", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        return;
+      }
 
-useEffect(() => {
+      // fetch id
+      const userId = currentUser._id;
+      setComment({
+        ...comment,
+        userId: userId,
+      });
+
+      try {
+        await postClient.createComment(comment);
+        window.alert("Comment successful!");
+      } catch (err) {
+        setError(err.response.data.message);
+        window.alert("Comment fails.");
+      }
+
+      //call func to create comment
+    } catch (error) {
+      console.error("Error during like:", error);
+    }
+  };
+
+  //   useEffect(() => {
+  //     fetchUser();
+  //     fetchPostDetail();
+  //   }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       console.log("Fetching user data...");
       await fetchUser();
       await fetchPostDetail();
     };
-  
+
     fetchData();
   }, []);
-  
-  
-  
 
   return (
     <main className="my-5">
@@ -122,6 +152,7 @@ useEffect(() => {
       <div className="fixed-top">
         <HeadBar />
       </div>
+
       <div className="container-fluid  pt-5">
         {" "}
         {/* Add padding-top to account for the fixed header */}
@@ -176,7 +207,7 @@ useEffect(() => {
                       </div>
                       {/* <span className="badge bg-danger px-2 py-1 shadow-1-strong">News of the day</span> */}
                       {/* like button */}
-{/* 
+                      {/* 
                       <button
                         className="btn btn-warning float-end"
                         onClick={handleLike}
@@ -215,9 +246,17 @@ useEffect(() => {
                         {isLiked ? <FaHeart /> : <FaRegHeart />}
                       </button>
                       </p> */}
-                      <div className="d-flex justify-content-between et-post-author-likes" onClick={handleLike}>
+                      <div
+                        className="d-flex justify-content-between et-post-author-likes"
+                        onClick={handleLike}
+                      >
                         <p className="card-text mb-3">
-                            {isLiked ? <FaHeart style={{ color: 'red' }}/> : <FaRegHeart style={{ color: 'red' }}/>} {likesCount}
+                          {isLiked ? (
+                            <FaHeart style={{ color: "red" }} />
+                          ) : (
+                            <FaRegHeart style={{ color: "red" }} />
+                          )}{" "}
+                          {likesCount}
                         </p>
                       </div>
 
@@ -236,14 +275,32 @@ useEffect(() => {
                       type="text"
                       className="form-control"
                       defaultValue="Say Something"
+                      onChange={(e) =>
+                        setComment({
+                          ...comment,
+                          content: e.target.value,
+                        })
+                      }
                     />
                     <br />
                     <button
                       type="button"
                       className="btn btn-primary align-self-end bottom-right-button"
+                      onClick={handleComment}
                     >
                       Comment
                     </button>
+                    {/* <p>{postDetail.title}</p>
+                    <p>{postDetail.body}</p>
+                    <p>{postDetail.postDate}</p>
+                    <p>{postDetail.numberOfLikes}</p>
+                    <ul>
+                      {postDetail.comment.map((c, index) => (
+                        <li key={index}>
+                          <strong>{c.author}</strong>: {c.content}
+                        </li>
+                      ))}
+                    </ul> */}
                   </div>
                 </div>
               </div>
