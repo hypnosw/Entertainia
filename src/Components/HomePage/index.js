@@ -20,10 +20,10 @@ export default function HomePage() {
   const user = useSelector((state) => state.userReducer);
   const [posts, setPosts] = useState([]);
   const [popularPosts, setPopularPosts] = useState([]);
-  const handlePosts = async () => {
-    const posts = await client.getSortedPostsWithLimit(0, 8);
+
+  const populateNickname = async (posts) => {
     for (let i = 0; i < posts.length; i++) {
-      let author_name = "Unkown User";
+      let author_name = "Stranger";
       try {
         if (posts[i].author) {
           const author = await userClient.findUserById(posts[i].author);
@@ -38,11 +38,17 @@ export default function HomePage() {
       }
       posts[i] = { ...posts[i], author_name: author_name };
     }
+  };
+
+  const handlePosts = async () => {
+    const posts = await client.getSortedPostsWithLimit(0, 8);
+    await populateNickname(posts);
     setPosts(posts);
   };
 
   const getMorePosts = async () => {
     const nextPosts = await client.getSortedPostsWithLimit(posts.length, 4);
+    await populateNickname(nextPosts);
     setPosts([...posts, ...nextPosts]);
   };
 

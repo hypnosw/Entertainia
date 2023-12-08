@@ -5,7 +5,6 @@ import "./index.css";
 import * as client from "../../Clients/userclient.js";
 
 export const PostCards = (post) => {
-
   return (
     <Link key={post._id} to="" className="card et-post-cards">
       <div
