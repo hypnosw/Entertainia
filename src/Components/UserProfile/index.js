@@ -54,8 +54,12 @@ export default function UserProfile() {
     }};
 
   useEffect(() => {
-    fetchProfile();
-    fetchCurrentProfile();
+    try{
+      fetchProfile();
+      fetchCurrentProfile();
+    }catch(error){
+      setError(error.message);
+    }
   }, [id]);
 
   useEffect(() => {
@@ -118,7 +122,7 @@ export default function UserProfile() {
                                         onClick={logOut}>
                                   Log Out
                                 </button>
-                                <Link to="/profile/profile-setting"
+                                <Link to={`/profile/profile-setting/${user._id}`}
                                       className="btn btn-outline-dark et-edit-profile-btn">
                                   Edit Profile
                                 </Link>

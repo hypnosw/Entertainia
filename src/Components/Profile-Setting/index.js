@@ -1,31 +1,45 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./index.css";
-import {useSelector} from "react-redux";
-import { Link } from 'react-router-dom';
-import userReducer from "../../Reducers/userReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useNavigate, useParams} from 'react-router-dom';
+import userReducer, {setUser} from "../../Reducers/userReducer";
 import store from "../../store";
+import {updateUser} from "../../Clients/userclient";
 
 function ProfileSetting(){
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {id} = useParams();
     const user = useSelector(state=>state.userReducer);
-    const [newUser, SetNewUser] = useState(user);
+    if(id != user._id) navigate("/home");
+
+    const [newUser, setNewUser] = useState(user);
     const [currentPassword, SetCurrentPassword] = useState('');
     const [newPassword, SetNewPassword] = useState('');
     const [confirmPassword, SetConfirmPassword] = useState('');
-    // console.log("newUser: " + newUser.nickname);
-    const handleUpdate = ()=>{
-        let replacement;
-        // do nothing about password if nothing is put in New Password
-        if(newPassword === ''){
-            replacement = {...newUser};
+    // This function checks if the new passwords match, and if current password matches
+    // if true, update newUser.password
+    const checkPassword =   ()=>{
+        if(newPassword === '')return true;
+        else if(newPassword !== '' && (newPassword === confirmPassword) &&
+           currentPassword === user.password && newPassword.length >= 6){
+            return true;
         } else{
-            checkPassword() && (replacement.password = newPassword);
+            alert("Passwords do not match or must be at least 6 characters long");
+            return false;
         }
-
     };
-    const checkPassword = ()=>{
-        return (newPassword === confirmPassword) &&
-                                             currentPassword === user.password;
-    }
+
+    const handleUpdate = ()=>{
+        const boo = checkPassword();
+        if(boo){
+            console.log("In handleupdate password: " + newUser.password);
+            const response = updateUser({...newUser, password:newPassword});
+            dispatch(setUser({...newUser, password:newPassword}));
+            navigate("/home");
+        }
+    };
+
     return (
         <div>
             <div className="container mt-2">
@@ -54,7 +68,7 @@ function ProfileSetting(){
                             <input id="et-username-input" type="text" className="form-control"
                             defaultValue={user.nickname}
                             onChange={(e)=>
-                                SetNewUser({...newUser, nickname:e.target.value})}/>
+                                setNewUser({...newUser, nickname:e.target.value})}/>
                         </div>
 
                         {/* Personal Bio Input */}
@@ -63,7 +77,7 @@ function ProfileSetting(){
                             <textarea id="et-personal-bio" className="form-control"
                             defaultValue={user.personalBio}
                                       onChange={(e)=>
-                                          SetNewUser({...newUser, personalBio:e.target.value})}>
+                                          setNewUser({...newUser, personalBio:e.target.value})}>
 
                             </textarea>
                         </div>
@@ -92,7 +106,7 @@ function ProfileSetting(){
                             </label>
                             <input id="et-password-input" type="text" className="form-control mb-2"
                                    onChange={(e)=>
-                                   {SetNewPassword(e.target.value)}}/>
+                                   {SetNewPassword(e.target.value);}}/>
                         </div>
                         <div>
                             <label htmlFor="et-password-input">
@@ -105,9 +119,15 @@ function ProfileSetting(){
                         { newPassword !== '' && (newPassword !== confirmPassword) &&
                             <p className={"alert alert-danger mt-1"}>New Password Does Not Match</p>
                         }
+                        { (newPassword !== '' && newPassword.length < 6) &&
+                          <p className={"alert alert-danger mt-1"}>
+                              New Password Must be At Least 6 Characters</p>
+                        }
 
                         <div className="d-block float-end mt-5">
-                            <button className="btn btn-outline-dark">Save</button>
+                            <button className="btn btn-outline-dark"
+                            onClick={()=>handleUpdate()}
+                            >Save</button>
                         </div>
                     </div>
                 </div>
