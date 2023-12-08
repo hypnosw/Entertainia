@@ -32,6 +32,8 @@ function App() {
               path="/profile/profile-setting"
               element={<ProfileSetting />}
             />
+            <Route path="/profile" element={<LogIn />} />
+
             <Route path="/profile/:id/*" element={<UserProfile />} />
             <Route path="/CreatePost" element={<CreatePost />} />
             <Route path="/home" element={<Homepage />} />
