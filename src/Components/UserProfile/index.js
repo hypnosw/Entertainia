@@ -3,9 +3,9 @@ import React, {useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {PostCards} from "../Post-cards";
 import {getPosts, currentLoggedInProfile, signOut} from "./client";
-import {useDispatch, useSelector} from "react-redux";
-import userReducer, {emptyUser} from "../../Reducers/userReducer";
-import {FaHamburger, FaUser} from "react-icons/fa";
+import {useDispatch} from "react-redux";
+import {emptyUser} from "../../Reducers/userReducer";
+import { FaUser} from "react-icons/fa";
 import {findUserById} from "../../Clients/userclient";
 
 
@@ -65,11 +65,9 @@ export default function UserProfile() {
   let sameUser = false;
   try{
     sameUser = currentUser !== null ? user.username === currentUser.username : false;
-    {console.log(user)}
-    {console.log(currentUser)
-      console.log(sameUser)}
+
   }catch(error){
-    console.log(error.message);
+    setError(error.message);
   }
 
   return (
