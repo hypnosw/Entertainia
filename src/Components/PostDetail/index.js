@@ -17,7 +17,7 @@ import { profile } from "../UserProfile/client.js";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+const API_URL = process.env.REACT_APP_SERVER_URL;
 const PostDetail = () => {
   const [error, setError] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
@@ -66,7 +66,7 @@ const PostDetail = () => {
       const userId = currentUser._id; //userid!!!
     //   console.log("Liking post with postId:", postIdToLike, "and userId:", userId);
   
-      const response = await fetch(`http://localhost:5001/api/posts/like`, {
+      const response = await fetch(`${API_URL}/posts/like`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
