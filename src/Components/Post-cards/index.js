@@ -5,8 +5,13 @@ import "./index.css";
 import * as client from "../../Clients/userclient.js";
 
 export const PostCards = (post) => {
+  const postId = post._id;
   return (
-    <Link key={post._id} to="" className="card et-post-cards">
+    <Link
+      key={post._id}
+      to={`/PostDetail/${postId}`}
+      className="card et-post-cards"
+    >
       <div
         className="bg-image hover-overlay"
         data-mdb-ripple-init
