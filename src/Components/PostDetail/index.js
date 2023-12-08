@@ -13,6 +13,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import * as userClient from "../../Clients/userclient.js";
 import * as postClient from "../../Clients/postclient.js";
 import { profile } from "../UserProfile/client.js";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const PostDetail = () => {
   const [error, setError] = useState(null);
@@ -26,18 +29,22 @@ const PostDetail = () => {
 
   const fetchUser = async () => {
     try {
+      console.log("Fetching user...");
       const currentuser = await userClient.account();
       setCurrentUser(currentuser);
+      console.log("User fetched successfully:", currentuser);
     } catch (error) {
       setCurrentUser(null);
+    //   console.error("Error fetching user:", error);
     }
   };
+  
 
   const fetchPostDetail = async () => {
     try {
       const postDetail = await postClient.findPostByPostID(postId);
       setPostDetail(postDetail);
-      console.log(postDetail);
+    //   console.log(postDetail);
     } catch (error) {
       window.alert(error);
     }
@@ -45,39 +52,63 @@ const PostDetail = () => {
 
   const handleLike = async () => {
     try {
-      if (!currentUser) {
-        console.log("User not logged in");
-        return;
-      }
-      const postId = postId; // postid!!!
-      const userId = currentUser.id; //userid!!!
-      console.log("Liking post with postId:", postId, "and userId:", userId);
-
-      //   const response = await postClient.likePost(postId, userId);
-
+        if (!currentUser || !currentUser._id) {
+            // 用户未登录或者用户 ID 未定义
+            toast.warn('Please Log In', {
+              position: toast.POSITION.TOP_CENTER,
+            });
+            return;
+          }
+      const postIdToLike = postId; // postid!!!
+      const userId = currentUser._id; //userid!!!
+    //   console.log("Liking post with postId:", postIdToLike, "and userId:", userId);
+  
       const response = await fetch(`http://localhost:5001/api/posts/like`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ postId, userId }),
+        body: JSON.stringify({ postIdToLike, userId }),
       });
-
+      console.log(response);
       if (response.ok) {
-        // 显示“已点赞”等逻辑，一会再写
-        // setLiked(true);
-      } else {
-        console.error("Failed to like the post");
+        toast.info('Thanks for your like!', {
+            position: toast.POSITION.TOP_CENTER,
+          });
+    } else {
+        const responseData = await response.json();
+        if (response.status === 409){
+            console.log('look here');
+          toast.info(responseData.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }  
+        // const errorData = await response.json();
+        // console.error("Failed to like the post:", errorData);
       }
     } catch (error) {
       console.error("Error during like:", error);
     }
   };
+  
 
-  useEffect(() => {
-    fetchUser();
-    fetchPostDetail();
+//   useEffect(() => {
+//     fetchUser();
+//     fetchPostDetail();
+//   }, []);
+
+useEffect(() => {
+    const fetchData = async () => {
+      console.log("Fetching user data...");
+      await fetchUser();
+      await fetchPostDetail();
+    };
+  
+    fetchData();
   }, []);
+  
+  
+  
 
   return (
     <main className="my-5">
@@ -146,7 +177,8 @@ const PostDetail = () => {
                       >
                         Like
                       </button>
-
+                      {/* 用来装提示的 */}
+                      <ToastContainer />
                       <button
                         type="button"
                         className="btn btn-danger top-right-button ml-auto"
