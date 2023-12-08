@@ -95,8 +95,8 @@ export default function UserProfile() {
 
               {/* Profile Picture */}
               <img
-                src={"#"}
-                alt=""
+                src={user.profilePicture}
+                alt={`Profile picture for ${user.nickname}`}
                 className="form-control et-profile-picture mb-4"
               />
 
