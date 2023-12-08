@@ -25,16 +25,13 @@ function App() {
         </div>
         <div className="row et-homepage-main">
           <Routes>
-            <Route path={"/"} element={<Homepage />} />
+            <Route path={"/*"} element={<Homepage />} />
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/LogIn" element={<LogIn />} />
-            <Route
-              path="/profile/profile-setting"
-              element={<ProfileSetting />}
-            />
+            <Route path="/profile/profile-setting/:id" element={<ProfileSetting />}/>
             <Route path="/profile" element={<LogIn />} />
 
-            <Route path="/profile/:id/*" element={<UserProfile />} />
+            <Route path="/profile/:id/" element={<UserProfile />} />
             <Route path="/CreatePost" element={<CreatePost />} />
             <Route path="/home" element={<Homepage />} />
             <Route path="/PostDetail/:postId" element={<PostDetail />} />
