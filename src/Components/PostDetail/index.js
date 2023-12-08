@@ -3,9 +3,10 @@ import HeadBar from "../HeadBar";
 import "./index.css";
 import { useSelector } from "react-redux";
 import {
-  FaRegHeart,
-  FaRegStar,
-  FaArrowUpRightFromSquare,
+    FaHeart,
+    FaRegHeart,
+    FaRegStar,
+    FaArrowUpRightFromSquare,
 } from "react-icons/fa6";
 import { FiMessageCircle } from "react-icons/fi";
 import React, { useState, useEffect } from "react";
@@ -21,6 +22,8 @@ const PostDetail = () => {
   const [error, setError] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [postDetail, setPostDetail] = useState();
+  const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
   const navigate = useNavigate();
   const { postId } = useParams();
 
@@ -72,6 +75,9 @@ const PostDetail = () => {
       });
       console.log(response);
       if (response.ok) {
+        const responseData = await response.json();
+        setIsLiked(!isLiked);
+        setLikesCount(responseData.numberOfLikes);
         toast.info('Thanks for your like!', {
             position: toast.POSITION.TOP_CENTER,
           });
@@ -170,14 +176,14 @@ useEffect(() => {
                       </div>
                       {/* <span className="badge bg-danger px-2 py-1 shadow-1-strong">News of the day</span> */}
                       {/* like button */}
-
+{/* 
                       <button
                         className="btn btn-warning float-end"
                         onClick={handleLike}
                       >
+                        {isLiked ? <FaHeart /> : <FaRegHeart />}
                         Like
-                      </button>
-                      {/* 用来装提示的 */}
+                      </button> */}
                       <ToastContainer />
                       <button
                         type="button"
@@ -201,9 +207,20 @@ useEffect(() => {
                       obcaecati illum maiores corporis.
                     </p>
                     <div className="d-flex justify-content-between et-post-author-likes">
-                      <p className="card-text mb-3">
-                        <FaRegHeart />6
-                      </p>
+                      {/* <p className="card-text mb-3">
+                      <button
+                        className="btn float-end"
+                        onClick={handleLike}
+                      >
+                        {isLiked ? <FaHeart /> : <FaRegHeart />}
+                      </button>
+                      </p> */}
+                      <div className="d-flex justify-content-between et-post-author-likes" onClick={handleLike}>
+                        <p className="card-text mb-3">
+                            {isLiked ? <FaHeart style={{ color: 'red' }}/> : <FaRegHeart style={{ color: 'red' }}/>} {likesCount}
+                        </p>
+                      </div>
+
                       <p className="card-text mb-3">
                         <FaRegStar />6
                       </p>

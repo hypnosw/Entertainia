@@ -34,7 +34,9 @@
     /* Aligns the button to the right at the bottom */
 }
 
-
+.et-post-author-likes:hover {
+    cursor: pointer;
+  }
 
 
 .col-lg-6.mb-4.mb-lg-0 {
