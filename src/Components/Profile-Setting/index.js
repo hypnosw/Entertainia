@@ -11,6 +11,7 @@ function ProfileSetting(){
     const dispatch = useDispatch();
     const {id} = useParams();
     const user = useSelector(state=>state.userReducer);
+    console.log(user);
     if(id != user._id) navigate("/home");
 
     const [newUser, setNewUser] = useState(user);
@@ -20,24 +21,36 @@ function ProfileSetting(){
     // This function checks if the new passwords match, and if current password matches
     // if true, update newUser.password
     const checkPassword =   ()=>{
-        if(newPassword === '')return true;
+        if(newPassword === '')return "emptypassword";
         else if(newPassword !== '' && (newPassword === confirmPassword) &&
            currentPassword === user.password && newPassword.length >= 6){
-            return true;
+            return "changed";
         } else{
             alert("Passwords do not match or must be at least 6 characters long");
-            return false;
+            return "incorrect";
         }
     };
 
     const handleUpdate = ()=>{
-        const boo = checkPassword();
-        if(boo){
-            console.log("In handleupdate password: " + newUser.password);
-            const response = updateUser({...newUser, password:newPassword});
-            dispatch(setUser({...newUser, password:newPassword}));
-            navigate("/home");
+        const passwordState = checkPassword();
+        switch (passwordState){
+            case "emptypassword":{
+                const response = updateUser({...newUser});
+                dispatch(setUser({...newUser}));
+                navigate("/home");
+                break;
+            }
+            case "changed":{
+                const response = updateUser({...newUser, password:newPassword});
+                dispatch(setUser({...newUser, password:newPassword}));
+                navigate("/home");
+                break;
+            }
+            case "incorrect":{
+                return;
+            } default:return;
         }
+
     };
 
     return (
@@ -64,7 +77,7 @@ function ProfileSetting(){
 
                         {/* Username input */}
                         <div>
-                            <label for="et-username-input"><strong>Username</strong></label>
+                            <label for="et-username-input"><strong>Nickname</strong></label>
                             <input id="et-username-input" type="text" className="form-control"
                             defaultValue={user.nickname}
                             onChange={(e)=>
@@ -104,7 +117,7 @@ function ProfileSetting(){
                             <label htmlFor="et-password-input">
                                 <strong>New Password</strong>
                             </label>
-                            <input id="et-password-input" type="text" className="form-control mb-2"
+                            <input id="et-password-input" type="password" className="form-control mb-2"
                                    onChange={(e)=>
                                    {SetNewPassword(e.target.value);}}/>
                         </div>
