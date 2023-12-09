@@ -96,7 +96,7 @@ function ProfileSetting(){
                         <div className="d-inline-flex justify-content-between
                         align-items-center et-profile-row">
                             <p className="et-profile-label">Profile Picture</p>
-                            <img src={user.profilePicture} alt=""
+                            <img src={newUser.profilePicture} alt=""
                                  className="form-control et-profile-icon"/>
                             <button className="form-control et-upload-btn"
                             onClick={()=>setChoosingProfile(!choosingProfile)}
