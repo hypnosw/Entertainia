@@ -54,7 +54,9 @@
     /* Adjust this percentage to decrease the width */
 }
 
-
+.et-details-pic.bg-image.hover-overlay{
+    max-height:500px;
+}
 
 
 

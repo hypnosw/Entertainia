@@ -1,12 +1,9 @@
-//import Sidebar from "../SideBar";
 import HeadBar from "../HeadBar";
 import "./index.css";
 import { useSelector } from "react-redux";
 import {
   FaHeart,
   FaRegHeart,
-  FaRegStar,
-  FaArrowUpRightFromSquare,
 } from "react-icons/fa6";
 import { FiMessageCircle } from "react-icons/fi";
 import React, { useState, useEffect } from "react";
@@ -151,13 +148,9 @@ const PostDetail = () => {
   };
 
   return (
-    currentUser &&
+
     postDetail && (
       <div className="my-5">
-        {/* Fixed HeadBar */}
-        <div className="fixed-top">
-          <HeadBar />
-        </div>
 
         <div className="container-fluid  pt-5">
           {" "}
@@ -178,22 +171,22 @@ const PostDetail = () => {
                   {/* Image */}
                   <div className="col-lg-6 mb-4 mb-lg-0">
                     <div
-                      className="bg-image hover-overlay shadow-1-strong ripple rounded-5"
+                      className="bg-image hover-overlay et-details-pic shadow-1-strong ripple rounded-5"
                       data-mdb-ripple-color="light"
                     >
                       <img
-                        src="https://mdbootstrap.com/img/new/slides/080.jpg"
+                        src={`data:${postDetail.images[0].contentType};base64,${postDetail.images[0].data}`}
                         className="img-fluid"
                         alt="Post"
                       />
-                      <a href="#!">
+                      {/* <a href="#!">
                         <div
                           className="mask"
                           style={{
                             backgroundColor: "rgba(251, 251, 251, 0.15)",
                           }}
                         ></div>
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                   {/* Text Content */}
@@ -232,20 +225,13 @@ const PostDetail = () => {
                         </button> */}
                       </div>
                       <h4>
-                        <strong>Facilis consequatur eligendi</strong>
+                        <strong>{postDetail.title}</strong>
                       </h4>
                       <p className="text-muted">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Facilis consequatur eligendi quisquam doloremque vero ex
-                        debitis veritatis placeat unde animi laborum sapiente
-                        illo possimus, commodi dignissimos obcaecati illum
-                        maiores corporis. Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Facilis consequatur eligendi quisquam
-                        doloremque vero ex debitis veritatis placeat unde animi
-                        laborum sapiente illo possimus, commodi dignissimos
-                        obcaecati illum maiores corporis.
+                      {postDetail.body}
                       </p>
-                      <div className="d-flex justify-content-between et-post-author-likes">
+                      <p> {postDetail.date}</p>
+                      <div className="d-flex justify-content-between et-post-author-likes float-end">
                         {/* <p className="card-text mb-3">
                       <button
                         className="btn float-end"
@@ -258,7 +244,7 @@ const PostDetail = () => {
                           className="d-flex justify-content-between et-post-author-likes"
                           onClick={handleLike}
                         >
-                          <p className="card-text mb-3">
+                          <p className="card-text mb-3 float-end">
                             {isLiked ? (
                               <FaHeart
                                 style={{ color: "red", cursor: "pointer" }}
@@ -275,9 +261,9 @@ const PostDetail = () => {
                         {/* <p className="card-text mb-3">
                           <FaRegStar />6
                         </p> */}
-                        <p className="card-text mb-3">
-                          <FiMessageCircle />6
-                        </p>
+                        {/* <p className="card-text mb-3">
+                          <FiMessageCircle />
+                        </p> */}
                         {/* <p className="mb-3">
                           <FaArrowUpRightFromSquare />8
                         </p> */}
@@ -302,18 +288,15 @@ const PostDetail = () => {
                       >
                         Comment
                       </button>
-                      <p>{postDetail.title}</p>
-                      <p>{postDetail.body}</p>
-                      <p>{postDetail.postDate}</p>
-                      <p>{postDetail.numberOfLikes}</p>
-                      <ul>
+
+                      <ul className="list-unstyled">
                         {postDetail.comment.map((c, index) => (
-                          <li key={index}>
+                          <li key={index} className="">
                             {console.log("mapping " + JSON.stringify(c))}
 
-                            <strong>
-                              {c.userNickname}: {c.content}
-                            </strong>
+                            <p>
+                              <strong>{c.userNickname}</strong>: {c.content}
+                            </p>
                           </li>
                         ))}
                       </ul>
