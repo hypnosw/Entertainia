@@ -11,6 +11,7 @@
     border-radius: 50%;
     margin:0px;
     padding:0px;
+    box-shadow: 3px 2px 4px 1px gray;
 }
 p.et-profile-label{
     margin:0px;
