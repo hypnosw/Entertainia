@@ -1,20 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  username: "Unknown User",
-  nickname:"Stranger",
-  profilePicture: "FaUser",
-  personalBio: `Tell us more about you!`,
+  username: "",
+  nickname:"",
+  profilePicture: "",
+  personalBio: ``,
   password: "",
+  _id:"",
   // posts should contain an array of the IDs of the posts that belong to this user
-  posts: ["656c5b5b035441ec4b753a4f"],
+  posts: [],
   // user ID in the following array
-  following: [1, 2, 3],
+  following: [],
   followingCount:0,
   // user ID in the followers array
-  followers: [1, 2, 3, 4],
+  followers: [],
   followersCount:0,
-  role: "ADMIN",
+  employeeID:0,
+  enterpriseName:"",
+  role: "USER",
 };
 
 const userSlice = createSlice({
@@ -24,6 +27,7 @@ const userSlice = createSlice({
     setUser: (state, action) => {
       // console.log(action);
       state.username = action.payload.username;
+      state._id = action.payload._id;
       state.nickname = action.payload.nickname;
       state.profilePicture = action.payload.profilePicture;
       state.personalBio = action.payload.personalBio;
@@ -34,14 +38,16 @@ const userSlice = createSlice({
       state.followersCount = action.payload.followersCount;
       state.followers = action.payload.followers;
       state.role = action.payload.role;
+      state.employeeID = action.payload.employeeID;
+      state.enterpriseName = action.payload.enterpriseName;
 
     },
-    emptyUser:(state)=>{
-
-      state.user = { ...initialState.user };
-    }
+    emptyUser: (state) => {
+      // Reset the state to the initial state
+      Object.assign(state, initialState);
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { setUser } = userSlice.actions;
+export const { setUser, emptyUser } = userSlice.actions;

@@ -28,6 +28,7 @@ function LogIn() {
         setUser({
           ...user,
           username: response.username,
+          _id:response._id,
           nickname: response.nickname,
           profilePicture: response.profilePicture,
           personalBio: response.personalBio,
@@ -41,6 +42,8 @@ function LogIn() {
           followers: response.followers,
           followersCount: response.followersCount,
           role: response.role,
+          enterpriseName: response.enterpriseName,
+          employeeID: response.employeeID,
         })
       );
       navigate("/home");
@@ -130,8 +133,7 @@ function LogIn() {
                           />
                           {!isValidPassword && (
                             <p style={{ color: "red" }}>
-                              Password incorrect or does not match the email
-                              address.
+                              The password must be at least 6 characters long
                             </p>
                           )}
                         </div>

@@ -19,7 +19,7 @@
     /* background-color: black;  */
     /* color: white;  */
     color:black;
-    /*position: fixed;*/
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -27,14 +27,22 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid grey;
-
+    /* border-right: 1px solid grey; */
+    height: 100vh;
+     /*box-shadow: 4px 0 3px -5px #000;*/
+  margin-top:90px;
   }
+.sidebar:hover{
+  box-shadow: 4px 0 3px -5px gray;
+
+}
+  
+
   
   /* 顶部部分的样式 */
   .top-section {
     color: black;
-    background-color: #76ce79; /* 顶部部分的背景颜色 */
+    /* background-color: #76ce79; 顶部部分的背景颜色 */
     padding: 10px;
     text-align: center;
     /* border:  5px solid #b2b0b0; */
@@ -106,4 +114,8 @@
   background-color: #b3b1b1/* 悬停时的背景颜色 */;
   animation: none; /* 停止按钮上的动画 */
   transform: scale(1.1); 
+}
+
+.Link {
+  text-decoration: none;
 }

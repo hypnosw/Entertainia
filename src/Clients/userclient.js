@@ -29,6 +29,7 @@ export const findAllUsers = async () => {
 };
 
 export const findUserById = async (id) => {
+
   const response = await request.get(`${USERS_API}/${id}`);
   return response.data;
 };
@@ -37,3 +38,9 @@ export const findUserByName = async (name) => {
   const response = await request.get(`${USERS_API}/username/${name}`);
   return response.data;
 };
+
+export const account = async () => {
+  const response = await request.post(`${USERS_API}/account`);
+  return response.data;
+};
+

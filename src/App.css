@@ -12,6 +12,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.row.et-homepage-main {
+  /*margin-left:200px;*/
+}
 
 .App-header {
   background-color: #282c34;
@@ -35,4 +38,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.page-content {
+  flex: 1;
 }

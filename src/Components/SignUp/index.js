@@ -49,6 +49,10 @@ function SignUp() {
   const [isValidPassword, setIsValidPassword] = useState(true);
 
   const signup = async () => {
+    if (!isValidPassword) {
+      window.alert("The password is not valid!");
+      return;
+    }
     try {
       await client.signup(credentials);
       window.alert("Signup successful!");

@@ -1,88 +1,109 @@
 import React from "react";
-import {
-  MDBCarousel,
-  MDBCarouselItem,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardImage,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-} from "mdb-react-ui-kit";
 import "mdb-ui-kit/css/mdb.min.css";
-import city from "../../images/city.jpeg";
-import spider from "../../images/spiderman.jpg";
-import game from "../../images/game.jpg";
+import man from "../../images/man.jpg";
+
 import "./index.css";
 import { useSelector } from "react-redux";
 import { PostCards } from "../Post-cards";
-import { FaBaby, FaThumbsUp } from "react-icons/fa";
-import { useState, useEffect } from "react";
 
+import { useState, useEffect } from "react";
+import {
+  FcHeadset,
+  FcLikePlaceholder,
+  FcSearch,
+  FcDislike,
+} from "react-icons/fc";
 import * as client from "../../Clients/postclient.js";
+import * as userClient from "../../Clients/userclient.js";
 
 export default function HomePage() {
   const user = useSelector((state) => state.userReducer);
   const [posts, setPosts] = useState([]);
+  const [popularPosts, setPopularPosts] = useState([]);
+
+  const populateNickname = async (posts) => {
+    for (let i = 0; i < posts.length; i++) {
+      let author_name = "Stranger";
+      try {
+        if (posts[i].author) {
+          const author = await userClient.findUserById(posts[i].author);
+          if (author.nickname) {
+            author_name = author.nickname;
+          } else if (author.username) {
+            author_name = author.username;
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      posts[i] = { ...posts[i], author_name: author_name };
+    }
+  };
+
   const handlePosts = async () => {
-    const posts = await client.getAllPosts();
+    const posts = await client.getSortedPostsWithLimit(0, 8);
+    await populateNickname(posts);
     setPosts(posts);
   };
 
+  const getMorePosts = async () => {
+    const nextPosts = await client.getSortedPostsWithLimit(posts.length, 4);
+    await populateNickname(nextPosts);
+    setPosts([...posts, ...nextPosts]);
+  };
+
+  // const handlePopularPosts = async () => {
+  //   const popularPosts = await client.getAllSortedPosts();
+  //   setPopularPosts(popularPosts);
+  // };
+
   useEffect(() => {
     handlePosts();
+    // handlePopularPosts();
   }, []);
-  return (
-    <div className="hp-content">
-      <div style={{ maxWidth: "1255px" }}>
-        <MDBCarousel showControls showIndicators dark fade>
-          <MDBCarouselItem
-            className="w-100 d-block"
-            itemId={1}
-            src={city}
-            alt="..."
-            style={{ maxHeight: "450px" }}
-          >
-            <h5 className="text-white">First slide label</h5>
-            <p className="text-white">
-              Nulla vitae elit libero, a pharetra augue mollis interdum.
-            </p>
-          </MDBCarouselItem>
-          <MDBCarouselItem
-            className="w-100 d-block"
-            itemId={2}
-            src={spider}
-            alt="..."
-            style={{ maxHeight: "450px" }}
-          >
-            <h5 className="text-white">Second slide label</h5>
-            <p className="text-white">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
-          </MDBCarouselItem>
 
-          <MDBCarouselItem
-            className="w-100 d-block"
-            itemId={3}
-            src={game}
+  const topThreePosts = popularPosts.slice(0, 3);
+  return (
+    <div class="container text-center mt-2">
+      <div className="row text-center ">
+        <div class="col col-md-1"></div>
+        <div class="col col-md-5 d-none d-md-block">
+          <img
+            className="img-fluid w-100 d-block img-rounded img-thumbnail "
+            src={man}
             alt="..."
-            style={{ maxHeight: "450px" }}
-          >
-            <h5 className="text-white">Third slide label</h5>
-            <p className="text-white">
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </MDBCarouselItem>
-        </MDBCarousel>
+          />
+        </div>
+        <div class="col col-md-6 col-sm-12">
+          <div class="container mt-5">
+            <div class="row align-items-center">
+              <div class="col-md-12 text-md-start text-center py-6">
+                <h1 class="mt-5 mb-5 fs-1 text-md-start fw-bold">
+                  Unleash Your Passion for Entertainment
+                </h1>
+                <p class="mt-2 mb-6 fs-3 lead text-secondary">
+                  Share
+                  <FcLikePlaceholder /> Discover
+                  <FcSearch /> Connect
+                  <FcHeadset />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <MDBRow>
-        <MDBRow className="row-cols-1 row-cols-md-3 g-3">
-          {posts.map((post) => {
-            return PostCards(post);
-          })}
-        </MDBRow>
-      </MDBRow>
+      <br />
+      <div className="col-lg-9 mt-3 d-flex  w-100">
+        <div class="col col-md-1"></div>
+        <div className="d-flex flex-row flex-wrap">{posts.map(PostCards)}</div>
+      </div>
+      <br />
+      <button
+        className="btn btn-outline-secondary btn-rounde"
+        onClick={getMorePosts}
+      >
+        Load More &gt;&gt;&gt;
+      </button>
     </div>
   );
 }

@@ -3,10 +3,13 @@ import "./index.css";
 import "mdb-ui-kit/css/mdb.min.css";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import {useSelector} from "react-redux";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Headbar = () => {
   const [terms, setTerms] = useState("");
+  const user = useSelector((state)=>state.userReducer);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
@@ -88,7 +91,7 @@ const Headbar = () => {
           <div className="dropdown">
             <Link
               className="dropdown-toggle d-flex align-items-center hidden-arrow"
-              to="/profile"
+              to={`/profile/${user._id}`}
               id="navbarDropdownMenuAvatar"
               role="button"
               data-mdb-toggle="dropdown"
