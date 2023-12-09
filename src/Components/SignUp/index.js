@@ -139,15 +139,16 @@ function SignUp() {
               </p>
 
               {/* By clicking it, add the new user to the db. */}
-              <button
+              <Link
                 type="button"
                 className="btn btn-dark btn-lg mb-4 px-5"
                 color="dark"
                 size="lg"
                 onClick={signup}
+                to={`/LogIn`}
               >
                 Create account
-              </button>
+              </Link>
               <p
                 className="mb-5 pb-lg-2 text-center"
                 style={{ color: "#393f81" }}
