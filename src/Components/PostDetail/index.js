@@ -13,7 +13,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as userClient from "../../Clients/userclient.js";
 import * as postClient from "../../Clients/postclient.js";
-import { profile } from "../UserProfile/client.js";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -114,14 +113,17 @@ const PostDetail = () => {
       }
 
       // fetch id
-      const userId = currentUser._id;
-      setComment({
-        ...comment,
-        userId: userId,
-      });
+      // const userId = currentUser._id;
+      // setComment({
+      //   ...comment,
+      //   userId: userId,
+      // });
+      // console.log(userId);
+      // console.log(comment.userId);
+      // console.log(comment);
 
       try {
-        await postClient.createComment(comment);
+        postClient.createComment(setCommentUser());
       } catch (err) {
         setError(err.response.data.message);
         window.alert("Comment fails.");
@@ -136,6 +138,19 @@ const PostDetail = () => {
     }
   };
 
+  const setCommentUser = () => {
+    const userId = currentUser._id;
+    const userNickname = currentUser.nickname;
+    console.log(userId);
+    const newComment = {
+      ...comment,
+      userId: userId,
+      userNickname: userNickname,
+    };
+    console.log(newComment);
+    return newComment;
+  };
+
   const fetchData = async () => {
     console.log("Fetching user data...");
     await fetchUser();
@@ -143,6 +158,7 @@ const PostDetail = () => {
   };
 
   return (
+    user &&
     postDetail && (
       <div className="my-5">
         {/* Fixed HeadBar */}
@@ -296,7 +312,11 @@ const PostDetail = () => {
                       <ul>
                         {postDetail.comment.map((c, index) => (
                           <li key={index}>
-                            <strong>{c.author}</strong>: {c.content}
+                            {console.log("mapping " + JSON.stringify(c))}
+
+                            <strong>
+                              {c.userNickname}: {c.content}
+                            </strong>
                           </li>
                         ))}
                       </ul>
