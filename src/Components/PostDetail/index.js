@@ -1,4 +1,4 @@
-import Sidebar from "../SideBar";
+//import Sidebar from "../SideBar";
 import HeadBar from "../HeadBar";
 import "./index.css";
 import { useSelector } from "react-redux";
@@ -154,9 +154,9 @@ const PostDetail = () => {
           {/* Main Content */}
           <div className="row">
             {/* Sidebar */}
-            <div className="col-md-2">
+            {/* <div className="col-md-2">
               <Sidebar />
-            </div>
+            </div> */}
             {/* Post Content */}
             <div className="col-md-8 mx-auto">
               {" "}
@@ -191,13 +191,13 @@ const PostDetail = () => {
                       {" "}
                       {/* Flex container */}
                       <div className="text-column-header d-flex justify-content-between">
-                        <img
+                        {/* <img
                           src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
                           className="rounded-circle"
                           height="37"
                           alt="Black and White Portrait of a Man"
                           loading="lazy"
-                        />
+                        /> */}
                         {/* Username */}
                         <div className="justify-content-center d-flex mb-2">
                           <strong className="h5 mx-2">{user.name}</strong>
@@ -213,12 +213,12 @@ const PostDetail = () => {
                         Like
                       </button> */}
                         <ToastContainer />
-                        <button
+                        {/* <button
                           type="button"
                           className="btn btn-danger top-right-button ml-auto"
                         >
                           Follow
-                        </button>
+                        </button> */}
                       </div>
                       <h4>
                         <strong>Facilis consequatur eligendi</strong>
@@ -257,15 +257,15 @@ const PostDetail = () => {
                           </p>
                         </div>
 
-                        <p className="card-text mb-3">
+                        {/* <p className="card-text mb-3">
                           <FaRegStar />6
-                        </p>
+                        </p> */}
                         <p className="card-text mb-3">
                           <FiMessageCircle />6
                         </p>
-                        <p className="mb-3">
+                        {/* <p className="mb-3">
                           <FaArrowUpRightFromSquare />8
-                        </p>
+                        </p> */}
                       </div>
                       <input
                         id="comment-text"

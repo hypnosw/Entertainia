@@ -108,7 +108,7 @@ export default function UserProfile() {
                 </div>
               </div>
               {user.role !== "USER" && <p><strong>{user.role === "ADMIN"? (
-                  "Employe ID: " + user.employeID
+                  "Employee ID: " + user.employeID
               ) : ("Enterprise: " + user.enterpriseName)}</strong></p>}
 
               <div className="d-flex justify-content-around">
