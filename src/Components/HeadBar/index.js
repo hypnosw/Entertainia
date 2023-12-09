@@ -1,14 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./index.css";
 import "mdb-ui-kit/css/mdb.min.css";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Headbar = () => {
   const [terms, setTerms] = useState("");
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
+
+      <div className="container-fluid d-flex justify-content-between">
         <button
           className="navbar-toggler"
           type="button"
@@ -24,46 +26,40 @@ const Headbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <Link className="navbar-brand mt-2 mt-lg-0" to="/">
             <img
-              src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-              height="15"
-              alt="MDB Logo"
+              // src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+              src="../entertainialogo.png"
+              width="35" height="35" class="d-inline-block align-top"
               loading="lazy"
-            />
+            /> Entertainia
           </Link>
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {/* <li className="nav-item">
-                            <a className="nav-link" href="#">Sign In</a>
-                        </li> */}
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Settings
-              </a>
-            </li>
-          </ul>
         </div>
 
         <div className="input-group rounded">
-          <input
-            type="search"
-            className="form-control rounded"
-            placeholder="Come and catch up with friends!"
-            aria-label="Search"
-            aria-describedby="search-addon"
-            onChange={(e)=>{setTerms(e.target.value)}}
-          />
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              onChange={(e) => { setTerms(e.target.value) }} />
+          </form>
           <div className="input-group-text border-0" id="search-addon">
             <Link to={`/search?terms=${terms}`}>
               <FaSearch />
             </Link>
           </div>
-          {/* <span className="input-group-text border-0" id="search-addon">
-                        <i className="fas fa-search"></i>
-                    </span> */}
-          {/* <li className="sidebar-item"><FaSearch /> </li> */}
         </div>
 
-        {/* // 还需要做登录后的sign out */}
-        {/* // 还是说点进profile 在最下方signout比较好 */}
+        {/* <div className="shared-parent-container"> */}
+        <div className="top-section">
+          <Link to={"/createpost"}>
+            <button className="post-button">POST</button>
+          </Link>
+        </div>
+        {/* </div> */}
+
+
+        {/* 还需要做登录后的sign out */}
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           {/* add link to login */}
           <Link to={`/LogIn`}>
@@ -76,11 +72,7 @@ const Headbar = () => {
         </ul>
 
         <div className="d-flex align-items-center">
-          <a className="text-reset me-3" href="#">
-            <i className="fas fa-shopping-cart"></i>
-          </a>
-
-          <div className="dropdown">
+          <div>
             <a
               className="text-reset me-3 dropdown-toggle hidden-arrow"
               href="#"
@@ -90,18 +82,7 @@ const Headbar = () => {
               aria-expanded="false"
             >
               <i className="fas fa-bell"></i>
-              <span className="badge rounded-pill badge-notification bg-danger">
-                1
-              </span>
             </a>
-            {/* <ul
-                            className="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="navbarDropdownMenuLink"
-                        >
-                            <li><a className="dropdown-item" href="#">Some news</a></li>
-                            <li><a className="dropdown-item" href="#">Another news</a></li>
-                            <li><a className="dropdown-item" href="#">Something else here</a></li>
-                        </ul> */}
           </div>
 
           <div className="dropdown">
@@ -121,17 +102,13 @@ const Headbar = () => {
                 loading="lazy"
               />
             </Link>
-            {/* <ul
-                            className="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="navbarDropdownMenuAvatar"
-                        >
-                            <li><a className="dropdown-item" href="#">My profile</a></li>
-                            <li><a className="dropdown-item" href="#">Settings</a></li>
-                            <li><a className="dropdown-item" href="#">Logout</a></li>
-                        </ul> */}
+
           </div>
         </div>
       </div>
+
+
+
     </nav>
   );
 };

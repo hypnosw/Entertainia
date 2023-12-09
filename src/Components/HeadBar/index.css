@@ -1,5 +1,4 @@
 .headbar {
-    /* background-color: #F5F5F5; */
     width: 50px;
     display: flex;
     flex-direction: row;
@@ -7,22 +6,63 @@
     bottom: 0;
     left: 0;
     border-bottom: 1px solid grey;
-    /* position: fixed; */
 }
 
 /* Hypnos Edits: shortened the height of the headbar */
-.navbar{
-    --bs-navbar-padding-y:unset !important;
+.navbar {
+    --bs-navbar-padding-y: unset !important;
 }
-.navbar .container-fluid{
 
+.navbar-brand {
+    margin-left: 30px;
 }
+
 .form-control.rounded {
-    width : 80%;
+    width: 80%;
 }
 
 .input-group.rounded {
-    width : 80%;
+    width: 45%;
+
+}
+.top-section {
+    color: black;
+    background-color: #76ce79; /* 顶部部分的背景颜色 */
+    padding: 10px;
+    text-align: center;
+    /* border:  5px solid #b2b0b0; */
+    border-radius: 20px;
+    margin-top: 25px;
+    transition: background-color 0.3s;
+    animation: coolEffect 0.5s ease-in-out;
+  }
+
+/* 顶部部分按钮的样式 */
+.top-section .post-button {
+    background-color: #76ce79;
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    /* margin: 10px 0; */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation: coolEffect 0.5s ease-in-out;
+}
+
+.nav-link {
+    margin-right: 30px;
+}
+
+.text-reset {
+    margin-right: 30px;
+}
+
+.dropdown {
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .form-control.headbar-icon {
@@ -31,6 +71,7 @@
     border-radius: 30px;
     margin: 15px;
     margin-right: 430px;
+    margin-left: 400px;
     padding: 0px;
 }
 
@@ -50,8 +91,6 @@
     padding: 0px;
     height: 30px;
 }
-
-
 
 .form-outline .form-control:focus~.form-notch .form-notch-leading {
     border-top: 0.125rem solid #00b74a;
