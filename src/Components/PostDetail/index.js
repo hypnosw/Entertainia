@@ -29,7 +29,7 @@ const PostDetail = () => {
 
   useEffect(() => {
     fetchData();
-  }, [postId]);
+  }, []);
 
   const user = useSelector((state) => state.userReducer);
 
@@ -122,11 +122,13 @@ const PostDetail = () => {
 
       try {
         await postClient.createComment(comment);
-        window.alert("Comment successful!");
       } catch (err) {
         setError(err.response.data.message);
         window.alert("Comment fails.");
       }
+
+      const newComments = [...postDetail.comment, comment];
+      setPostDetail({ ...postDetail, comment: newComments });
 
       //call func to create comment
     } catch (error) {
@@ -271,7 +273,7 @@ const PostDetail = () => {
                         id="comment-text"
                         type="text"
                         className="form-control"
-                        defaultValue="Say Something"
+                        placeholder="Say Something"
                         onChange={(e) =>
                           setComment({
                             ...comment,
