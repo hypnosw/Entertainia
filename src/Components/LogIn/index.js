@@ -28,7 +28,7 @@ function LogIn() {
         setUser({
           ...user,
           username: response.username,
-          _id:response._id,
+          _id: response._id,
           nickname: response.nickname,
           profilePicture: response.profilePicture,
           personalBio: response.personalBio,
@@ -172,6 +172,7 @@ function LogIn() {
                           type="button"
                           className="btn btn-dark btn-lg"
                           onClick={signin}
+                          to={`/home`}
                         >
                           LOGIN
                         </button>

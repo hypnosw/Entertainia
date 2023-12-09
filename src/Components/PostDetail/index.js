@@ -45,6 +45,8 @@ const PostDetail = () => {
   const [comment, setComment] = useState({
     content: "",
     postId: postId,
+    userId: "",
+    userNickname: "",
   });
 
   const fetchPostDetail = async () => {
@@ -53,6 +55,7 @@ const PostDetail = () => {
       let postDetail = await postClient.findPostByPostID(postId);
       console.log("postID:", postDetail);
       setPostDetail(postDetail);
+      setLikesCount(postDetail.numberOfLikes);
     } catch (error) {
       window.alert(error);
     }
@@ -81,9 +84,9 @@ const PostDetail = () => {
       console.log(response);
       if (response.ok) {
         const responseData = await response.json();
-        setIsLiked(!isLiked);
+        setIsLiked(true);
         setLikesCount(responseData.numberOfLikes);
-        toast.info("Thanks for your like!", {
+        toast.info("Thank for your like!", {
           position: toast.POSITION.TOP_CENTER,
         });
       } else {
@@ -111,27 +114,17 @@ const PostDetail = () => {
         });
         return;
       }
-
-      // fetch id
-      // const userId = currentUser._id;
-      // setComment({
-      //   ...comment,
-      //   userId: userId,
-      // });
-      // console.log(userId);
-      // console.log(comment.userId);
-      // console.log(comment);
-
       try {
-        postClient.createComment(setCommentUser());
+        const newComment = setCommentUser();
+        postClient.createComment(newComment);
+        setComment(newComment);
+        const newComments = [...postDetail.comment, newComment];
+        setPostDetail({ ...postDetail, comment: newComments });
       } catch (err) {
         setError(err.response.data.message);
         window.alert("Comment fails.");
+        return;
       }
-
-      const newComments = [...postDetail.comment, comment];
-      setPostDetail({ ...postDetail, comment: newComments });
-
       //call func to create comment
     } catch (error) {
       console.error("Error during like:", error);
@@ -158,7 +151,7 @@ const PostDetail = () => {
   };
 
   return (
-    user &&
+    currentUser &&
     postDetail && (
       <div className="my-5">
         {/* Fixed HeadBar */}
@@ -267,9 +260,13 @@ const PostDetail = () => {
                         >
                           <p className="card-text mb-3">
                             {isLiked ? (
-                              <FaHeart style={{ color: "red" }} />
+                              <FaHeart
+                                style={{ color: "red", cursor: "pointer" }}
+                              />
                             ) : (
-                              <FaRegHeart style={{ color: "red" }} />
+                              <FaRegHeart
+                                style={{ color: "black", cursor: "pointer" }}
+                              />
                             )}{" "}
                             {likesCount}
                           </p>
