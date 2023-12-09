@@ -62,9 +62,8 @@ export default function HomePage() {
     // handlePopularPosts();
   }, []);
 
-  const topThreePosts = popularPosts.slice(0, 3);
   return (
-    <div class="container text-center mt-2">
+    <div class="container text-center mt-2 pt-2">
       <div className="row text-center ">
         <div class="col col-md-1"></div>
         <div class="col col-md-5 d-none d-md-block">
@@ -79,7 +78,8 @@ export default function HomePage() {
             <div class="row align-items-center">
               <div class="col-md-12 text-md-start text-center py-6">
                 <h1 class="mt-5 mb-5 fs-1 text-md-start fw-bold">
-                  Unleash Your Passion for Entertainment
+                  <span className="text-success">Unleash</span> Your Passion for
+                  Entertainment
                 </h1>
                 <p class="mt-2 mb-6 fs-3 lead text-secondary">
                   Share

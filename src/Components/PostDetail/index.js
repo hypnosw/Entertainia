@@ -28,8 +28,12 @@ const PostDetail = () => {
 
   const fetchUser = async () => {
     try {
-      const currentuser = await userClient.account();
-      setCurrentUser(currentuser);
+      const loginedUser = await userClient.account();
+      console.log(loginedUser);
+      setCurrentUser(loginedUser);
+      if (loginedUser && loginedUser.likedPosts.includes(postId)) {
+        setIsLiked(true);
+      }
     } catch (error) {
       setCurrentUser(null);
       //   console.error("Error fetching user:", error);
@@ -66,7 +70,6 @@ const PostDetail = () => {
   const handleLike = async () => {
     try {
       if (!currentUser || !currentUser._id) {
-        // 用户未登录或者用户 ID 未定义
         toast.warn("Please Log In", {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -140,19 +143,16 @@ const PostDetail = () => {
     const userId = currentUser._id;
     const userNickname = currentUser.nickname;
     const currentDate = new Date();
-    console.log(userId);
     const newComment = {
       ...comment,
       userId: userId,
       userNickname: userNickname,
       commentDate: currentDate.toDateString(),
     };
-    console.log(newComment);
     return newComment;
   };
 
   const fetchData = async () => {
-    console.log("Fetching user data...");
     await fetchUser();
     await fetchPostDetail();
   };
@@ -192,7 +192,7 @@ const PostDetail = () => {
                         by{" "}
                         <Link
                           to={`/profile/${postDetail.author}`}
-                          className="text-decoration-none text-muted"
+                          className="text-decoration-none text-success"
                         >
                           {postDetail.authorName}
                         </Link>
@@ -246,7 +246,7 @@ const PostDetail = () => {
                 <div className="col-3">
                   <button
                     type="button"
-                    className="btn btn-outline-secondary"
+                    className="btn btn-outline-success"
                     onClick={handleComment}
                   >
                     + Comment
@@ -264,7 +264,7 @@ const PostDetail = () => {
                       >
                         <p>{c.userNickname}:</p>
                       </Link>
-                      <small className="text-muted float-end text-muted">
+                      <small className="float-end text-muted">
                         {c.commentDate.substring(0, 10)}
                       </small>
                     </h5>
