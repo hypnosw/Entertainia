@@ -13,7 +13,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as userClient from "../../Clients/userclient.js";
 import * as postClient from "../../Clients/postclient.js";
-import { profile } from "../UserProfile/client.js";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,7 +28,7 @@ const PostDetail = () => {
 
   useEffect(() => {
     fetchData();
-  }, [postId]);
+  }, []);
 
   const user = useSelector((state) => state.userReducer);
 
@@ -46,6 +45,8 @@ const PostDetail = () => {
   const [comment, setComment] = useState({
     content: "",
     postId: postId,
+    userId: "",
+    userNickname: "",
   });
 
   const fetchPostDetail = async () => {
@@ -54,6 +55,7 @@ const PostDetail = () => {
       let postDetail = await postClient.findPostByPostID(postId);
       console.log("postID:", postDetail);
       setPostDetail(postDetail);
+      setLikesCount(postDetail.numberOfLikes);
     } catch (error) {
       window.alert(error);
     }
@@ -82,9 +84,9 @@ const PostDetail = () => {
       console.log(response);
       if (response.ok) {
         const responseData = await response.json();
-        setIsLiked(!isLiked);
+        setIsLiked(true);
         setLikesCount(responseData.numberOfLikes);
-        toast.info("Thanks for your like!", {
+        toast.info("Thank for your like!", {
           position: toast.POSITION.TOP_CENTER,
         });
       } else {
@@ -112,26 +114,34 @@ const PostDetail = () => {
         });
         return;
       }
-
-      // fetch id
-      const userId = currentUser._id;
-      setComment({
-        ...comment,
-        userId: userId,
-      });
-
       try {
-        await postClient.createComment(comment);
-        window.alert("Comment successful!");
+        const newComment = setCommentUser();
+        postClient.createComment(newComment);
+        setComment(newComment);
+        const newComments = [...postDetail.comment, newComment];
+        setPostDetail({ ...postDetail, comment: newComments });
       } catch (err) {
         setError(err.response.data.message);
         window.alert("Comment fails.");
+        return;
       }
-
       //call func to create comment
     } catch (error) {
       console.error("Error during like:", error);
     }
+  };
+
+  const setCommentUser = () => {
+    const userId = currentUser._id;
+    const userNickname = currentUser.nickname;
+    console.log(userId);
+    const newComment = {
+      ...comment,
+      userId: userId,
+      userNickname: userNickname,
+    };
+    console.log(newComment);
+    return newComment;
   };
 
   const fetchData = async () => {
@@ -141,6 +151,7 @@ const PostDetail = () => {
   };
 
   return (
+    currentUser &&
     postDetail && (
       <div className="my-5">
         {/* Fixed HeadBar */}
@@ -249,9 +260,13 @@ const PostDetail = () => {
                         >
                           <p className="card-text mb-3">
                             {isLiked ? (
-                              <FaHeart style={{ color: "red" }} />
+                              <FaHeart
+                                style={{ color: "red", cursor: "pointer" }}
+                              />
                             ) : (
-                              <FaRegHeart style={{ color: "red" }} />
+                              <FaRegHeart
+                                style={{ color: "black", cursor: "pointer" }}
+                              />
                             )}{" "}
                             {likesCount}
                           </p>
@@ -271,7 +286,7 @@ const PostDetail = () => {
                         id="comment-text"
                         type="text"
                         className="form-control"
-                        defaultValue="Say Something"
+                        placeholder="Say Something"
                         onChange={(e) =>
                           setComment({
                             ...comment,
@@ -294,7 +309,11 @@ const PostDetail = () => {
                       <ul>
                         {postDetail.comment.map((c, index) => (
                           <li key={index}>
-                            <strong>{c.author}</strong>: {c.content}
+                            {console.log("mapping " + JSON.stringify(c))}
+
+                            <strong>
+                              {c.userNickname}: {c.content}
+                            </strong>
                           </li>
                         ))}
                       </ul>
