@@ -259,7 +259,7 @@ const PostDetail = () => {
                   <div class="card-body">
                     <h5 class="card-title">
                       <Link
-                        to={`/profile/${postDetail.author}`}
+                        to={`/profile/${c.userId}`}
                         className="text-decoration-none text-secondary"
                       >
                         <p>{c.userNickname}:</p>
