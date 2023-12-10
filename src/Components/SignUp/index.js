@@ -1,5 +1,4 @@
 import {
-  MDBBtn,
   MDBContainer,
   MDBCard,
   MDBCardBody,
@@ -8,13 +7,14 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import React, { useState } from "react";
-import validator from "validator";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import "mdb-ui-kit/css/mdb.min.css";
 import "./index.css";
 import * as client from "../../Clients/userclient.js";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [credentials, setCredentials] = useState({
     username: "",
@@ -55,15 +55,22 @@ function SignUp() {
     }
     try {
       await client.signup(credentials);
-      window.alert("Signup successful!");
+      toast.info("Signup success!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      navigate("/LogIn");
     } catch (err) {
       setError(err.response.data.message);
-      window.alert("The username has been registered, please use another one.");
+      toast.info("The username has been registered, please use another one.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
     }
   };
 
   return (
     <MDBContainer className="my-5">
+      <ToastContainer />
       <MDBCard className="mx-auto ">
         <MDBRow className="g-0">
           <MDBCol md="12">
@@ -145,7 +152,6 @@ function SignUp() {
                 color="dark"
                 size="lg"
                 onClick={signup}
-                to={`/LogIn`}
               >
                 Create account
               </Link>

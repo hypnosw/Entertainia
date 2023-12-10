@@ -4,6 +4,7 @@ import { MDBInput } from "mdb-react-ui-kit";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../Reducers/userReducer";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import * as client from "../../Clients/userclient.js";
 import "./index.css";
 import "mdb-ui-kit/css/mdb.min.css";
@@ -49,7 +50,9 @@ function LogIn() {
       navigate("/home");
     } catch (err) {
       setError("Incorrect username or password");
-      window.alert("Please recheck your information and try again");
+      toast.info("Please recheck your information and try again", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 
@@ -82,6 +85,7 @@ function LogIn() {
 
   return (
     <div className="vh-100" style={{ backgroundColor: "#eee" }}>
+      <ToastContainer />
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11">
