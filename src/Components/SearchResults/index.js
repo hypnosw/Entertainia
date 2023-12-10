@@ -46,7 +46,7 @@ const SearchResults = () => {
     handleSearch().then(handleAPISearch);
   }, [location]);
   return (
-    <div className={" ms-4 mt-2"}>
+    <div className={" ms-1 mt-2"}>
       {error !== "" && (
         <p className={"alert alert-danger mt-2 w-25"}>{error}</p>
       )}
