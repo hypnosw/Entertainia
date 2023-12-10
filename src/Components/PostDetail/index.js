@@ -143,11 +143,18 @@ const PostDetail = () => {
     const userId = currentUser._id;
     const userNickname = currentUser.nickname;
     const currentDate = new Date();
+
+    const localPostDate = currentDate
+      .toLocaleDateString("en-UK")
+      .split("/")
+      .reverse()
+      .join("-");
+
     const newComment = {
       ...comment,
       userId: userId,
       userNickname: userNickname,
-      commentDate: currentDate.toDateString(),
+      commentDate: localPostDate,
     };
     return newComment;
   };
@@ -264,11 +271,11 @@ const PostDetail = () => {
                       >
                         <p>{c.userNickname}:</p>
                       </Link>
+                      <p class="card-text ">{c.content}</p>
                       <small className="float-end text-muted">
                         {c.commentDate.substring(0, 10)}
                       </small>
                     </h5>
-                    <p class="card-text ">{c.content}</p>
                   </div>
                 </div>
               ))}
