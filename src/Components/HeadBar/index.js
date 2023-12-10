@@ -15,7 +15,7 @@ const Headbar = () => {
       <div>
         <Link className="navbar-brand mt-2 mt-lg-0" to="/home">
           <img
-            src="../entertainia-transparent.png"
+            src="../entertainialogo.png"
             width="35"
             height="35"
             class="d-inline-block align-top me-2"
