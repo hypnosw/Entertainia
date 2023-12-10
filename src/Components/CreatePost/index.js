@@ -92,14 +92,16 @@ const CreatePost = () => {
         <div className="col-6">
           <div className="d-inline-flex justify-content-between align-items-center et-profile-row">
             <p className="et-profile-label">Upload Image</p>
-            <input
-              type="file"
-              name="images"
-              accept="image/*"
-              className="custom-file-input et-profile-icon"
-              onChange={handleImageChange}
-            />
           </div>
+
+          <input
+            type="file"
+            name="images"
+            accept="image/*"
+            class="form-control mb-2"
+            id="customFile"
+            onChange={handleImageChange}
+          />
 
           <div>
             <label htmlFor="post-title">
