@@ -192,9 +192,9 @@ const PostDetail = () => {
                         </div>
                         <ToastContainer />
                       </div>
-                      <h3>
+                      <h2>
                         <strong>{postDetail.title}</strong>
-                      </h3>
+                      </h2>
                       <small className="text-muted">
                         by{" "}
                         <Link
@@ -206,7 +206,7 @@ const PostDetail = () => {
                         , &nbsp;
                         {postDetail.postDate.substring(0, 10)}
                       </small>
-                      <p>{postDetail.body}</p>
+                      <span>{postDetail.body}</span>
                       <div className="d-flex justify-content-between et-post-author-likes float-end">
                         <div
                           className="d-flex justify-content-between et-post-author-likes"
@@ -264,7 +264,7 @@ const PostDetail = () => {
               {postDetail.comment.map((c, index) => (
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title">
+                    <h6 class="card-title">
                       <Link
                         to={`/profile/${c.userId}`}
                         className="text-decoration-none text-secondary"
@@ -275,7 +275,7 @@ const PostDetail = () => {
                       <small className="float-end text-muted">
                         {c.commentDate.substring(0, 10)}
                       </small>
-                    </h5>
+                    </h6>
                   </div>
                 </div>
               ))}
