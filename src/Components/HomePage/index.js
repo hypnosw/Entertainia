@@ -78,8 +78,9 @@ export default function HomePage() {
             <div class="row align-items-center">
               <div class="col-md-12 text-md-start text-center py-6">
                 <h1 class="mt-5 mb-5 fs-1 text-md-start fw-bold">
-                  <span className="text-success">Unleash</span> Your Passion for
-                  Entertainment
+                  <span className="text-success">Unleash</span>
+                  <br />
+                  Your Passion for Entertainment
                 </h1>
                 <p class="mt-2 mb-6 fs-3 lead text-secondary">
                   Share

@@ -1,15 +1,33 @@
-.carousel-control-prev-icon:after {
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+h1 {
+  color: hsl(0, 0%, 28%);
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: 7px;
+  cursor: pointer;
+}
+
+h1 span {
+  transition: 0.5s ease-out;
+}
+h1:hover span:nth-child(1) {
+  margin-right: 5px;
+}
+h1:hover span:nth-child(1):after {
   content: "";
 }
-
-.carousel-control-next-icon:after {
-  content: "";
+h1:hover span:nth-child(2) {
+  margin-left: 30px;
 }
-
-.hp-content {
-  transform: scale(0.95);
-}
-
-.MDBCarousel {
-  height: 1000px;
+h1:hover span {
+  color: #fff;
+  text-shadow: 0 0 10px green, 0 0 20px green, 0 0 40px green;
 }
