@@ -2,21 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   username: "",
-  nickname:"",
+  nickname: "",
   profilePicture: "",
   personalBio: ``,
   password: "",
-  _id:"",
+  _id: "",
   // posts should contain an array of the IDs of the posts that belong to this user
   posts: [],
   // user ID in the following array
   following: [],
-  followingCount:0,
+  followingCount: 0,
   // user ID in the followers array
   followers: [],
-  followersCount:0,
-  employeeID:0,
-  enterpriseName:"",
+  likedPosts: [],
+  followersCount: 0,
+  employeeID: 0,
+  enterpriseName: "",
   role: "USER",
 };
 
@@ -40,7 +41,7 @@ const userSlice = createSlice({
       state.role = action.payload.role;
       state.employeeID = action.payload.employeeID;
       state.enterpriseName = action.payload.enterpriseName;
-
+      state.likedPosts = action.payload.likedPosts;
     },
     emptyUser: (state) => {
       // Reset the state to the initial state

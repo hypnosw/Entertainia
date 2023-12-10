@@ -45,6 +45,7 @@ function LogIn() {
           role: response.role,
           enterpriseName: response.enterpriseName,
           employeeID: response.employeeID,
+          likedPosts: response.likedPosts,
         })
       );
       navigate("/home");

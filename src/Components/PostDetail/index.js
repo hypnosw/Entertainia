@@ -1,13 +1,13 @@
 import HeadBar from "../HeadBar";
 import "./index.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
-import { FiMessageCircle } from "react-icons/fi";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as userClient from "../../Clients/userclient.js";
 import * as postClient from "../../Clients/postclient.js";
 import { toast, ToastContainer } from "react-toastify";
+import { setUser } from "../../Reducers/userReducer";
 import "react-toastify/dist/ReactToastify.css";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
@@ -25,15 +25,13 @@ const PostDetail = () => {
   }, []);
 
   const user = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
 
   const fetchUser = async () => {
     try {
       const loginedUser = await userClient.account();
       console.log(loginedUser);
       setCurrentUser(loginedUser);
-      if (loginedUser && loginedUser.likedPosts.includes(postId)) {
-        setIsLiked(true);
-      }
     } catch (error) {
       setCurrentUser(null);
       //   console.error("Error fetching user:", error);
@@ -62,6 +60,10 @@ const PostDetail = () => {
       postDetail = { ...postDetail, authorName: authorName };
       setPostDetail(postDetail);
       setLikesCount(postDetail.numberOfLikes);
+
+      if (user && user.likedPosts.includes(postId)) {
+        setIsLiked(true);
+      }
     } catch (error) {
       window.alert(error);
     }
@@ -91,6 +93,14 @@ const PostDetail = () => {
         const responseData = await response.json();
         setIsLiked(true);
         setLikesCount(responseData.numberOfLikes);
+
+        const updatedUser = {
+          ...user,
+          likedPosts: [...user.likedPosts, postId],
+        };
+
+        // Dispatch the action to update the user state
+        dispatch(setUser(updatedUser));
         toast.info("Thank for your like!", {
           position: toast.POSITION.TOP_CENTER,
         });
